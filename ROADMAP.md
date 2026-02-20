@@ -66,19 +66,37 @@ multi-br/
 
 ---
 
-## Fase 1 — Design System (Tokens + Componentes Base) 🔜
+## Fase 1 — Design System (Tokens + Componentes Base) ✅
 
-**Status:** Próxima fase
+**Status:** Concluído · **Data:** 20/02/2026
 
-- Implementar tokens completos (escala tipográfica, espaçamentos, sombras, gradientes)
-- Carregar fonte Balgin Black (local)
-- Inicializar shadcn/ui com tema Multi
-- Customizar 10+ componentes (Button, Card, Form, Sheet, Toast, Accordion, Tabs, Dialog, Dropdown)
-- Implementar animações base (fade-in, slide-up, IntersectionObserver)
+### O que foi feito
+
+| Item | Status | Detalhes |
+|------|--------|---------|
+| Tokens de cor | ✅ | 8 brand + 6 neutros via `@theme inline` (Tailwind v4) |
+| Tokens de espaçamento | ✅ | 12 tokens base 4px (4px–120px) |
+| Tokens de sombra | ✅ | 5 níveis (sm, card, card-hover, modal, whatsapp) |
+| Tokens de radius/transição | ✅ | sm/md/lg/full + fast/base/smooth |
+| Gradientes | ✅ | 4 gradientes como custom properties |
+| Fonte Balgin Bold | ✅ | `@font-face` local, `public/fonts/balgin-bold.ttf` |
+| Animações CSS | ✅ | `fade-in`, `slide-up`, stagger + `prefers-reduced-motion` |
+| Componentes UI (10) | ✅ | Button, Card, Input, Textarea, Label, Dialog, Sheet, Toast, Accordion, Tabs |
+| `lib/utils.ts` | ✅ | `cn()` com clsx + tailwind-merge |
+| `useIntersectionObserver` | ✅ | Hook para scroll animations |
+
+### Verificação
+
+| Comando | Resultado |
+|---------|-----------|
+| `tsc --noEmit` | ✅ 0 erros |
+| `bun lint` (Biome) | ✅ 37 arquivos, 0 erros |
+| `vitest run` | ✅ 2/2 testes passando |
+| `next build` (Turbopack) | ✅ Build concluído |
 
 ---
 
-## Fase 2 — Layout Global ⏳
+## Fase 2 — Layout Global 🔜
 
 - Header responsivo (sticky, blur, nav, CTA)
 - Footer completo
