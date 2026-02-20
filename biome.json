@@ -45,7 +45,8 @@
 				"noExplicitAny": "error"
 			},
 			"a11y": {
-				"recommended": true
+				"recommended": true,
+				"useSemanticElements": "off"
 			}
 		}
 	},
