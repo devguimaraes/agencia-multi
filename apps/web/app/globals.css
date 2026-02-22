@@ -66,6 +66,7 @@
 	--animate-slide-up: slide-up 500ms ease both;
 	--animate-stagger: fade-in 500ms ease both;
 	--animate-float-slow: float 6s ease-in-out infinite;
+	--animate-marquee: marquee 20s linear infinite;
 }
 
 /* --- Custom Properties (usáveis fora do Tailwind) --- */
@@ -128,6 +129,15 @@
 	}
 }
 
+@keyframes marquee {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
 /* --- Base Styles --- */
 body {
 	font-family: var(--font-sans), system-ui, sans-serif;
@@ -152,6 +162,18 @@ body {
 }
 .stagger-6 {
 	animation-delay: 600ms;
+}
+.stagger-7 {
+	animation-delay: 700ms;
+}
+.stagger-8 {
+	animation-delay: 800ms;
+}
+.stagger-9 {
+	animation-delay: 900ms;
+}
+.stagger-10 {
+	animation-delay: 1000ms;
 }
 
 /* --- Gradiente utility classes --- */
