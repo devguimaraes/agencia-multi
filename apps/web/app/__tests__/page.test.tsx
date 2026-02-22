@@ -5,13 +5,23 @@ import Home from "../page";
 afterEach(cleanup);
 
 describe("Home Page", () => {
-	it("renders the Multi BR heading", () => {
+	it("renders the logo with Multi BR alt text", () => {
 		render(<Home />);
-		expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Multi BR");
+		expect(screen.getByAltText("Multi BR")).toBeInTheDocument();
 	});
 
-	it("renders the slogan text", () => {
+	it("renders the slogan in the main heading", () => {
 		render(<Home />);
-		expect(screen.getByText("Branding ✹ Conteúdo ✹ Tráfego")).toBeInTheDocument();
+		const heading = screen.getByRole("heading", { level: 1 });
+		expect(heading).toHaveTextContent(/Branding/);
+		expect(heading).toHaveTextContent(/Conteúdo/);
+		expect(heading).toHaveTextContent(/Tráfego/);
+	});
+
+	it("renders the value proposition text", () => {
+		render(<Home />);
+		expect(
+			screen.getByText(/Estratégia digital sem enrolação/i),
+		).toBeInTheDocument();
 	});
 });
