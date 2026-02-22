@@ -12,7 +12,7 @@
 ### O que foi feito
 
 | Item | Status | Detalhes |
-|------|--------|---------|
+| :--- | :--- | :--- |
 | Branch de trabalho | ✅ | `feat/fase-0-setup` criada a partir da `main` |
 | Monorepo com Bun workspaces | ✅ | `apps/*` + `packages/*`, Bun 1.3.4 |
 | Turborepo | ✅ | Pipelines: `dev`, `build`, `lint`, `type-check`, `test`, `test:e2e` |
@@ -29,10 +29,10 @@
 | Playwright | ✅ | 3 browsers (Chromium, Firefox, WebKit), webServer auto |
 | Smoke test | ✅ | 2 testes passando (heading + slogan) |
 
-### Verificação
+### Verificação (Fase 0)
 
 | Comando | Resultado |
-|---------|-----------|
+| :--- | :--- |
 | `bun install` | ✅ 446 packages instalados |
 | `bun lint` | ✅ 21 arquivos, 0 erros |
 | `bun type-check` | ✅ 4/4 packages passando |
@@ -54,9 +54,9 @@ multi-br/
 │   ├── vitest.setup.ts
 │   └── playwright.config.ts
 ├── packages/
-│   ├── ui/                   # @multi-br/ui (seed)
-│   ├── config/               # @multi-br/config (SITE_CONFIG)
-│   └── types/                # @multi-br/types (Service, BlogPost, etc.)
+├── ui/                   # @multi-br/ui (seed)
+├── config/               # @multi-br/config (SITE_CONFIG)
+└── types/                # @multi-br/types (Service, BlogPost, etc.)
 ├── .vscode/                  # Biome + Tailwind IntelliSense
 ├── biome.json                # Lint + format strict
 ├── turbo.json                # Pipelines monorepo
@@ -73,7 +73,7 @@ multi-br/
 ### O que foi feito
 
 | Item | Status | Detalhes |
-|------|--------|---------|
+| :--- | :--- | :--- |
 | Tokens de cor | ✅ | 8 brand + 6 neutros via `@theme inline` (Tailwind v4) |
 | Tokens de espaçamento | ✅ | 12 tokens base 4px (4px–120px) |
 | Tokens de sombra | ✅ | 5 níveis (sm, card, card-hover, modal, whatsapp) |
@@ -85,10 +85,10 @@ multi-br/
 | `lib/utils.ts` | ✅ | `cn()` com clsx + tailwind-merge |
 | `useIntersectionObserver` | ✅ | Hook para scroll animations |
 
-### Verificação
+### Verificação (Fase 1)
 
 | Comando | Resultado |
-|---------|-----------|
+| :--- | :--- |
 | `tsc --noEmit` | ✅ 0 erros |
 | `bun lint` (Biome) | ✅ 37 arquivos, 0 erros |
 | `vitest run` | ✅ 2/2 testes passando |
@@ -96,21 +96,47 @@ multi-br/
 
 ---
 
-## Fase 2 — Layout Global 🔜
+## Fase 2 — Layout Global ✅
 
-- Header responsivo (sticky, blur, nav, CTA)
-- Footer completo
-- Menu mobile (Sheet)
-- WhatsApp floating button
-- Loading/Error/404 global
+**Status:** Concluído · **Data:** 20/02/2026
+
+### O que foi feito
+
+| Item | Status | Detalhes |
+| :--- | :--- | :--- |
+| Header responsivo | ✅ | Sticky, blur effect, hook `useScrollEffect`, acessível |
+| Menu mobile | ✅ | Drawer lateral (Sheet), overlay, animações condicionais |
+| Footer completo | ✅ | 3 colunas, dados reais (CNPJ, endereço, contatos), links rápidos |
+| WhatsApp Button | ✅ | Flutuante fixo, shadow personalizada, link seguro `wa.me` |
+| System Pages | ✅ | `loading.tsx` (spinner), `error.tsx` (retry), `not-found.tsx` (404 tipográfico) |
+| Layout Raiz | ✅ | `layout.tsx` com Metadata OpenGraph, Skip-link, Fontes |
+| Assets de Marca | ✅ | Logos e ícones organizados em `public/brand/` |
+
+### Verificação (Fase 2)
+
+| Comando | Resultado |
+| :--- | :--- |
+| `bun lint` | ✅ 0 erros (Biome strict) |
+| `bun type-check` | ✅ 0 erros |
+| `vitest` | ✅ 16 testes passando (100% layout components) |
 
 ---
 
-## Fase 3 — Home Page ⏳
+## Fase 3 — Home Page 🏗️
 
-- Hero Section, Serviços, Mentoria, Portfolio
-- Depoimentos, Blog highlights, CTA final
-- Scroll animations, Trust badges
+**Status:** Em Progresso · **Data:** 22/02/2026
+
+**Objetivo:** Implementar a página inicial completa com seções modulares e animações de entrada.
+
+- [x] **Hero Section**: Estética Brasilidades (Colagem), ativos customizados (Caju, Rio, Pássaros, Abacaxi), Mobile-First.
+- [ ] **Trust Strip**: Logos de clientes/parceiros (carousel infinito).
+- [ ] **Serviços (Resumo)**: Cards com ícones e breves descrições (3-4 destaques).
+- [ ] **Diferenciais/Sobre**: Seção "Por que Multi?" com métricas ou texto persuasivo.
+- [ ] **Mentoria (Teaser)**: Chamada para o programa de mentoria.
+- [ ] **Portfolio (Highlights)**: Grid com 3-6 projetos recentes.
+- [ ] **Depoimentos**: Slider de prova social.
+- [ ] **CTA Final**: Chamada para ação focada em conversão (WhatsApp/Form).
+- [ ] **Animações**: Implementar `fade-in`/`slide-up` usando `useIntersectionObserver`.
 
 ---
 

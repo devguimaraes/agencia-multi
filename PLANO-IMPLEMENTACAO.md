@@ -211,7 +211,7 @@ gantt
 
 | # | Tarefa | Descrição | Prioridade | Est. | Deps |
 |---|--------|-----------|-----------|------|------|
-| 3.1 | Desenvolver Hero Section | Headline Balgin "Branding ✹ Conteúdo ✹ Tráfego", subheadline, 2 CTAs (WhatsApp + serviços), elemento gráfico estrela/sol | 🔴 Alta | 6h | F2 |
+| 3.1 | Desenvolver Hero Section | ✅ Concluída: Headline Balgin "Branding ✹ Conteúdo ✹ Tráfego", estética Brasilidades (Colagem), ativos: Caju, Abacaxi, Pão de Açúcar, Pássaros. | 🔴 Alta | 6h | F2 |
 | 3.2 | Desenvolver Serviços Overview | Grid 6 cards (2 col mobile, 3 col desktop), ícone + título + descrição + "Saiba mais" | 🔴 Alta | 4h | 1.12 |
 | 3.3 | Desenvolver Seção Mentoria | Destaque full-width com fundo roxo/rosa, problema/solução 2 colunas, CTA forte | 🔴 Alta | 5h | 1.12 |
 | 3.4 | Desenvolver Portfolio Grid | Grid de projetos destacados com imagem, título, categoria, hover effect | 🟡 Média | 4h | 1.12 |
