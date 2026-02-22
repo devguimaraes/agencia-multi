@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 
 export function MentorshipTeaser({ className }: { className?: string }) {
+	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
+
 	const problems = [
 		"Trabalha muito mas lucra pouco",
 		"Não sabe como precificar pelos serviços",
@@ -17,20 +22,30 @@ export function MentorshipTeaser({ className }: { className?: string }) {
 	];
 
 	return (
-		<section className={cn("py-24 bg-multi-roxo text-white", className)}>
+		<section ref={ref} className={cn("py-24 bg-multi-roxo text-white", className)}>
 			<div className="container mx-auto px-4 sm:px-6">
 				<div className="max-w-6xl mx-auto">
-					<div className="mb-16 text-center">
-						<span className="inline-block px-4 py-2 bg-multi-rosa text-white font-balgin text-xl tracking-wider uppercase transform -rotate-2 shadow-[4px_4px_0_#FFF]">
+					<div
+						className={cn(
+							"mb-16 text-center opacity-0",
+							isIntersecting && "animate-slide-up stagger-1",
+						)}
+					>
+						<span className="inline-block px-4 py-2 bg-multi-rosa text-white font-display text-xl tracking-wider uppercase transform -rotate-2 shadow-[4px_4px_0_#FFF]">
 							Mentoria Multi
 						</span>
 					</div>
 
 					<div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
 						{/* Problemas */}
-						<div className="space-y-8 bg-black/20 p-8 rounded-2xl border-2 border-white/10">
-							<h2 className="text-3xl lg:text-4xl font-balgin text-multi-amarelo">
-								Você esta passando por isso?
+						<div
+							className={cn(
+								"space-y-8 bg-black/20 p-8 rounded-2xl border-2 border-white/10 opacity-0",
+								isIntersecting && "animate-slide-up stagger-2",
+							)}
+						>
+							<h2 className="text-3xl lg:text-4xl font-display text-multi-amarelo uppercase tracking-tight leading-tight">
+								Você está passando por isso?
 							</h2>
 							<ul className="space-y-6">
 								{problems.map((prob) => (
@@ -45,8 +60,15 @@ export function MentorshipTeaser({ className }: { className?: string }) {
 						</div>
 
 						{/* Soluções */}
-						<div className="space-y-8 p-8 border-4 border-multi-amarelo backdrop-blur-sm rounded-2xl relative shadow-[8px_8px_0_#FAC32A]">
-							<h2 className="text-3xl lg:text-4xl font-balgin text-white">Nós te ajudaremos a:</h2>
+						<div
+							className={cn(
+								"space-y-8 p-8 border-4 border-multi-amarelo backdrop-blur-sm rounded-2xl relative shadow-[8px_8px_0_#FAC32A] opacity-0",
+								isIntersecting && "animate-slide-up stagger-3",
+							)}
+						>
+							<h2 className="text-3xl lg:text-4xl font-display text-white uppercase tracking-tight leading-tight">
+								Nós te ajudaremos a:
+							</h2>
 							<ul className="space-y-6">
 								{solutions.map((sol) => (
 									<li
@@ -63,8 +85,7 @@ export function MentorshipTeaser({ className }: { className?: string }) {
 							<div className="pt-8">
 								<Button
 									size="lg"
-									variant="primary"
-									className="w-full text-lg h-14 bg-multi-amarelo text-multi-roxo hover:bg-white border-none font-bold"
+									className="w-full text-lg h-14 bg-multi-amarelo text-multi-roxo hover:bg-white border-none font-bold shadow-lg"
 								>
 									Quero estruturar a minha agência
 								</Button>

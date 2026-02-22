@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 import { Lightbulb, MessageCircle, Rocket } from "lucide-react";
 
 export function FinalCTA({ className }: { className?: string }) {
+	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
+
 	const cards = [
 		{
 			icon: <Rocket className="w-8 h-8 text-multi-rosa" />,
@@ -31,10 +36,18 @@ export function FinalCTA({ className }: { className?: string }) {
 	];
 
 	return (
-		<section className={cn("py-24 bg-linear-to-br from-multi-roxo to-multi-rosa", className)}>
+		<section
+			ref={ref}
+			className={cn("py-24 bg-linear-to-br from-multi-roxo to-multi-rosa", className)}
+		>
 			<div className="container mx-auto px-4 sm:px-6">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl md:text-5xl font-balgin text-white mb-6">
+				<div
+					className={cn(
+						"text-center mb-16 opacity-0",
+						isIntersecting && "animate-slide-up stagger-1",
+					)}
+				>
+					<h2 className="text-4xl md:text-5xl font-display text-white mb-6 uppercase tracking-tight leading-tight">
 						Não importa a sua fase, a Multi pode te ajudar.
 					</h2>
 					<p className="text-xl text-white/90 font-poppins max-w-2xl mx-auto">
@@ -43,14 +56,20 @@ export function FinalCTA({ className }: { className?: string }) {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-					{cards.map((card) => (
+					{cards.map((card, idx) => (
 						<div
 							key={card.title}
-							className="bg-white rounded-2xl p-8 flex flex-col justify-between text-center border-4 border-multi-amarelo shadow-[6px_6px_0_#000] hover:-translate-y-2 transition-transform duration-300"
+							className={cn(
+								"bg-white rounded-2xl p-8 flex flex-col justify-between text-center border-4 border-multi-amarelo shadow-[6px_6px_0_#000] hover:-translate-y-2 transition-transform duration-300 opacity-0",
+								isIntersecting && "animate-slide-up",
+								isIntersecting && `stagger-${idx + 2}`,
+							)}
 						>
 							<div className="flex flex-col items-center">
 								<div className="bg-gray-100 p-4 rounded-full mb-6">{card.icon}</div>
-								<h3 className="font-balgin text-2xl text-multi-roxo mb-4">{card.title}</h3>
+								<h3 className="font-display text-2xl text-multi-roxo mb-4 uppercase tracking-tight">
+									{card.title}
+								</h3>
 								<p className="text-gray-600 font-poppins text-lg min-h-[60px]">{card.desc}</p>
 							</div>
 

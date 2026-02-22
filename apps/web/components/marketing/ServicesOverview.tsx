@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -7,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 
 const SERVICES = [
@@ -43,11 +46,20 @@ const SERVICES = [
 ];
 
 export function ServicesOverview({ className }: { className?: string }) {
+	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
+
 	return (
-		<section className={cn("py-24 bg-white", className)}>
+		<section ref={ref} className={cn("py-24 bg-white", className)}>
 			<div className="container mx-auto px-4 sm:px-6">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl md:text-5xl font-balgin text-multi-roxo mb-4">Nossos Serviços</h2>
+				<div
+					className={cn(
+						"text-center mb-16 opacity-0",
+						isIntersecting && "animate-slide-up stagger-1",
+					)}
+				>
+					<h2 className="text-4xl md:text-5xl font-display text-multi-roxo mb-4 uppercase tracking-tight">
+						Nossos Serviços
+					</h2>
 					<p className="text-lg text-gray-600 max-w-2xl mx-auto font-poppins">
 						Um mix de estratégias de presença digital focado em escalar os resultados da sua empresa
 						no digital de forma eficaz.
@@ -55,10 +67,14 @@ export function ServicesOverview({ className }: { className?: string }) {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{SERVICES.map((service) => (
+					{SERVICES.map((service, idx) => (
 						<Card
 							key={service.title}
-							className="transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-2 border-transparent hover:border-multi-rosa group"
+							className={cn(
+								"transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-2 border-transparent hover:border-multi-rosa group opacity-0",
+								isIntersecting && "animate-slide-up",
+								isIntersecting && `stagger-${idx + 2}`,
+							)}
 						>
 							<CardHeader>
 								<div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
