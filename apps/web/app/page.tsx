@@ -1,8 +1,21 @@
+import { BlogHighlights } from "@/components/marketing/BlogHighlights";
+import { FinalCTA } from "@/components/marketing/FinalCTA";
+import { HeroSection } from "@/components/marketing/HeroSection";
+import { MentorshipTeaser } from "@/components/marketing/MentorshipTeaser";
+import { PortfolioHighlights } from "@/components/marketing/PortfolioHighlights";
+import { ServicesOverview } from "@/components/marketing/ServicesOverview";
+import { TrustStrip } from "@/components/marketing/TrustStrip";
+
 export default function Home() {
-	return (
-		<main className="flex min-h-screen flex-col items-center justify-center">
-			<h1 className="text-4xl font-bold">Multi BR</h1>
-			<p className="mt-4 text-lg text-gray-600">Branding ✹ Conteúdo ✹ Tráfego</p>
-		</main>
-	);
+  return (
+    <>
+      <HeroSection />
+      <TrustStrip />
+      <ServicesOverview />
+      <MentorshipTeaser />
+      <PortfolioHighlights />
+      <BlogHighlights />
+      <FinalCTA />
+    </>
+  );
 }

@@ -1,12 +1,12 @@
 @import "tailwindcss";
-
+@source "../../";
 /* ============================================================
    Multi BR Design System — Tokens (Tailwind v4)
    Fonte de verdade: DESIGN-SYSTEM.md
    ============================================================ */
 
 /* --- Tailwind v4 Theme Tokens --- */
-@theme inline {
+@theme {
 	/* Font families */
 	--font-sans: var(--font-poppins);
 	--font-display: "Balgin Bold", "Arial Black", sans-serif;
@@ -65,6 +65,7 @@
 	--animate-fade-in: fade-in 500ms ease both;
 	--animate-slide-up: slide-up 500ms ease both;
 	--animate-stagger: fade-in 500ms ease both;
+	--animate-float-slow: float 6s ease-in-out infinite;
 }
 
 /* --- Custom Properties (usáveis fora do Tailwind) --- */
@@ -114,6 +115,16 @@
 	to {
 		opacity: 0;
 		transform: translateY(20px);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
 	}
 }
 
