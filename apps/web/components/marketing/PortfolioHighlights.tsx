@@ -9,17 +9,18 @@ const HIGHLIGHTS = [
 	{
 		title: "Multi Estratégia",
 		cat: "Growth & Digital",
-		image: "/assets/multi/feed-1.png",
+		image: "/assets/portfolio/4-1.webp",
 	},
 	{
 		title: "Conteúdo Diário",
 		cat: "Gestão de Redes",
-		image: "/assets/multi/feed-2.png",
+		image: "/assets/portfolio/3-1920w.webp",
 	},
 	{
 		title: "Branding Multi",
 		cat: "Identidade Visual",
-		image: "/assets/multi/feed-3.png",
+		image: "/assets/portfolio/identidadeVisual-.webp",
+		hoverImage: "/assets/portfolio/identidadeVisual-2.webp",
 	},
 ];
 
@@ -65,8 +66,23 @@ export function PortfolioHighlights({ className }: { className?: string }) {
 								src={item.image}
 								alt={item.title}
 								fill
-								className="object-cover transition-transform duration-700 group-hover:scale-110"
+								quality={100}
+								unoptimized
+								className={cn(
+									"transition-all duration-700 bg-white object-cover",
+									item.hoverImage ? "group-hover:opacity-0" : "group-hover:scale-110",
+								)}
 							/>
+							{item.hoverImage && (
+								<Image
+									src={item.hoverImage}
+									alt={`${item.title} hover layer`}
+									fill
+									quality={100}
+									unoptimized
+									className="object-cover absolute inset-0 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:scale-110"
+								/>
+							)}
 							<div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
 							<div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
 								<span className="inline-block px-3 py-1 bg-white text-multi-roxo text-sm font-poppins font-bold rounded-full mb-3 shadow-md">
