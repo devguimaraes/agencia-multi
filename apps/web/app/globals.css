@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @source "../../";
 /* ============================================================
    Multi BR Design System — Tokens (Tailwind v4)
