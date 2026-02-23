@@ -1,6 +1,6 @@
 # Planejamento: Redesign Homepage Awwwards
 
-## Passos para Implementação
+## Fases anteriores (concluídas)
 
 - [x] 0. Geração de Novos Assets Visuais para o Layout
 - [x] 1. Sistema de design (CSS variables, tipografia, grain)
@@ -9,8 +9,16 @@
 - [x] Configure desktop-only custom cursor with contextual scaling (`CustomCursor.tsx`).
 - [x] Apply IntersectionObserver for stagger staggered section entries (`useIntersectionObserver.ts`).
 - [x] **Services Section** (`ServicesOverview.tsx`): Implement editorial list style with line drawings and hover arrow reveals.
-- [x] **Mentorship Section** (`MentorshipTeaser.tsx`): Re-factor to 'Carta Aberta' style with custom image scroll masking and mixed typography.
-- [x] **Portfolio Section** (`PortfolioHighlights.tsx`): Create masonry grid layout with high-impact mask reveals on enter viewport.ds)
+
+## Fase Atual — Redesign Seções (Mentoria, Portfolio, CTA)
+
+- [x] **MentorshipTeaser**: Redesign editorial "Carta Aberta" com grain, tipografia dramática, imagem com clip-path
+- [x] **PortfolioHighlights**: Galeria editorial imersiva em fundo escuro com grid masonry 4 itens
+- [x] **FinalCTA**: Layout monumental full-screen com tipografia gigante e colagem tropical
+- [x] Verificação visual e de build
+
+## Backlog
+
 - [ ] 12. Footer + WhatsApp sticky
 - [ ] 13. Header/nav com estados de scroll
 - [ ] 14. Testes de performance + ajustes de CLS
