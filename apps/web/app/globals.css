@@ -1,9 +1,11 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 @source "../../";
+
 /* ============================================================
    Multi BR Design System — Tokens (Tailwind v4)
-   Fonte de verdade: DESIGN-SYSTEM.md
+   Fonte de verdade: Awwwards Redesign Briefing
    ============================================================ */
 
 /* --- Tailwind v4 Theme Tokens --- */
@@ -24,11 +26,20 @@
 
 	/* ---- Neutral Colors ---- */
 	--color-multi-white: #ffffff;
-	--color-multi-black: #111111;
+	--color-multi-black: #0a0a0a;
+	--color-multi-cream: #f5f0e8;
 	--color-gray-50: #f5f5f5;
 	--color-gray-200: #cccccc;
 	--color-gray-600: #666666;
 	--color-gray-800: #333333;
+
+	/* ---- Typography scale (clamp values from briefing) ---- */
+	--text-hero: clamp(80px, 15vw, 220px);
+	--text-display: clamp(48px, 7vw, 110px);
+	--text-section: clamp(36px, 5vw, 72px);
+	--text-lead: clamp(18px, 2vw, 24px);
+	--text-body: 16px;
+	--text-label: 11px;
 
 	/* ---- Border Radius ---- */
 	--radius-sm: 4px;
@@ -43,58 +54,170 @@
 	--shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.2);
 	--shadow-whatsapp: 0 4px 16px rgba(37, 211, 102, 0.4);
 
-	/* ---- Spacing (base 4px) ---- */
-	--spacing-1: 4px;
-	--spacing-2: 8px;
-	--spacing-3: 12px;
-	--spacing-4: 16px;
-	--spacing-6: 24px;
-	--spacing-8: 32px;
-	--spacing-10: 40px;
-	--spacing-12: 48px;
-	--spacing-16: 64px;
-	--spacing-20: 80px;
-	--spacing-24: 96px;
-	--spacing-30: 120px;
-
-	/* ---- Transition Durations ---- */
-	--transition-duration-fast: 150ms;
-	--transition-duration-base: 200ms;
-	--transition-duration-smooth: 300ms;
-
 	/* ---- Animations ---- */
 	--animate-fade-in: fade-in 500ms ease both;
 	--animate-slide-up: slide-up 500ms ease both;
-	--animate-stagger: fade-in 500ms ease both;
-	--animate-float-slow: float 6s ease-in-out infinite;
-	--animate-marquee: marquee 20s linear infinite;
+	--animate-marquee: marquee-scroll 25s linear infinite;
+	--animate-sol-spin: sol-spin 50s linear infinite;
+	--animate-grain: grain-move 0.4s steps(1) infinite;
 }
 
-/* --- Custom Properties (usáveis fora do Tailwind) --- */
+/* --- Base & Tokens globais --- */
 :root {
 	/* Gradientes */
-	--multi-gradient-principal: linear-gradient(135deg, #5d018a 0%, #e60057 100%);
-	--multi-gradient-energetico: linear-gradient(135deg, #e60057 0%, #ec8b20 100%);
-	--multi-gradient-profissional: linear-gradient(135deg, #5d018a 0%, #014fcd 100%);
-	--multi-gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(93, 1, 138, 0.6) 100%);
+	--grad-hero: linear-gradient(145deg, #5d018a 0%, #e60057 100%);
+	--grad-warm: linear-gradient(135deg, #e60057 0%, #ec8b20 100%);
 }
 
-/* --- @font-face: Balgin Bold (local) --- */
-@font-face {
-	font-family: "Balgin Bold";
-	src: url("/fonts/balgin-bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+/* --- Base Styles --- */
+body {
+	font-family: var(--font-sans), system-ui, sans-serif;
+	color: var(--color-gray-800);
+	background-color: var(--color-multi-cream);
+	overflow-x: hidden;
+}
+
+/* Custom Scrollbar minimalista */
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 10px;
+	border: 3px solid #0a0a0a;
+}
+
+/* --- Typography utilities extras --- */
+.text-outline-yellow {
+	color: transparent;
+	-webkit-text-stroke: 2px #fac32a;
+}
+.text-multi-stroke {
+	/* Efeito multi-stroke descrito no briefing - dependendo do uso */
+	color: transparent;
+	-webkit-text-stroke: 2px #fac32a;
+}
+.grain-fill-text {
+	position: relative;
+	color: transparent;
+	background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23fac32a'/%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3' style='mix-blend-mode: multiply;'/%3E%3C/svg%3E");
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+/* --- Utils de reveal e animação de texto --- */
+.split-line {
+	overflow: hidden;
+	display: block;
+}
+.split-line span {
+	display: block;
+	transform: translateY(105%);
+	transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform;
+}
+.is-visible .split-line span {
+	transform: translateY(0);
+}
+
+/* IntersectionObserver Stagger reveal Utilities */
+.reveal-up {
+	opacity: 0;
+	transform: translateY(40px);
+	transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.reveal-up.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.stagger-children > * {
+	opacity: 0;
+	transform: translateY(32px);
+	transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.stagger-children.is-visible > *:nth-child(1) {
+	transition-delay: 0.05s;
+}
+.stagger-children.is-visible > *:nth-child(2) {
+	transition-delay: 0.12s;
+}
+.stagger-children.is-visible > *:nth-child(3) {
+	transition-delay: 0.19s;
+}
+.stagger-children.is-visible > *:nth-child(4) {
+	transition-delay: 0.26s;
+}
+.stagger-children.is-visible > *:nth-child(5) {
+	transition-delay: 0.33s;
+}
+.stagger-children.is-visible > *:nth-child(6) {
+	transition-delay: 0.40s;
+}
+.stagger-children.is-visible > * {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* --- Global Grain --- */
+.grain {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+	opacity: 0.05;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-size: 180px 180px;
+	animation: grain-move 0.4s steps(1) infinite;
+	will-change: background-position;
+}
+/* Modificadores de overlay do grain */
+.grain.low-opacity {
+	opacity: 0.04;
+}
+.grain.high-opacity {
+	opacity: 0.06;
 }
 
 /* --- Keyframe Animations --- */
-@keyframes fade-in {
+@keyframes grain-move {
+	0% {
+		background-position: 0 0;
+	}
+	25% {
+		background-position: -30px -60px;
+	}
+	50% {
+		background-position: 50px -20px;
+	}
+	75% {
+		background-position: -20px 40px;
+	}
+	100% {
+		background-position: 30px -30px;
+	}
+}
+
+@keyframes marquee-scroll {
 	from {
-		opacity: 0;
+		transform: translateX(0);
 	}
 	to {
-		opacity: 1;
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes sol-spin {
+	from {
+		transform: translateY(-50%) rotate(0deg);
+	}
+	to {
+		transform: translateY(-50%) rotate(360deg);
 	}
 }
 
@@ -109,89 +232,7 @@
 	}
 }
 
-@keyframes slide-down {
-	from {
-		opacity: 1;
-		transform: translateY(0);
-	}
-	to {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-}
-
-@keyframes float {
-	0%,
-	100% {
-		transform: translateY(0);
-	}
-	50% {
-		transform: translateY(-20px);
-	}
-}
-
-@keyframes marquee {
-	0% {
-		transform: translateX(0);
-	}
-	100% {
-		transform: translateX(-50%);
-	}
-}
-
-/* --- Base Styles --- */
-body {
-	font-family: var(--font-sans), system-ui, sans-serif;
-	color: var(--color-gray-800);
-}
-
-/* --- Utility: Stagger delays --- */
-.stagger-1 {
-	animation-delay: 100ms;
-}
-.stagger-2 {
-	animation-delay: 200ms;
-}
-.stagger-3 {
-	animation-delay: 300ms;
-}
-.stagger-4 {
-	animation-delay: 400ms;
-}
-.stagger-5 {
-	animation-delay: 500ms;
-}
-.stagger-6 {
-	animation-delay: 600ms;
-}
-.stagger-7 {
-	animation-delay: 700ms;
-}
-.stagger-8 {
-	animation-delay: 800ms;
-}
-.stagger-9 {
-	animation-delay: 900ms;
-}
-.stagger-10 {
-	animation-delay: 1000ms;
-}
-
-/* --- Gradiente utility classes --- */
-.bg-gradient-principal {
-	background: var(--multi-gradient-principal);
-}
-.bg-gradient-energetico {
-	background: var(--multi-gradient-energetico);
-}
-.bg-gradient-profissional {
-	background: var(--multi-gradient-profissional);
-}
-.bg-gradient-overlay {
-	background: var(--multi-gradient-overlay);
-}
-
-/* --- Reduced Motion --- */
+/* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
