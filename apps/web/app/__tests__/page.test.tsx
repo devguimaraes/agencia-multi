@@ -20,8 +20,6 @@ describe("Home Page", () => {
 
 	it("renders the value proposition text", () => {
 		render(<Home />);
-		expect(
-			screen.getByText(/Estratégia digital sem enrolação/i),
-		).toBeInTheDocument();
+		expect(screen.getByText(/Estratégia digital sem enrolação/i)).toBeInTheDocument();
 	});
 });

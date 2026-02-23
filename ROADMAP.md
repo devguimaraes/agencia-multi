@@ -151,11 +151,32 @@ multi-br/
 
 ---
 
-## Fase 4 — Páginas Internas ⏳
+## Fase 4 — Páginas Internas ✅
 
-- Sobre, 6× Serviço (template), Portfolio, Blog
-- Mentoria (landing), Contato (formulário)
-- Rotas dinâmicas `/servicos/[slug]`, `/blog/[slug]`
+**Status:** Concluído · **Data:** 22/02/2026
+
+### O que foi feito
+
+| Item | Status | Detalhes |
+| :--- | :--- | :--- |
+| Estrutura de Rotas | ✅ | `sobre`, `servicos`, `portfolio`, `blog`, `mentoria`, `contato` |
+| Componentes Compartilhados | ✅ | `PageHeader` (com breadcrumbs), `ContactForm` (com validação Zod), `ServiceCard` |
+| Página Sobre | ✅ | Seções de História, Valores e Equipe |
+| Páginas de Serviços | ✅ | Listagem e Detalhes dinâmicos (`/servicos/[slug]`) com FAQ |
+| Página Portfolio | ✅ | Grid com filtros de categorias (Tabs) e dados mockados |
+| Blog | ✅ | Listagem e Post template (`/blog/[slug]`) com `@tailwindcss/typography` |
+| Landing Mentoria | ✅ | Estrutura de vendas com módulos e depoimentos |
+| Página Contato | ✅ | Informações e Formulário funcional (UI) |
+| Página E-book | ✅ | Landing page para captura de leads (mockup) |
+| Sistema de Toast | ✅ | Implementação customizada de `use-toast` e `Toaster` |
+
+### Verificação (Fase 4)
+
+| Comando | Resultado |
+| :--- | :--- |
+| `bun run build` | ✅ Build de produção (Static + SSG) sem erros |
+| `bun biome check` | ✅ Linting e formatação validados |
+| Navegação | ✅ Links entre páginas e breadcrumbs funcionais |
 
 ---
 
