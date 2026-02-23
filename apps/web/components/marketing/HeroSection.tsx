@@ -87,7 +87,45 @@ export function HeroSection({ className }: { className?: string }) {
 
       {/* Elementos da Colagem (Parallax) */}
       <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden mix-blend-normal">
-        {/* Folhas Gigantes (Esquerda/Baixo) */}
+        {/* 1. Rio (Fundo Direita/Baixo) */}
+        <div
+          data-parallax="0.02"
+          className={cn(
+            "absolute right-[-5%] bottom-[-5%] w-[300px] md:w-[45vw] max-w-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500",
+            isIntersecting ? "opacity-40 scale-100" : "opacity-0 scale-95",
+          )}
+        >
+          <Image
+            src="/assets/brasilidades/rio.png"
+            alt="Rio de Janeiro Decorativo"
+            width={600}
+            height={600}
+            className="w-full h-auto object-contain drop-shadow-lg"
+            aria-hidden="true"
+            priority
+          />
+        </div>
+
+        {/* 2. Pássaros (Esquerda/Cima) */}
+        <div
+          data-parallax="0.06"
+          className={cn(
+            "absolute left-[5%] md:left-[10%] top-[10%] md:top-[15%] w-[120px] md:w-[20vw] max-w-[250px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-600",
+            isIntersecting ? "opacity-80 scale-100" : "opacity-0 scale-95",
+          )}
+        >
+          <Image
+            src="/assets/brasilidades/passaros_v2.png"
+            alt="Pássaros voando"
+            width={250}
+            height={250}
+            className="w-full h-auto object-contain drop-shadow-xl"
+            aria-hidden="true"
+            priority
+          />
+        </div>
+
+        {/* 3. Folhas Gigantes (Esquerda/Baixo) */}
         <div
           data-parallax="0.05"
           className={cn(
@@ -106,38 +144,38 @@ export function HeroSection({ className }: { className?: string }) {
           />
         </div>
 
-        {/* Flor de Hibisco (Direita/Cima) */}
+        {/* 4. Caju (Direita/Cima) */}
         <div
           data-parallax="0.08"
           className={cn(
-            "absolute right-[-2%] top-[5%] md:top-[10%] w-[150px] md:w-[25vw] max-w-[320px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-900",
+            "absolute right-[-2%] top-[5%] md:top-[10%] w-[150px] md:w-[22vw] max-w-[300px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-900",
             isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           <Image
-            src="/assets/brasilidades/flor_hibisco.png"
-            alt="Flor decorativa"
-            width={320}
-            height={320}
-            className="w-full h-auto object-contain drop-shadow-2xl"
+            src="/assets/brasilidades/caju_v2.png"
+            alt="Caju decorativo"
+            width={300}
+            height={300}
+            className="w-full h-auto object-contain drop-shadow-2xl transform -rotate-12"
             aria-hidden="true"
             priority
           />
         </div>
 
-        {/* Tucano Original (Direita/Meio) */}
+        {/* 5. Tucano Original V2 (Direita/Meio/Baixo) */}
         <div
           data-parallax="0.03"
           className={cn(
-            "absolute right-[5%] bottom-[20%] w-[120px] md:w-[18vw] max-w-[240px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1000",
+            "absolute right-[5%] bottom-[15%] w-[140px] md:w-[18vw] max-w-[260px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1000",
             isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           <Image
-            src="/assets/brasilidades/tucano.png"
+            src="/assets/brasilidades/tucano_v2.png"
             alt="Tucano decorativo"
-            width={240}
-            height={240}
+            width={260}
+            height={260}
             className="w-full h-auto object-contain drop-shadow-2xl"
             aria-hidden="true"
             priority
