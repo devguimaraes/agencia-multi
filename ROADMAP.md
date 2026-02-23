@@ -41,7 +41,7 @@
 
 ### Estrutura criada
 
-```
+```text
 multi-br/
 ├── apps/web/                 # Next.js 16 (App Router + Turbopack)
 │   ├── app/
@@ -130,14 +130,15 @@ multi-br/
 
 | Item | Status | Detalhes |
 | :--- | :--- | :--- |
-| Hero Section Refined | ✅ | Fundo com gradiente brand, acessibilidade (alt/aria), animações stagger |
-| Trust Strip Real | ✅ | Logos de clientes reais (IORB, etc.) com scroll infinito (marquee) |
+| Hero Section Refined | ✅ | Fundo com gradiente brand, acessibilidade real, colagem estilo Brasilidades com transparência absoluta (Tucano, Ramo de Café, Flor) |
+| Trust Strip Real | ✅ | Logos de clientes reais (IORB, etc.) com scroll infinito refinado (marquee) |
 | Serviços (Overview) | ✅ | Grid de 6 cards com animações de entrada e fonte Balgin |
-| Mentoria (Teaser) | ✅ | Seção persuasiva com dores/soluções e cores brand |
-| Portfolio (Highlights) | ✅ | Grid de projetos com efeitos de hover e animações de scroll |
+| Mentoria (Teaser) | ✅ | Persuasiva com dores/soluções, cores brand e ativos sutis de marca no background (monocromática/branca) |
+| Portfolio (Highlights) | ✅ | Grid de projetos com efeitos de hover, animações de scroll e imagens reais do feed |
 | Blog Highlights | ✅ | Posts recentes com layout limpo e animações coordenadas |
 | Final CTA | ✅ | Seção de conversão multi-caminho com gradiente brand |
 | Animações de Scroll | ✅ | Sistema global de `fade-in-up` usando `IntersectionObserver` |
+| Correções SSG/SSR | ✅ | Resolução de conflitos de renderização no servidor (Home Page convertida) |
 | Testes Unitários | ✅ | Cobertura da Home Page atualizada para nova estrutura |
 
 ### Verificação (Fase 3)
