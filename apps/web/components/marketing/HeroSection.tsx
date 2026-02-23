@@ -239,7 +239,7 @@ export function HeroSection({ className }: { className?: string }) {
               isIntersecting && "animate-slide-up stagger-3",
             )}
           >
-            Estratégia digital sem enrolação para multiplicar os resultados do
+            Marketing digital sem enrolação para multiplicar os resultados do
             seu negócio.
           </p>
 

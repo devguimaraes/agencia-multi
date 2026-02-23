@@ -9,15 +9,15 @@ import { ServicesOverview } from "@/components/marketing/ServicesOverview";
 import { TrustStrip } from "@/components/marketing/TrustStrip";
 
 export default function Home() {
-  return (
-    <>
-      <HeroSection />
-      <TrustStrip />
-      <ServicesOverview />
-      <MentorshipTeaser />
-      <PortfolioHighlights />
-      <BlogHighlights />
-      <FinalCTA />
-    </>
-  );
+	return (
+		<>
+			<HeroSection />
+			<TrustStrip />
+			<ServicesOverview />
+			<MentorshipTeaser />
+			<PortfolioHighlights />
+			<BlogHighlights />
+			<FinalCTA />
+		</>
+	);
 }
