@@ -28,6 +28,11 @@ const buttonVariants = cva(
 					"border-2 border-multi-roxo",
 					"hover:bg-multi-roxo hover:text-white",
 				],
+				outline: [
+					"bg-transparent text-multi-roxo",
+					"border-2 border-multi-roxo",
+					"hover:bg-multi-roxo hover:text-white",
+				],
 				ghost: [
 					"bg-transparent text-multi-roxo",
 					"hover:text-multi-azul",
