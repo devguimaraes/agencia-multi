@@ -3,15 +3,44 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 export function MentorshipTeaser({ className }: { className?: string }) {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.15 });
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  // Array preparado para expansão do carrossel no futuro
+  const carouselItems = [
+    {
+      id: 1,
+      image: "/assets/brasilidades/media__1771615197792.png",
+      alt: "Mentoria de Escala",
+    },
+  ];
+
+  const handleScroll = () => {
+    if (!scrollContainerRef.current) return;
+    const scrollPosition = scrollContainerRef.current.scrollLeft;
+    const slideWidth = scrollContainerRef.current.offsetWidth;
+    const currentIndex = Math.round(scrollPosition / slideWidth);
+    setActiveSlide(currentIndex);
+  };
+
+  const scrollToSlide = (index: number) => {
+    if (!scrollContainerRef.current) return;
+    const slideWidth = scrollContainerRef.current.offsetWidth;
+    scrollContainerRef.current.scrollTo({
+      left: slideWidth * index,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
       ref={ref}
       className={cn(
-        "relative py-24 md:py-32 bg-multi-black text-white overflow-hidden",
+        "relative py-24 md:py-32 bg-white text-multi-black overflow-hidden",
         className,
       )}
       data-intersecting={isIntersecting}
@@ -20,12 +49,12 @@ export function MentorshipTeaser({ className }: { className?: string }) {
         {/* Top Label */}
         <div
           className={cn(
-            "mb-12 md:mb-20 opacity-0 transition-opacity duration-700 ease-out",
+            "mb-12 md:mb-16 opacity-0 transition-opacity duration-700 ease-out",
             isIntersecting && "opacity-100",
           )}
         >
-          <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-white/40">
-            Mentoria
+          <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-black/40">
+            Mentoria de Escala
           </span>
         </div>
 
@@ -37,17 +66,15 @@ export function MentorshipTeaser({ className }: { className?: string }) {
               isIntersecting && "opacity-100 translate-y-0 delay-200",
             )}
           >
-            <div className="text-[clamp(24px,4vw,42px)] leading-[1.2] font-poppins font-light text-white/90">
-              <p className="mb-6">
-                Já estivemos aí.{" "}
-                <span className="font-display tracking-tight text-white">
-                  Patinando
-                </span>{" "}
-                nos mesmos problemas.
+            <div className="text-[clamp(24px,4vw,42px)] leading-[1.2] font-poppins font-light text-multi-black/90">
+              <p className="mb-6 font-display text-[clamp(42px,5vw,56px)] leading-none text-multi-roxo">
+                Maturidade para
+                <br />
+                crescer sem caos.
               </p>
-              <p className="mb-6">
-                A mentoria aborda{" "}
-                <span className="relative inline-block font-medium text-multi-roxo px-2 mx-1 whitespace-nowrap">
+              <p className="mb-6 text-lg font-poppins">
+                Você já validou seu modelo. Agora o desafio é estruturar a
+                <span className="relative inline-block font-medium text-white px-2 mx-1 whitespace-nowrap">
                   {/* Marker Amarelo */}
                   <span
                     className={cn(
@@ -55,12 +82,13 @@ export function MentorshipTeaser({ className }: { className?: string }) {
                       isIntersecting && "scale-x-100 delay-600",
                     )}
                   />
-                  processos
+                  operação comercial
                 </span>
-                , posicionamento e vendas.
+                e o posicionamento para a próxima fase.
               </p>
-              <p className="opacity-60 text-[clamp(18px,2.5vw,28px)] font-poppins italic">
-                Sem fórmula mágica.
+              <p className="opacity-70 text-[clamp(18px,2vw,22px)] font-poppins italic">
+                Cultura de execução, alinhamento de branding e vendas
+                previsíveis. Sem rodeios.
               </p>
             </div>
 
@@ -73,76 +101,74 @@ export function MentorshipTeaser({ className }: { className?: string }) {
             >
               <a
                 href="#mentoria"
-                className="group relative inline-flex items-center justify-center gap-2 bg-white text-multi-black font-poppins font-bold text-sm md:text-base px-8 py-4 md:px-10 md:py-5 overflow-hidden rounded-sm transition-colors duration-300 hover:bg-multi-amarelo"
+                className="group relative inline-flex items-center justify-center gap-2 bg-multi-roxo text-white font-poppins font-bold text-sm md:text-base px-8 py-4 md:px-10 md:py-5 overflow-hidden rounded-sm transition-colors duration-300 hover:bg-multi-amarelo hover:text-multi-roxo"
               >
                 <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-10">
-                  Quero estruturar meu negócio
+                  Estruturar meu negócio
                 </span>
                 <span className="absolute inset-0 flex items-center justify-center z-10 transition-transform duration-300 translate-y-10 group-hover:translate-y-0">
-                  Saber mais →
+                  Aplicar agora →
                 </span>
               </a>
             </div>
           </div>
 
-          {/* Direita: Foto com Máscara e Efeito Hover */}
+          {/* Direita: Carrossel de Fotos (Preparado para N imagens) */}
           <div
             className={cn(
-              "w-full lg:w-1/2 flex justify-center lg:justify-end opacity-0 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              "w-full lg:w-1/2 flex flex-col justify-center lg:justify-end opacity-0 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
               isIntersecting && "opacity-100 scale-100 delay-300",
             )}
           >
-            <div className="relative w-full max-w-[480px] aspect-3/4 group cursor-pointer overflow-hidden rounded-sm mask-image-reveal">
-              {/* Imagem Base */}
-              <Image
-                src="/assets/brasilidades/mentoria_blur.png"
-                alt="Mentoria Multi"
-                fill
-                className="object-cover grayscale contrast-125 transition-transform duration-800 ease-out group-hover:scale-110"
-                priority
-              />
-
-              {/* Overlay Noise/Grain local hover intensificador */}
-              <div className="absolute inset-0 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-[0.15] pointer-events-none bg-multi-roxo" />
-
-              {/* Gradient escuro embaixo para contraste */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/80 to-transparent pointer-events-none" />
-
-              <div className="absolute bottom-6 left-6 font-display text-[clamp(20px,3vw,32px)] text-white m-0 p-0 transform translate-y-4 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-                Confissão
-                <br />
-                Direta
+            {/* Viewport do Carrossel */}
+            <div className="relative w-full max-w-[540px] aspect-square lg:aspect-4/5 overflow-hidden rounded-xl bg-gray-100 ring-1 ring-multi-black/5 mx-auto shadow-2xl">
+              <div
+                ref={scrollContainerRef}
+                onScroll={handleScroll}
+                className="flex w-full h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar touch-pan-x"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {carouselItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="w-full h-full flex-none snap-center relative group"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                      priority
+                    />
+                    {/* Dark gradient overlay em cada slide */}
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/60 to-transparent pointer-events-none opacity-60 mix-blend-multiply" />
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* Controles do Carrossel (Visíveis caso > 1 slide) */}
+            {carouselItems.length > 1 && (
+              <div className="flex items-center justify-center gap-3 mt-6">
+                {carouselItems.map((item, index) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => scrollToSlide(index)}
+                    className={cn(
+                      "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                      activeSlide === index
+                        ? "bg-multi-roxo w-8"
+                        : "bg-multi-black/20 hover:bg-multi-black/40",
+                    )}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Custom Mask Reveal Style Injector (Since it's highly specific to this component) */}
-      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Needed for custom CSS mask animations */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-				.mask-image-reveal {
-				  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');
-				  mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');
-				  -webkit-mask-size: 0%;
-				  mask-size: 0%;
-				  -webkit-mask-position: center;
-				  mask-position: center;
-				  -webkit-mask-repeat: no-repeat;
-				  mask-repeat: no-repeat;
-				  transition: -webkit-mask-size 1.2s cubic-bezier(0.16, 1, 0.3, 1), mask-size 1.2s cubic-bezier(0.16, 1, 0.3, 1), border-radius 1.2s ease;
-				  border-radius: 50%;
-				}
-				section[data-intersecting="true"] .mask-image-reveal {
-				  -webkit-mask-size: 200%;
-				  mask-size: 200%;
-				  border-radius: 4px;
-				}
-			`,
-        }}
-      />
     </section>
   );
 }

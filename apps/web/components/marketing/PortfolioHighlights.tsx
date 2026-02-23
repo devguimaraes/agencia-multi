@@ -33,7 +33,7 @@ export function PortfolioHighlights({ className }: { className?: string }) {
     <section
       ref={ref}
       className={cn(
-        "bg-multi-black text-white py-24 md:py-32 w-full",
+        "bg-white text-multi-black py-24 md:py-32 w-full",
         className,
       )}
       data-intersecting={isIntersecting}
@@ -46,11 +46,11 @@ export function PortfolioHighlights({ className }: { className?: string }) {
             isIntersecting && "opacity-100 translate-y-0",
           )}
         >
-          <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-white/40 mb-2">
+          <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-black/40 mb-2">
             Nosso
           </span>
           <div className="relative">
-            <h2 className="font-display text-[clamp(48px,6vw,84px)] text-multi-amarelo leading-none m-0">
+            <h2 className="font-display text-[clamp(48px,6vw,84px)] text-multi-roxo leading-none m-0">
               Portfólio
             </h2>
           </div>
@@ -62,14 +62,14 @@ export function PortfolioHighlights({ className }: { className?: string }) {
             <div
               key={item.title}
               className={cn(
-                "group relative overflow-hidden bg-multi-black cursor-pointer rounded-sm collage-element",
+                "group relative overflow-hidden bg-gray-50 border border-gray-100 cursor-pointer rounded-sm collage-element",
                 item.className,
               )}
             >
               {/* Div de Cobertura para Animação de Reveal (Curtain wipe vertical) */}
               <div
                 className={cn(
-                  "absolute inset-0 z-20 bg-[#1A1A1A] origin-top transition-transform duration-1200 ease-[cubic-bezier(0.19,1,0.22,1)]",
+                  "absolute inset-0 z-20 bg-gray-100 origin-top transition-transform duration-1200 ease-[cubic-bezier(0.19,1,0.22,1)]",
                   isIntersecting ? "scale-y-0" : "scale-y-100",
                 )}
                 style={{ transitionDelay: `${200 + idx * 150}ms` }}
@@ -130,7 +130,7 @@ export function PortfolioHighlights({ className }: { className?: string }) {
         >
           <a
             href="#projetos"
-            className="group relative inline-flex items-center justify-center gap-2 bg-transparent text-white font-poppins font-normal text-sm md:text-base px-10 py-5 rounded-sm border border-white/20 hover:border-white transition-all duration-300 hover:bg-white/5"
+            className="group relative inline-flex items-center justify-center gap-2 bg-transparent text-multi-roxo font-poppins font-semibold text-sm md:text-base px-10 py-5 rounded-sm border-2 border-multi-roxo/20 hover:border-multi-roxo transition-all duration-300 hover:bg-multi-roxo/5"
           >
             Todos os projetos →
           </a>

@@ -85,60 +85,60 @@ export function HeroSection({ className }: { className?: string }) {
         </svg>
       </div>
 
-      {/* Collage Elements com Parallax */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-        {/* Elemento A (Top-Right): Beija-flor */}
+      {/* Elementos da Colagem (Parallax) */}
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden mix-blend-normal">
+        {/* Folhas Gigantes (Esquerda/Baixo) */}
         <div
-          data-parallax="0.04"
+          data-parallax="0.05"
           className={cn(
-            "absolute right-[2%] top-[10%] md:top-[5%] w-[180px] md:w-[35vw] max-w-[480px] mix-blend-multiply transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-800",
+            "absolute left-[-5%] bottom-[-5%] md:bottom-0 w-[200px] md:w-[35vw] max-w-[450px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-700",
             isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           <Image
-            src="/assets/brasilidades/hero_beijaflor.png"
-            alt=""
-            width={480}
-            height={480}
-            className="w-full h-auto object-contain collage-element"
+            src="/assets/brasilidades/folhas_v2.png"
+            alt="Folha decorativa"
+            width={450}
+            height={450}
+            className="w-full h-auto object-contain drop-shadow-2xl"
             aria-hidden="true"
             priority
           />
         </div>
 
-        {/* Elemento B (Bottom-Right): Folha */}
+        {/* Flor de Hibisco (Direita/Cima) */}
         <div
-          data-parallax="0.07"
+          data-parallax="0.08"
           className={cn(
-            "absolute right-0 bottom-[-5%] md:bottom-0 w-[150px] md:w-[25vw] max-w-[320px] mix-blend-multiply transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-950",
+            "absolute right-[-2%] top-[5%] md:top-[10%] w-[150px] md:w-[25vw] max-w-[320px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-900",
             isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           <Image
-            src="/assets/brasilidades/hero_folha.png"
-            alt=""
+            src="/assets/brasilidades/flor_hibisco.png"
+            alt="Flor decorativa"
             width={320}
             height={320}
-            className="w-full h-auto object-contain collage-element"
+            className="w-full h-auto object-contain drop-shadow-2xl"
             aria-hidden="true"
             priority
           />
         </div>
 
-        {/* Elemento C (Left): Tucano Pequeno Decorativo */}
+        {/* Tucano Original (Direita/Meio) */}
         <div
-          data-parallax="0.02"
+          data-parallax="0.03"
           className={cn(
-            "absolute left-[2%] top-[20%] w-[80px] md:w-[10vw] max-w-[120px] mix-blend-screen transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1100",
-            isIntersecting ? "opacity-60 scale-100" : "opacity-0 scale-95",
+            "absolute right-[5%] bottom-[20%] w-[120px] md:w-[18vw] max-w-[240px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1000",
+            isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
           )}
         >
           <Image
-            src="/assets/brasilidades/hero_tucano.png"
-            alt=""
-            width={200}
-            height={200}
-            className="w-full h-auto object-contain collage-element"
+            src="/assets/brasilidades/tucano.png"
+            alt="Tucano decorativo"
+            width={240}
+            height={240}
+            className="w-full h-auto object-contain drop-shadow-2xl"
             aria-hidden="true"
             priority
           />
@@ -151,67 +151,83 @@ export function HeroSection({ className }: { className?: string }) {
         className="w-full h-full relative z-20 pointer-events-none"
         data-intersecting={isIntersecting}
       >
-        {/* Slogan Top Right */}
-        <div className="absolute top-[100px] md:top-[120px] right-[4vw] md:right-[6vw] font-poppins font-bold text-[9px] md:text-[clamp(12px,1.2vw,16px)] tracking-[0.25em] text-white/70 uppercase">
+        {/* Conteúdo Central */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4 flex flex-col items-center text-center">
+          {/* Logo da Multi Centralizada */}
           <div
-            className="overflow-hidden"
-            style={{
-              clipPath: isIntersecting ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
-              transition: "clip-path 1s cubic-bezier(0.16,1,0.3,1) 0.3s",
-            }}
+            className={cn(
+              "mb-8 opacity-0 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300",
+              isIntersecting && "opacity-100 scale-100",
+            )}
           >
-            BRANDING{" "}
-            <span className="inline-block w-[0.9em] text-multi-amarelo">✹</span>{" "}
-            CONTEÚDO{" "}
-            <span className="inline-block w-[0.9em] text-multi-amarelo">✹</span>{" "}
-            TRÁFEGO
+            <Image
+              src="/brand/logomarca-preta.png"
+              alt="Agência Multi BR Logo"
+              width={420}
+              height={140}
+              priority
+              className="w-full max-w-[240px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain brightness-0 invert drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+            />
           </div>
-        </div>
 
-        {/* Bloco Bottom Left */}
-        <div className="absolute bottom-[10%] md:bottom-[15%] left-[4vw] w-full max-w-[90vw]">
-          {/* Título GIGANTE */}
-          <h1 className="font-display text-[var(--text-hero)] text-multi-amarelo leading-[0.88] tracking-[-0.02em] lowercase m-0 p-0">
-            <span className="split-line">
-              <span style={{ transitionDelay: "0.00s" }}>m</span>
+          {/* Slogan Top Row */}
+          <h1 className="font-balgin text-[clamp(16px,2vw,28px)] text-white uppercase leading-none tracking-normal flex items-center justify-center gap-2 sm:gap-4 whitespace-nowrap drop-shadow-md opacity-0 animate-slide-up stagger-2">
+            <span
+              className={cn(
+                "transition-all duration-700 ease-out",
+                isIntersecting
+                  ? "opacity-100 translate-y-0 delay-500"
+                  : "opacity-0 translate-y-5",
+              )}
+            >
+              Branding
             </span>
-            <span className="split-line -ml-[2%]">
-              <span style={{ transitionDelay: "0.065s" }}>u</span>
+            <span
+              className={cn(
+                "text-multi-amarelo transition-all duration-700 ease-out",
+                isIntersecting
+                  ? "opacity-100 translate-y-0 delay-600"
+                  : "opacity-0 translate-y-5",
+              )}
+            >
+              ✹ Conteúdo ✹
             </span>
-            <span className="split-line -ml-[2%]">
-              <span style={{ transitionDelay: "0.130s" }}>l</span>
-            </span>
-            <span className="split-line -ml-[2%]">
-              <span style={{ transitionDelay: "0.195s" }}>t</span>
-            </span>
-            <span className="split-line -ml-[2%]">
-              <span style={{ transitionDelay: "0.260s" }}>i</span>
+            <span
+              className={cn(
+                "transition-all duration-700 ease-out",
+                isIntersecting
+                  ? "opacity-100 translate-y-0 delay-700"
+                  : "opacity-0 translate-y-5",
+              )}
+            >
+              Tráfego
             </span>
           </h1>
 
-          {/* Subtítulo */}
+          {/* Subtítulo Descritivo */}
           <div
-            className={`mt-4 font-poppins font-normal text-white text-base md:text-[clamp(16px,1.8vw,22px)] max-w-[460px] transition-all duration-700 ease-out ${
+            className={`mt-6 font-poppins font-normal text-white text-base md:text-xl lg:text-2xl max-w-2xl mx-auto transition-all duration-700 ease-out drop-shadow-md ${
               isIntersecting
-                ? "opacity-100 translate-y-0 delay-500"
+                ? "opacity-100 translate-y-0 delay-800"
                 : "opacity-0 translate-y-5"
             }`}
           >
-            Estratégia digital sem enrolação.
+            Marketing digital sem enrolação para multiplicar os resultados do
+            seu negócio.
           </div>
 
           {/* Botões CTA */}
           <div
-            className={`mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 pointer-events-auto transition-all duration-700 ease-out ${
+            className={`mt-10 md:mt-14 flex flex-col sm:flex-row items-center gap-4 md:gap-6 pointer-events-auto transition-all duration-700 ease-out ${
               isIntersecting
-                ? "opacity-100 translate-y-0 delay-700"
+                ? "opacity-100 translate-y-0 delay-900"
                 : "opacity-0 translate-y-4"
             }`}
           >
-            {/* Primário Amarelo com HoverSweep */}
+            {/* Primário Amarelo */}
             <a
               href="#contato"
-              className="group relative overflow-hidden bg-multi-amarelo text-multi-roxo font-poppins font-bold text-sm md:text-base px-9 py-4 rounded-md border-none flex items-center justify-center gap-2"
+              className="group relative overflow-hidden bg-multi-amarelo text-multi-roxo font-poppins font-bold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-none shadow-xl flex items-center justify-center gap-2"
             >
               <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                 Vamos conversar?
@@ -222,12 +238,12 @@ export function HeroSection({ className }: { className?: string }) {
               <div className="absolute inset-0 bg-multi-rosa rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
             </a>
 
-            {/* Secundário Outline Animado */}
+            {/* Secundário Branco Outline */}
             <a
               href="#servicos"
-              className="group relative bg-transparent text-white font-poppins font-normal text-sm md:text-base px-9 py-4 rounded-md border-[1.5px] border-white/50 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
+              className="group relative text-white font-poppins font-semibold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-2 border-white/80 hover:border-white hover:bg-white/10 hover:shadow-lg transition-all duration-300 flex items-center justify-center"
             >
-              Conheça os serviços →
+              Conheça os serviços
             </a>
           </div>
         </div>
