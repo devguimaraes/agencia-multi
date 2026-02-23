@@ -1,269 +1,245 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export function HeroSection({ className }: { className?: string }) {
-	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
 
-	return (
-		<section
-			ref={ref}
-			className={cn(
-				"relative overflow-hidden bg-linear-to-br from-multi-roxo to-multi-rosa min-h-[90vh] flex items-center justify-center pt-24 pb-32",
-				className,
-			)}
-		>
-			{/* Background Assets Composition - Mobile First Approach */}
-			<div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-				{/* Soft Blurs (Present everywhere) */}
-				<div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-multi-amarelo rounded-full blur-[140px] opacity-20" />
-				<div className="absolute top-[20%] -right-[10%] w-[40%] h-[60%] bg-multi-roxo rounded-full blur-[120px] opacity-20" />
+  // Mousemove Parallax Logic
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
 
-				{/* Level 1: Subtle Brand Shapes (Mobile+) */}
-				<div className="absolute inset-0 opacity-10 md:opacity-15">
-					<div className="absolute top-[10%] left-[5%] w-32 md:w-64 rotate-12">
-						<Image
-							src="/brand/icone-branco-transparente.png"
-							alt=""
-							width={256}
-							height={256}
-							aria-hidden="true"
-							className="w-full h-auto opacity-20 grayscale brightness-200"
-						/>
-					</div>
-					<div className="absolute bottom-[10%] right-[5%] w-40 md:w-72 -rotate-12">
-						<Image
-							src="/brand/icone-branco-transparente.png"
-							alt=""
-							width={288}
-							height={288}
-							aria-hidden="true"
-							className="w-full h-auto opacity-10 grayscale brightness-200"
-						/>
-					</div>
-				</div>
+    // Only activate parallax on desktop to avoid mobile jank
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
-				{/* Level 2: Tropical Leaves (Universal Visibility) */}
-				<div className="absolute inset-0">
-					{/* Top Right Leaf */}
-					<div className="absolute top-[-5%] right-[-8%] w-[200px] md:w-[400px] lg:w-[600px] opacity-20 md:opacity-40 rotate-[25deg]">
-						<Image
-							src="/assets/brasilidades/folhas_v2.png"
-							alt=""
-							width={600}
-							height={600}
-							aria-hidden="true"
-							className="w-full h-auto object-contain"
-						/>
-					</div>
-					{/* Bottom Left Leaf */}
-					<div className="absolute bottom-[-10%] left-[-10%] w-[180px] md:w-[350px] lg:w-[500px] opacity-20 md:opacity-30 -rotate-[15deg] scale-x-[-1]">
-						<Image
-							src="/assets/brasilidades/folhas_v2.png"
-							alt=""
-							width={500}
-							height={500}
-							aria-hidden="true"
-							className="w-full h-auto object-contain"
-						/>
-					</div>
-				</div>
+    let animationFrameId: number;
+    let tx = window.innerWidth / 2;
+    let ty = window.innerHeight / 2;
 
-				{/* Level 3: Colorful Icons & Fauna (Universal Visibility) */}
-				<div className="absolute inset-0">
-					{/* Colorful Brand Icon - Floating */}
-					<div className="absolute top-[28%] left-[10%] lg:left-[20%] w-16 lg:w-24 opacity-40 lg:opacity-60 animate-float-slow">
-						<Image
-							src="/brand/icone-colorido-transparente.png"
-							alt=""
-							width={128}
-							height={128}
-							aria-hidden="true"
-							className="grayscale-[0.5] lg:grayscale-0"
-						/>
-					</div>
+    const handleMouseMove = (e: MouseEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    };
 
-					{/* Pássaros */}
-					<div
-						className="absolute top-[12%] right-[5%] lg:right-[15%] w-[180px] md:w-[250px] lg:w-[350px] opacity-40 lg:opacity-70 animate-float-slow"
-						style={{ animationDelay: "1s" }}
-					>
-						<Image
-							src="/assets/brasilidades/passaros_v2.png"
-							alt="Pássaros tropicais ilustrativos"
-							width={350}
-							height={350}
-						/>
-					</div>
+    window.addEventListener("mousemove", handleMouseMove);
 
-					{/* Ícone Rio: Pão de Açúcar (Oposto aos pássaros) */}
-					<div className="absolute top-[18%] left-[2%] lg:left-[12%] w-[150px] md:w-[250px] lg:w-[350px] opacity-30 lg:opacity-60 animate-float-slow">
-						<Image
-							src="/assets/brasilidades/rio.png"
-							alt="Ilustração do Pão de Açúcar, Rio de Janeiro"
-							width={350}
-							height={350}
-							className="object-contain"
-						/>
-					</div>
+    const elements = container.querySelectorAll<HTMLElement>("[data-parallax]");
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
 
-					{/* Ícone Único: O Caju */}
-					<div className="absolute bottom-[8%] left-[10%] lg:left-[20%] w-24 md:w-32 lg:w-48 opacity-40 lg:opacity-70 hover:opacity-100 transition-opacity duration-500 -rotate-12">
-						<Image
-							src="/assets/brasilidades/caju_v2.png"
-							alt="Ilustração de um Caju tropical"
-							width={200}
-							height={200}
-							className="drop-shadow-xl"
-						/>
-					</div>
+    const tick = () => {
+      const dx = (tx - cx) / cx; // -1 to 1
+      const dy = (ty - cy) / cy;
 
-					{/* Ícone Complementar: O Abacaxi (Oposto ao Caju) */}
-					<div className="absolute bottom-[10%] right-[8%] lg:right-[18%] w-24 md:w-32 lg:w-48 opacity-40 lg:opacity-70 hover:opacity-100 transition-opacity duration-500 rotate-12">
-						<Image
-							src="/assets/brasilidades/abacaxi.png"
-							alt="Ilustração de um Abacaxi tropical"
-							width={200}
-							height={200}
-							className="drop-shadow-xl"
-						/>
-					</div>
+      for (const el of elements) {
+        const factor = Number.parseFloat(
+          el.getAttribute("data-parallax") || "0",
+        );
+        // Smooth translate without lerp here as it's directly tied to mouse event rate
+        el.style.transform = `translate3d(${dx * factor * 100}px, ${dy * factor * 60}px, 0)`;
+      }
+      animationFrameId = requestAnimationFrame(tick);
+    };
+    tick();
 
-					{/* Novos Assets de Colagem - Expansão (Cache Busting + Transparência Real) */}
-					<div className="absolute top-[8%] left-[2%] md:left-[4%] w-24 md:w-44 animate-float-slow delay-700 opacity-40 lg:opacity-70">
-						<Image
-							src="/assets/brasilidades/flor_hibisco_v5.png"
-							alt="Flor Hibisco"
-							width={240}
-							height={240}
-							className="object-contain rotate-12"
-						/>
-					</div>
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
-					<div className="absolute bottom-[20%] left-[-2%] md:left-[5%] w-28 md:w-52 animate-float-slow delay-1000 opacity-40 lg:opacity-70">
-						<Image
-							src="/assets/brasilidades/tucano_v3.png"
-							alt="Tucano"
-							width={240}
-							height={240}
-							className="object-contain -rotate-12"
-						/>
-					</div>
+  return (
+    <section
+      ref={ref}
+      className={cn(
+        "relative overflow-hidden bg-multi-roxo w-full h-svh flex items-center justify-center isolate",
+        className,
+        isIntersecting ? "is-visible" : "",
+      )}
+    >
+      {/* Watermark do sol girando no background */}
+      <div className="absolute right-[-15%] md:right-[-5%] top-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] max-w-[800px] opacity-[0.07] z-0 animate-sol-spin pointer-events-none">
+        <svg
+          viewBox="0 0 200 200"
+          fill="currentColor"
+          className="w-full h-full text-multi-amarelo"
+        >
+          <title>Logo Sol Girando background</title>
+          <g>
+            {Array.from({ length: 18 }).map((_, i) => {
+              const rotationId = `hero-ray-${i * 20}`;
+              return (
+                <path
+                  key={rotationId}
+                  d="M100 20L108 80L100 90L92 80L100 20Z"
+                  transform={`rotate(${i * 20} 100 100)`}
+                />
+              );
+            })}
+            <circle cx="100" cy="100" r="40" />
+          </g>
+        </svg>
+      </div>
 
-					<div className="absolute top-[60%] right-[2%] md:right-[10%] w-24 md:w-48 animate-float-slow delay-500 opacity-40 lg:opacity-70">
-						<Image
-							src="/assets/brasilidades/ramo_cafe_v3.png"
-							alt="Ramo de Café"
-							width={220}
-							height={220}
-							className="object-contain rotate-6"
-						/>
-					</div>
-				</div>
+      {/* Collage Elements com Parallax */}
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+        {/* Elemento A (Top-Right): Beija-flor */}
+        <div
+          data-parallax="0.04"
+          className={cn(
+            "absolute right-[2%] top-[10%] md:top-[5%] w-[180px] md:w-[35vw] max-w-[480px] mix-blend-multiply transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-800",
+            isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
+          )}
+        >
+          <Image
+            src="/assets/brasilidades/hero_beijaflor.png"
+            alt=""
+            width={480}
+            height={480}
+            className="w-full h-auto object-contain collage-element"
+            aria-hidden="true"
+            priority
+          />
+        </div>
 
-				{/* Level 4: Subtle Mobile Texture Texture Overlay */}
-				<div className="md:hidden absolute inset-0 opacity-10">
-					<div className="absolute top-[40%] right-[-5%] w-32 rotate-45">
-						<Image
-							src="/assets/brasilidades/folhas_v2.png"
-							alt=""
-							width={150}
-							height={150}
-							aria-hidden="true"
-						/>
-					</div>
-				</div>
+        {/* Elemento B (Bottom-Right): Folha */}
+        <div
+          data-parallax="0.07"
+          className={cn(
+            "absolute right-0 bottom-[-5%] md:bottom-0 w-[150px] md:w-[25vw] max-w-[320px] mix-blend-multiply transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-950",
+            isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
+          )}
+        >
+          <Image
+            src="/assets/brasilidades/hero_folha.png"
+            alt=""
+            width={320}
+            height={320}
+            className="w-full h-auto object-contain collage-element"
+            aria-hidden="true"
+            priority
+          />
+        </div>
 
-				{/* Final Polish: Noise Overlay */}
-				<div className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 100 100"
-						preserveAspectRatio="none"
-						className="w-full h-full"
-						role="img"
-						aria-label="Textura de ruído de grãos visuais"
-					>
-						<filter id="grain-noise-rosa">
-							<feTurbulence
-								type="fractalNoise"
-								baseFrequency="0.65"
-								numOctaves="3"
-								stitchTiles="stitch"
-							/>
-						</filter>
-						<rect width="100%" height="100%" filter="url(#grain-noise-rosa)" />
-					</svg>
-				</div>
-			</div>
+        {/* Elemento C (Left): Tucano Pequeno Decorativo */}
+        <div
+          data-parallax="0.02"
+          className={cn(
+            "absolute left-[2%] top-[20%] w-[80px] md:w-[10vw] max-w-[120px] mix-blend-screen transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1100",
+            isIntersecting ? "opacity-60 scale-100" : "opacity-0 scale-95",
+          )}
+        >
+          <Image
+            src="/assets/brasilidades/hero_tucano.png"
+            alt=""
+            width={200}
+            height={200}
+            className="w-full h-auto object-contain collage-element"
+            aria-hidden="true"
+            priority
+          />
+        </div>
+      </div>
 
-			<div className="container relative z-10 mx-auto px-4 md:px-6">
-				<div className="flex flex-col items-center justify-center text-center gap-8">
-					<div className="flex flex-col items-center gap-3 max-w-5xl mx-auto z-20 relative">
-						{/* Logo */}
-						<div
-							className={cn(
-								"flex justify-center drop-shadow-lg opacity-0",
-								isIntersecting && "animate-slide-up stagger-1",
-							)}
-						>
-							<Image
-								src="/brand/logomarca-branca-menor.png"
-								alt="Agência Multi BR Logo"
-								width={460}
-								height={160}
-								priority
-								className="w-full max-w-[200px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain"
-							/>
-						</div>
+      {/* Conteúdo Principal (Texto) */}
+      {/* Atributo auxiliar para acionar animações baseado no isIntersecting via CSS selectors locais */}
+      <div
+        className="w-full h-full relative z-20 pointer-events-none"
+        data-intersecting={isIntersecting}
+      >
+        {/* Slogan Top Right */}
+        <div className="absolute top-[100px] md:top-[120px] right-[4vw] md:right-[6vw] font-poppins font-bold text-[9px] md:text-[clamp(12px,1.2vw,16px)] tracking-[0.25em] text-white/70 uppercase">
+          <div
+            className="overflow-hidden"
+            style={{
+              clipPath: isIntersecting ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+              transition: "clip-path 1s cubic-bezier(0.16,1,0.3,1) 0.3s",
+            }}
+          >
+            BRANDING{" "}
+            <span className="inline-block w-[0.9em] text-multi-amarelo">✹</span>{" "}
+            CONTEÚDO{" "}
+            <span className="inline-block w-[0.9em] text-multi-amarelo">✹</span>{" "}
+            TRÁFEGO
+          </div>
+        </div>
 
-						{/* Subtítulo em Linha Única */}
-						<h1
-							className={cn(
-								"font-balgin text-[1rem] sm:text-xl md:text-2xl lg:text-3xl text-white uppercase leading-none tracking-normal flex items-center justify-center gap-1 sm:gap-2 whitespace-nowrap drop-shadow-md opacity-0",
-								isIntersecting && "animate-slide-up stagger-2",
-							)}
-						>
-							<span>Branding</span>
-							<span className="text-multi-amarelo">✹ Conteúdo ✹</span>
-							<span>Tráfego</span>
-						</h1>
-					</div>
+        {/* Bloco Bottom Left */}
+        <div className="absolute bottom-[10%] md:bottom-[15%] left-[4vw] w-full max-w-[90vw]">
+          {/* Título GIGANTE */}
+          <h1 className="font-display text-[var(--text-hero)] text-multi-amarelo leading-[0.88] tracking-[-0.02em] lowercase m-0 p-0">
+            <span className="split-line">
+              <span style={{ transitionDelay: "0.00s" }}>m</span>
+            </span>
+            <span className="split-line -ml-[2%]">
+              <span style={{ transitionDelay: "0.065s" }}>u</span>
+            </span>
+            <span className="split-line -ml-[2%]">
+              <span style={{ transitionDelay: "0.130s" }}>l</span>
+            </span>
+            <span className="split-line -ml-[2%]">
+              <span style={{ transitionDelay: "0.195s" }}>t</span>
+            </span>
+            <span className="split-line -ml-[2%]">
+              <span style={{ transitionDelay: "0.260s" }}>i</span>
+            </span>
+          </h1>
 
-					<p
-						className={cn(
-							"font-poppins text-base md:text-lg lg:text-xl text-white/90 max-w-xl mx-auto font-medium px-4 opacity-0",
-							isIntersecting && "animate-slide-up stagger-3",
-						)}
-					>
-						Marketing digital sem enrolação para multiplicar os resultados do seu negócio.
-					</p>
+          {/* Subtítulo */}
+          <div
+            className={`mt-4 font-poppins font-normal text-white text-base md:text-[clamp(16px,1.8vw,22px)] max-w-[460px] transition-all duration-700 ease-out ${
+              isIntersecting
+                ? "opacity-100 translate-y-0 delay-500"
+                : "opacity-0 translate-y-5"
+            }`}
+          >
+            Estratégia digital sem enrolação.
+          </div>
 
-					<div
-						className={cn(
-							"flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto opacity-0",
-							isIntersecting && "animate-slide-up stagger-4",
-						)}
-					>
-						<Button
-							size="lg"
-							className="w-full sm:w-auto text-lg px-8 h-14 bg-multi-amarelo text-multi-roxo hover:bg-white transition-colors duration-300 shadow-xl"
-						>
-							Vamos conversar?
-						</Button>
-						<Button
-							size="lg"
-							variant="secondary"
-							className="w-full sm:w-auto text-lg px-8 h-14 border-2 border-white text-white hover:bg-white hover:text-multi-rosa transition-colors duration-300"
-						>
-							Conheça nossos serviços
-						</Button>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+          {/* Botões CTA */}
+          <div
+            className={`mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 pointer-events-auto transition-all duration-700 ease-out ${
+              isIntersecting
+                ? "opacity-100 translate-y-0 delay-700"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
+            {/* Primário Amarelo com HoverSweep */}
+            <a
+              href="#contato"
+              className="group relative overflow-hidden bg-multi-amarelo text-multi-roxo font-poppins font-bold text-sm md:text-base px-9 py-4 rounded-md border-none flex items-center justify-center gap-2"
+            >
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                Vamos conversar?
+              </span>
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-white group-hover:translate-x-1">
+                ▶
+              </span>
+              <div className="absolute inset-0 bg-multi-rosa rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
+            </a>
+
+            {/* Secundário Outline Animado */}
+            <a
+              href="#servicos"
+              className="group relative bg-transparent text-white font-poppins font-normal text-sm md:text-base px-9 py-4 rounded-md border-[1.5px] border-white/50 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
+            >
+              Conheça os serviços →
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">
+          <span className="font-poppins font-normal text-[10px] uppercase tracking-[0.3em] text-white/40">
+            Scroll
+          </span>
+          <div className="text-white/40 text-[10px] animate-bounce">↓</div>
+        </div>
+      </div>
+    </section>
+  );
 }
