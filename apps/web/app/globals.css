@@ -232,6 +232,15 @@ body {
 	}
 }
 
+@keyframes story-fill {
+	from {
+		width: 0%;
+	}
+	to {
+		width: 100%;
+	}
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
 	*,
