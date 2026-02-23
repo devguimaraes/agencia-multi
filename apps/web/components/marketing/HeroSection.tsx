@@ -162,25 +162,6 @@ export function HeroSection({ className }: { className?: string }) {
             priority
           />
         </div>
-
-        {/* 5. Tucano Original V2 (Direita/Meio/Baixo) */}
-        <div
-          data-parallax="0.03"
-          className={cn(
-            "absolute right-[5%] bottom-[15%] w-[140px] md:w-[18vw] max-w-[260px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-1000",
-            isIntersecting ? "opacity-100 scale-100" : "opacity-0 scale-95",
-          )}
-        >
-          <Image
-            src="/assets/brasilidades/tucano_v2.png"
-            alt="Tucano decorativo"
-            width={260}
-            height={260}
-            className="w-full h-auto object-contain drop-shadow-2xl"
-            aria-hidden="true"
-            priority
-          />
-        </div>
       </div>
 
       {/* Conteúdo Principal (Texto) */}
