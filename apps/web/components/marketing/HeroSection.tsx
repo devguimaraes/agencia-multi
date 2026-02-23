@@ -180,12 +180,12 @@ export function HeroSection({ className }: { className?: string }) {
             )}
           >
             <Image
-              src="/brand/logomarca-preta.png"
+              src="/brand/logo-branca.png"
               alt="Agência Multi BR Logo"
               width={420}
               height={140}
               priority
-              className="w-full max-w-[240px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain brightness-0 invert drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+              className="w-full max-w-[240px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
             />
           </div>
 
