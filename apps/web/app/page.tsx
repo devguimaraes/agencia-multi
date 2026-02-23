@@ -2,6 +2,7 @@
 
 import { BlogHighlights } from "@/components/marketing/BlogHighlights";
 import { FinalCTA } from "@/components/marketing/FinalCTA";
+import { GoogleReviewsSection } from "@/components/marketing/GoogleReviewsSection";
 import { HeroSection } from "@/components/marketing/HeroSection";
 import { MentorshipTeaser } from "@/components/marketing/MentorshipTeaser";
 import { PortfolioHighlights } from "@/components/marketing/PortfolioHighlights";
@@ -16,6 +17,7 @@ export default function Home() {
 			<ServicesOverview />
 			<MentorshipTeaser />
 			<PortfolioHighlights />
+			<GoogleReviewsSection />
 			<BlogHighlights />
 			<FinalCTA />
 		</>
