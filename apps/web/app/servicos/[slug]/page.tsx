@@ -86,9 +86,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						{/* Deliverables */}
 						<div className="bg-multi-cinza-claro rounded-2xl p-8 md:p-10 shadow-card animate-fade-in-up stagger-1">
 							<h3 className="font-display text-2xl text-multi-roxo mb-6">O que entregamos</h3>
-							              <ul className="space-y-4">
-							                {service.details.deliverables.map((item) => (
-							                  <li key={item} className="flex items-start gap-3">										<CheckCircle2 className="w-6 h-6 text-multi-verde shrink-0" />
+							<ul className="space-y-4">
+								{service.details.deliverables.map((item) => (
+									<li key={item} className="flex items-start gap-3">
+										{" "}
+										<CheckCircle2 className="w-6 h-6 text-multi-verde shrink-0" />
 										<span className="text-gray-700 text-lg">{item}</span>
 									</li>
 								))}
