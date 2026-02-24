@@ -96,8 +96,8 @@ export function MentorshipTeaser({ className }: { className?: string }) {
             isIntersecting && "opacity-100",
           )}
         >
-          <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-black/40">
-            Mentoria de Escala
+          <span className="inline-block px-4 py-1.5 rounded-full border-2 border-multi-rosa bg-multi-rosa/5 text-multi-rosa font-poppins font-bold text-label tracking-[0.2em] uppercase shadow-sm">
+            Mentoria
           </span>
         </div>
 
