@@ -19,6 +19,7 @@
 
 ## Backlog
 
-- [ ] 12. Footer + WhatsApp sticky
-- [ ] 13. Header/nav com estados de scroll
-- [ ] 14. Testes de performance + ajustes de CLS
+- [x] 12. Footer + WhatsApp sticky (WhatsApp mantido por instrução do usuário)
+- [x] 13. Header/nav com estados de scroll premium
+- [x] 14. Testes de performance + ajustes de CLS
+- [x] 15. Setup Mobile Menu E2E Testing
