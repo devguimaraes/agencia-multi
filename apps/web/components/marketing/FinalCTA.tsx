@@ -79,7 +79,7 @@ export function FinalCTA({ className }: { className?: string }) {
       </div>
 
       {/* Sol girando — watermark sutil */}
-      <div className="absolute right-[-10%] md:right-[-3%] top-1/2 -translate-y-1/2 w-screen md:w-[50vw] max-w-[700px] opacity-[0.04] z-0 animate-sol-spin pointer-events-none">
+      <div className="absolute right-[-10%] md:right-[-3%] top-1/2 -translate-y-1/2 w-full md:w-[50vw] max-w-[700px] opacity-[0.04] z-0 animate-sol-spin pointer-events-none">
         <svg
           viewBox="0 0 200 200"
           fill="currentColor"

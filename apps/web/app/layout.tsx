@@ -16,6 +16,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://multibr.com.br"),
   title: {
     default: "Multi BR | Branding ✹ Conteúdo ✹ Tráfego",
     template: "%s | Multi BR",
@@ -55,8 +56,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${poppins.variable} antialiased`}>
+    <html lang="pt-BR" className="overflow-x-hidden">
+      <body
+        className={`${poppins.variable} antialiased min-h-screen overflow-x-hidden`}
+      >
         {/* Skip to content — acessibilidade por teclado */}
         <a
           href="#main-content"
