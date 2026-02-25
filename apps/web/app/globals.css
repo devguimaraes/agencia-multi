@@ -69,6 +69,21 @@
 	--grad-warm: linear-gradient(135deg, #e60057 0%, #ec8b20 100%);
 }
 
+/* --- Lenis Smooth Scroll --- */
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
 /* --- Base Styles --- */
 body {
 	font-family: var(--font-sans), system-ui, sans-serif;
@@ -238,6 +253,15 @@ body {
 	}
 	to {
 		width: 100%;
+	}
+}
+
+@keyframes scroll-line {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(200%);
 	}
 }
 
