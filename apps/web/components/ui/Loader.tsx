@@ -1,124 +1,237 @@
 "use client";
 
+import { gsap } from "@/hooks/use-gsap";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * Loader cinematográfico com GSAP master timeline.
+ *
+ * Fluxo:
+ * 1. BUILD — Logo surge com scale spring, counter anima 0→100
+ * 2. EXIT — Logo implode, painéis split-curtain deslizam com stagger
+ * 3. DONE — Unmount + dispatch evento "loader:complete" para Hero
+ */
 export function Loader() {
-	const [count, setCount] = useState(0);
-	const [phase, setPhase] = useState<"build" | "exit" | "done">("build");
-	const hasStarted = useRef(false);
+  const [phase, setPhase] = useState<"build" | "exit" | "done">("build");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const topPanelRef = useRef<HTMLDivElement>(null);
+  const bottomPanelRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const hasStarted = useRef(false);
 
-	useEffect(() => {
-		// Impede scroll durante o loading
-		if (phase !== "done") {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
-	}, [phase]);
+  // Bloqueia scroll durante o loader
+  useEffect(() => {
+    if (phase !== "done") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [phase]);
 
-	useEffect(() => {
-		if (hasStarted.current) return;
-		hasStarted.current = true;
+  // Master timeline GSAP
+  useEffect(() => {
+    if (hasStarted.current) return;
+    hasStarted.current = true;
 
-		// Counter animates from 0 to 100 within 0.8s
-		const duration = 800; // 0.8s build phase
-		const start = performance.now();
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-		let frameId: number;
+    // Se reduced motion, pula loader inteiro
+    if (prefersReducedMotion) {
+      setPhase("done");
+      window.dispatchEvent(new CustomEvent("loader:complete"));
+      return;
+    }
 
-		const updateCounter = (now: number) => {
-			const progress = Math.min((now - start) / duration, 1);
-			setCount(Math.floor(progress * 100));
+    const counterObj = { value: 0 };
+    const counterEl = counterRef.current;
+    const logoEl = logoRef.current;
+    const topPanel = topPanelRef.current;
+    const bottomPanel = bottomPanelRef.current;
+    const lineEl = lineRef.current;
 
-			if (progress < 1) {
-				frameId = requestAnimationFrame(updateCounter);
-			} else {
-				// Once 100 is reached, wait slightly and transition to 'exit' phase
-				setTimeout(() => setPhase("exit"), 200); // Trigger split curtain
-			}
-		};
+    if (!counterEl || !logoEl || !topPanel || !bottomPanel || !lineEl) return;
 
-		frameId = requestAnimationFrame(updateCounter);
+    // ═══════════════════════════════════════════
+    // FASE 1: BUILD (1.2s)
+    // ═══════════════════════════════════════════
+    const buildTl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+    });
 
-		return () => cancelAnimationFrame(frameId);
-	}, []);
+    // Logo entra com spring scale
+    buildTl.fromTo(
+      logoEl,
+      {
+        scale: 0,
+        rotation: -180,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: "back.out(1.7)",
+      },
+      0,
+    );
 
-	useEffect(() => {
-		if (phase === "exit") {
-			// After split animation finishes (0.5s), unmount completely
-			const timer = setTimeout(() => {
-				setPhase("done");
-			}, 600); // Wait for the split animation to hide
-			return () => clearTimeout(timer);
-		}
-	}, [phase]);
+    // Linha de progresso preenche
+    buildTl.fromTo(
+      lineEl,
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 1.1,
+        ease: "power2.inOut",
+      },
+      0.1,
+    );
 
-	if (phase === "done") return null;
+    // Counter anima 0 → 100
+    buildTl.to(
+      counterObj,
+      {
+        value: 100,
+        duration: 1.1,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          counterEl.textContent = `${Math.floor(counterObj.value).toString().padStart(2, "0")}`;
+        },
+      },
+      0.1,
+    );
 
-	return (
-		<div className="fixed inset-0 z-[99999] flex items-center justify-center isolate pointer-events-none">
-			{/* Painéis do Curtain Split */}
-			<div
-				className={`absolute inset-x-0 top-0 h-1/2 bg-multi-roxo transition-transform duration-500 will-change-transform ease-[cubic-bezier(0.16,1,0.3,1)] ${
-					phase === "exit" ? "-translate-y-full" : "translate-y-0"
-				}`}
-			/>
-			<div
-				className={`absolute inset-x-0 bottom-0 h-1/2 bg-multi-roxo transition-transform duration-500 will-change-transform ease-[cubic-bezier(0.16,1,0.3,1)] ${
-					phase === "exit" ? "translate-y-full" : "translate-y-0"
-				}`}
-			/>
+    // ═══════════════════════════════════════════
+    // FASE 2: EXIT (0.7s após BUILD)
+    // ═══════════════════════════════════════════
+    const exitTl = gsap.timeline({
+      delay: 0.2, // Pausa entre build e exit
+      onStart: () => setPhase("exit"),
+      onComplete: () => {
+        setPhase("done");
+        window.dispatchEvent(new CustomEvent("loader:complete"));
+      },
+    });
 
-			{/* Noise base no loader */}
-			<div
-				className={`grain transition-opacity duration-300 ${phase === "exit" ? "opacity-0" : "opacity-100"}`}
-				style={{ opacity: phase === "exit" ? 0 : 0.05 }}
-			/>
+    // Logo implode + spinner
+    exitTl.to(logoEl, {
+      scale: 0.3,
+      rotation: 180,
+      opacity: 0,
+      duration: 0.4,
+      ease: "power3.in",
+    });
 
-			{/* Sol Central */}
-			<div
-				className={`relative z-10 transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] will-change-transform ${
-					phase === "build" ? "scale-100 rotate-0 opacity-100" : "scale-0 opacity-0"
-				}`}
-				style={{
-					transform: phase === "build" ? "scale(1) rotate(0deg)" : "scale(0.2) rotate(-180deg)",
-				}}
-			>
-				<svg
-					width="120"
-					height="120"
-					viewBox="0 0 200 200"
-					fill="none"
-					className="text-multi-amarelo"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					{/* Placeholder Sol SVG path (to be matched exactly if they have specific one) */}
-					<title>Carregando...</title>
-					<g opacity="0.9">
-						{Array.from({ length: 18 }).map((_, i) => {
-							const rotationKey = `ray-${i * 20}`;
-							return (
-								<path
-									key={rotationKey}
-									d="M100 20L108 80L100 90L92 80L100 20Z"
-									fill="currentColor"
-									transform={`rotate(${i * 20} 100 100)`}
-								/>
-							);
-						})}
-						<circle cx="100" cy="100" r="40" fill="currentColor" />
-					</g>
-				</svg>
-			</div>
+    // Counter e linha somem
+    exitTl.to(
+      [counterEl, lineEl],
+      {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+      },
+      "<",
+    );
 
-			{/* Counter */}
-			<div
-				className={`absolute bottom-8 right-8 text-[#fac32a] font-bold text-[11px] uppercase tracking-[0.3em] transition-opacity duration-300 ${
-					phase === "build" ? "opacity-50" : "opacity-0"
-				}`}
-			>
-				{count.toString().padStart(2, "0")}%
-			</div>
-		</div>
-	);
+    // Painéis split-curtain com stagger
+    exitTl.to(
+      topPanel,
+      {
+        yPercent: -100,
+        duration: 0.6,
+        ease: "power4.inOut",
+        onStart: () => {
+          window.dispatchEvent(new CustomEvent("loader:start-exit"));
+        },
+      },
+      "-=0.1",
+    );
+
+    exitTl.to(
+      bottomPanel,
+      {
+        yPercent: 100,
+        duration: 0.6,
+        ease: "power4.inOut",
+      },
+      "<0.05", // 50ms stagger — painel de baixo atrasa levemente
+    );
+
+    // Master: build → exit
+    const master = gsap.timeline();
+    master.add(buildTl);
+    master.add(exitTl);
+
+    return () => {
+      master.kill();
+    };
+  }, []);
+
+  if (phase === "done") return null;
+
+  return (
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-99999 flex items-center justify-center isolate"
+    >
+      {/* Painel superior */}
+      <div
+        ref={topPanelRef}
+        className="absolute inset-x-0 top-0 h-1/2 bg-multi-roxo will-change-transform"
+      />
+      {/* Painel inferior */}
+      <div
+        ref={bottomPanelRef}
+        className="absolute inset-x-0 bottom-0 h-1/2 bg-multi-roxo will-change-transform"
+      />
+
+      {/* Grain */}
+      <div
+        className="grain"
+        style={{ opacity: phase === "exit" ? 0 : 0.05 }}
+        aria-hidden="true"
+      />
+
+      {/* Logo central */}
+      <div
+        ref={logoRef}
+        className="relative z-10 will-change-transform"
+        style={{ opacity: 0 }}
+      >
+        <Image
+          src="/brand/logo-branca.png"
+          alt="Multi BR"
+          width={180}
+          height={60}
+          priority
+          className="w-[140px] md:w-[180px] h-auto object-contain drop-shadow-[0_4px_20px_rgba(250,195,42,0.3)]"
+        />
+      </div>
+
+      {/* Barra de progresso */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+        {/* Linha de progresso */}
+        <div className="w-[120px] md:w-[160px] h-[2px] bg-white/15 rounded-full overflow-hidden">
+          <div
+            ref={lineRef}
+            className="h-full bg-multi-amarelo rounded-full origin-left will-change-transform"
+            style={{ transform: "scaleX(0)" }}
+          />
+        </div>
+        {/* Counter */}
+        <span
+          ref={counterRef}
+          className="text-multi-amarelo/60 font-poppins font-bold text-label tracking-[0.4em] tabular-nums"
+        >
+          00
+        </span>
+      </div>
+    </div>
+  );
 }
