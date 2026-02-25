@@ -16,29 +16,30 @@ export const SERVICES: Service[] = [
 	{
 		slug: "trafego-pago",
 		title: "Tráfego Pago",
-		description: "Anúncios otimizados em Google Ads e Meta Ads para máxima visibilidade.",
+		description: "Mais pessoas qualificadas encontrando e comprando do seu negócio todos os dias.",
 		icon: "🎯",
 		details: {
-			hero: "Alcance seu público ideal no momento certo.",
-			problem: "Você está gastando com anúncios sem ver retorno?",
+			hero: "Anúncios que escalam seu faturamento de forma previsível.",
+			problem:
+				"Você está gastando com anúncios genéricos sem ver o retorno voltar rápido pro caixa?",
 			solution:
-				"Nossa gestão de tráfego é focada em dados e conversão. Otimizamos cada centavo investido para trazer leads qualificados.",
+				"Nossa gestão de tráfego é focada em conversão real. Escalonamos campanhas no Google e Meta Ads para dominar seu mercado local ou nacional.",
 			deliverables: [
-				"Planejamento de campanhas",
+				"Estratégia focada no momento do negócio",
 				"Gestão de Google Ads e Meta Ads",
-				"Análise de métricas e relatórios mensais",
-				"Otimização contínua de ROI",
+				"Análise de CPA (Custo por Aquisição)",
+				"Escala de resultados com dados precisos",
 			],
 			faq: [
 				{
 					question: "Quanto preciso investir?",
 					answer:
-						"Recomendamos um investimento mínimo inicial para testes, mas a estratégia é adaptável ao seu orçamento.",
+						"O orçamento depende do volume de vendas que você quer atingir. Faremos um plano personalizado para que o investimento seja inteligente e retorne rápido.",
 				},
 				{
 					question: "Em quanto tempo vejo resultados?",
 					answer:
-						"Campanhas de tráfego podem gerar resultados imediatos, mas a otimização ideal ocorre nos primeiros 3 meses.",
+						"Os primeiros clientes chegam logo nas primeiras semanas de otimização, ganhando mais consistência ao decorrer dos 3 primeiros meses.",
 				},
 			],
 		},
@@ -46,77 +47,96 @@ export const SERVICES: Service[] = [
 	{
 		slug: "conteudo",
 		title: "Criação de Conteúdo",
-		description: "Mídias sociais e artigos que engajam e criam autoridade.",
+		description: "Sua marca presente todo dia na timeline do cliente certo, gerando autoridade.",
 		icon: "✍️",
 		details: {
-			hero: "Conteúdo que conecta e converte.",
-			problem: "Seu perfil tem seguidores mas não tem engajamento?",
+			hero: "Seu perfil trabalhando como a melhor vitrine pro seu bolso.",
+			problem: "Seu perfil só atrai curiosos que nunca compram de você?",
 			solution:
-				"Criamos estratégias de conteúdo alinhadas com a jornada do seu cliente, transformando seguidores em fãs e compradores.",
+				"Desenvolvemos conteúdo intencional. Não apenas posts bonitos, mas criativos baseados no que o seu público alvo de fato consome e precisa.",
 			deliverables: [
-				"Calendário editorial",
-				"Roteiros para Reels e TikTok",
-				"Legendas persuasivas (Copywriting)",
-				"Design de posts estáticos e carrosséis",
+				"Mapeamento de jornada de compra",
+				"Roteiros magnéticos para vídeos curtos",
+				"Copywriting orientado à conversão",
+				"Design focado na identidade da marca",
 			],
 			faq: [
 				{
-					question: "Vocês fazem a postagem?",
-					answer: "Sim, podemos incluir o agendamento e postagem no pacote de gestão de redes.",
+					question: "Vocês publicam os posts também?",
+					answer:
+						"No pacote completo, nós cuidamos de toda a gestão de publicação, para que você foque apenas em atender a demanda.",
 				},
 			],
 		},
 	},
-	// ... other services
 	{
 		slug: "social-media",
 		title: "Gestão de Redes",
-		description: "Planejamento e estratégia 360° para seus perfis sociais.",
+		description: "Posicionamento consistente que transforma seguidores em clientes fiéis.",
 		icon: "📱",
 		details: {
-			hero: "Sua marca presente e ativa nas redes.",
-			problem: "Falta de consistência nas postagens?",
-			solution: "Cuidamos de tudo, do planejamento à interação com o público.",
-			deliverables: ["Planejamento", "Criação", "Agendamento", "Relatórios"],
+			hero: "Sua empresa sendo a principal escolha dos consumidores.",
+			problem: "Perde clientes pra concorrência por não ter um Instagram atrativo?",
+			solution: "Cuidamos da percepção de valor do seu serviço digitalmente. De ponta a ponta.",
+			deliverables: [
+				"Posicionamento estratégico",
+				"Atração de audiência qualificada",
+				"Constância nas publicações",
+				"Monitoramento de métricas",
+			],
 			faq: [],
 		},
 	},
 	{
 		slug: "design",
 		title: "Design Gráfico",
-		description: "Peças publicitárias, portfólios e banners impactantes.",
+		description:
+			"Um visual premium que transmite a confiança necessária para fechar bons negócios.",
 		icon: "🎨",
 		details: {
-			hero: "Design que vende.",
-			problem: "Sua marca não transmite profissionalismo?",
-			solution: "Criamos peças visuais que destacam sua empresa no mercado.",
-			deliverables: ["Posts", "Banners", "Apresentações"],
+			hero: "O profissionalismo que aumenta a sua conversão.",
+			problem: "O visual do seu negócio afasta os clientes classe A?",
+			solution: "Desenvolvemos materiais que elevam sua marca e facilitam a decisão de compra.",
+			deliverables: [
+				"Materiais para Redes Sociais",
+				"Apresentações Institucionais",
+				"Banners para Campanhas",
+			],
 			faq: [],
 		},
 	},
 	{
 		slug: "sites",
 		title: "Criação de Sites",
-		description: "Destaque digital com sites performáticos e modernos.",
+		description: "Um vendedor automático que capta clientes para seu time 24 horas por dia.",
 		icon: "💻",
 		details: {
-			hero: "Seu site é sua loja 24h.",
-			problem: "Seu site é lento ou não funciona no celular?",
-			solution: "Desenvolvemos sites rápidos, responsivos e otimizados para conversão.",
-			deliverables: ["Landing Pages", "Sites Institucionais", "E-commerce"],
+			hero: "A base mais sólida pra sua empresa digital.",
+			problem: "Seu negócio depende apenas do Instagram e de favores do algoritmo?",
+			solution: "Sites velozes, com design focado em converter tráfego em orçamentos.",
+			deliverables: [
+				"Landing Pages de Alta Conversão",
+				"Sites Institucionais Otimizados",
+				"Integração com WhatsApp e CRM",
+			],
 			faq: [],
 		},
 	},
 	{
 		slug: "identidade-visual",
 		title: "Identidade Visual",
-		description: "Da marca ao manual: um posicionamento inesquecível.",
+		description: "Posicionamento claro que separa o seu negócio do resto da concorrência.",
 		icon: "👁️",
 		details: {
-			hero: "Uma marca forte começa pelo visual.",
-			problem: "Sua empresa não tem uma cara definida?",
-			solution: "Criamos identidades visuais completas e memoráveis.",
-			deliverables: ["Logo", "Manual da Marca", "Papelaria"],
+			hero: "Arquitetura visual desenhada para marcas líderes.",
+			problem: "As pessoas não lembram de você depois que saem da sua loja ou perfil?",
+			solution:
+				"Criamos identidades que causam impacto imediato e geram credibilidade desde o primeiro contato.",
+			deliverables: [
+				"Brandbook Completo",
+				"Aplicações Gráficas",
+				"Estratégia de Cores e Tipografia",
+			],
 			faq: [],
 		},
 	},

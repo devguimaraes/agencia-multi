@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const contactSchema = z.object({
@@ -87,7 +87,7 @@ export function ContactForm({ className }: { className?: string }) {
 			</div>
 
 			<Button type="submit" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
-				{isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+				{isSubmitting ? "Enviando..." : "Fale com a gente agora"}
 			</Button>
 		</form>
 	);
