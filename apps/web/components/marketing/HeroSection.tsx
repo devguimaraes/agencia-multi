@@ -473,11 +473,11 @@ export function HeroSection({ className }: { className?: string }) {
         ref={contentRef}
         className="w-full h-full relative z-20 pointer-events-none"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4 flex flex-col items-center text-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl px-4 mt-20 md:mt-0 flex flex-col items-center text-center">
           {/* Logo centralizada */}
           <div
             ref={logoRef}
-            className="mb-8 will-change-transform"
+            className="mb-6 md:mb-8 will-change-transform"
             style={{ opacity: 0 }}
           >
             <Image
@@ -509,7 +509,7 @@ export function HeroSection({ className }: { className?: string }) {
           {/* CTAs */}
           <div
             ref={ctaRef}
-            className="mt-10 md:mt-14 flex flex-col sm:flex-row items-center gap-4 md:gap-6 pointer-events-auto"
+            className="mt-8 md:mt-14 flex flex-col sm:flex-row items-center gap-4 md:gap-6 pointer-events-auto"
           >
             {/* Primário Amarelo */}
             <Magnetic strength={0.3} radius={60}>
