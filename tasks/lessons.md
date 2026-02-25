@@ -1,10 +1,23 @@
-# Lições Aprendidas
+# Lições Aprendidas - Multi BR Copy & Arquitetura
 
-## Animações e Tailwind v4
+Este documento registra regras arquiteturais, anti-patterns e convenções de comunicação que devem ser lembrados pelo Time/Agente.
 
-- **tailwindcss-animate**: Evitar o uso do plugin legiado com Tailwind v4. Preferir `tw-animate-css` ou configurar keyframes nativos no CSS, pois o v4 mudou a forma como as diretivas de animação são processadas.
-- **Dinamismo**: Para animações complexas baseadas em estado (como barras de progresso de stories), usar keyframes CSS nativos com manipulação de `style`/`animation` via React é mais performático e menos propenso a bugs de linter do que tentar abstrair via classes utilitárias dinâmicas.
+## Lição 1: Tom de Voz e Comunicação Presencial
 
-## Padrões de React
+**Data:** 24/02/2026
+**Padrão Corrigido:** O site explicava "o que fazemos" ao invés de "o que o cliente conquista". Os CTAs eram impessoais.
+**Regra para Prevenir Recorrência:**
 
-- **Auto-advance Timers**: Ao implementar carrosséis com auto-advance e override manual, usar `setTimeout` em vez de `setInterval` dentro do `useEffect`. Isso garante que o timer seja resetado de forma limpa a cada mudança de estado (manual ou automática) e satisfaz as regras de dependência do linter sem hacks.
+- Sempre inicie qualquer bloco de texto pelo **benefício** alcançado.
+- Teste de Humanização: "Se isso fosse lido em voz alta em uma reunião comercial, soaria como robô ou folheto PDF?" Se sim, reescreva.
+- CTAs dependem da etapa do funil. Se for topo, ofereça valor ("como trabalhamos"). Se for fundo de funil, seja direto ("fale com a gente agora").
+- Nunca mais use jargões desconexos (ex: "soluções sinérgicas", "inovação disruptiva").
+
+## Lição 2: Localização Estratégica
+
+**Data:** 24/02/2026
+**Padrão Corrigido:** Densidade forçada de localidade (Keyword Stuffing de "RJ").
+**Regra para Prevenir Recorrência:**
+
+- Use referências como "Rio de Janeiro", "mercado carioca", "RJ" no MÁXIMO uma vez por bloco semântico.
+- Insira em contexto que comprove inteligência e pertencimento, não apenas como GPS geográfico (ex: em vez de "Fazemos SEO local no RJ", diga "Sua empresa no topo das buscas do Rio de Janeiro").
