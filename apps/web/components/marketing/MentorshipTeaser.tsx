@@ -1,276 +1,274 @@
 "use client";
 
+import { Magnetic } from "@/components/ui/Magnetic";
+import { TextScramble } from "@/components/ui/TextScramble";
+import { gsap, useGSAP } from "@/hooks/use-gsap";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-
-const STORIES = [
-	{
-		src: "/assets/brasilidades/agencia-de-marketing-digital-1.png",
-		alt: "Multi BR — Mentoria de Escala",
-	},
-	{
-		src: "/assets/brasilidades/agencia-de-marketing-digital-2.png",
-		alt: "Equipe Multi BR em ação",
-	},
-	{
-		src: "/assets/brasilidades/agencia-de-marketing-digital-3.png",
-		alt: "Resultados da Mentoria Multi BR",
-	},
-];
-
-const STORY_DURATION = 4000; // 4 segundos por story
+import { useRef } from "react";
 
 export function MentorshipTeaser({ className }: { className?: string }) {
-	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.12 });
-	const [activeStory, setActiveStory] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
+    threshold: 0.15,
+  });
 
-	const goToNext = useCallback(() => {
-		setActiveStory((prev) => (prev + 1) % STORIES.length);
-	}, []);
+  useGSAP(
+    () => {
+      if (!sectionRef.current || !gridRef.current) return;
 
-	const goToPrev = useCallback(() => {
-		setActiveStory((prev) => (prev - 1 + STORIES.length) % STORIES.length);
-	}, []);
+      // Revela os itens do grid com efeito de escala
+      const gridItems = gridRef.current.querySelectorAll(".grid-item");
+      gsap.fromTo(
+        gridItems,
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 80%",
+          },
+        },
+      );
 
-	// Auto-advance — só quando visível na tela
-	useEffect(() => {
-		if (!isIntersecting) return;
+      // Parallax sutil no background (ícones flutuantes)
+      const icons = sectionRef.current.querySelectorAll(".brand-icon");
+      icons.forEach((icon, i) => {
+        gsap.to(icon, {
+          y: i % 2 === 0 ? -40 : 40,
+          rotation: i % 2 === 0 ? 15 : -15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
 
-		const timer = setTimeout(goToNext, STORY_DURATION);
-		return () => clearTimeout(timer);
-	}, [isIntersecting, activeStory, goToNext]);
-	return (
-		<section
-			ref={ref}
-			className={cn(
-				"relative min-h-dvh flex items-center py-12 md:py-16 bg-multi-cream text-multi-black overflow-hidden isolate",
-				className,
-			)}
-		>
-			{/* Grain Overlay */}
-			<div className="grain low-opacity" />
+      // Revela o conteúdo editorial (texto) com staggered reveal
+      const contentItems =
+        sectionRef.current.querySelectorAll(".editorial-content");
+      gsap.fromTo(
+        contentItems,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        },
+      );
+    },
+    { scope: sectionRef },
+  );
 
-			{/* Elemento decorativo — Flor Hibisco no canto superior direito */}
-			<div
-				className={cn(
-					"absolute -top-10 -right-10 md:top-0 md:right-0 w-[200px] md:w-[320px] opacity-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-0",
-					isIntersecting && "opacity-[0.12] scale-100 delay-700",
-					!isIntersecting && "scale-90",
-				)}
-			>
-				<Image
-					src="/assets/brasilidades/flor_hibisco_v5.png"
-					alt=""
-					width={320}
-					height={320}
-					className="w-full h-auto object-contain rotate-12"
-					aria-hidden="true"
-				/>
-			</div>
+  return (
+    <section
+      ref={(node) => {
+        if (node) {
+          sectionRef.current = node;
+          (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+        }
+      }}
+      className={cn(
+        "relative min-h-dvh flex items-center py-20 md:py-32 bg-multi-cream text-multi-black overflow-hidden isolate border-t border-multi-roxo/10",
+        className,
+      )}
+    >
+      {/* BACKGROUND BRANDING ASSETS — Reforço da marca */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="brand-icon absolute top-[2%] left-[2%] w-48 md:w-64 opacity-10 grayscale brightness-0">
+          <Image
+            src="/rebranding/LOGO BRANCA TRANSPARENTE.png"
+            alt=""
+            width={300}
+            height={300}
+          />
+        </div>
+        <div className="brand-icon absolute bottom-[10%] right-[2%] w-56 md:w-80 opacity-10 grayscale brightness-0 rotate-12">
+          <Image
+            src="/rebranding/ÍCONE BRANCO TRANSPARENTE.png"
+            alt=""
+            width={400}
+            height={400}
+          />
+        </div>
 
-			{/* Elemento decorativo — Tucano no canto inferior esquerdo */}
-			<div
-				className={cn(
-					"absolute -bottom-8 -left-6 md:bottom-4 md:left-4 w-[160px] md:w-[240px] opacity-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-0",
-					isIntersecting && "opacity-[0.08] scale-100 delay-900",
-					!isIntersecting && "scale-90",
-				)}
-			>
-				<Image
-					src="/assets/brasilidades/tucano_v3.png"
-					alt=""
-					width={240}
-					height={240}
-					className="w-full h-auto object-contain -scale-x-100"
-					aria-hidden="true"
-				/>
-			</div>
+        {/* Assets de Brasilidades solicitados — Posicionamento refinado nas pontas */}
+        <div className="brand-icon absolute bottom-[12%] left-[2%] w-48 md:w-72 opacity-20 -rotate-12">
+          <Image
+            src="/assets/brasilidades/flor_hibisco_v5.png"
+            alt=""
+            width={350}
+            height={350}
+            className="w-full h-auto object-contain"
+          />
+        </div>
+        <div className="brand-icon absolute bottom-[2%] md:bottom-[5%] left-[5%] md:left-[15%] w-40 md:w-72 opacity-20 rotate-12">
+          <Image
+            src="/assets/brasilidades/hero_mesacadeiras.png"
+            alt=""
+            width={350}
+            height={350}
+            className="w-full h-auto object-contain"
+          />
+        </div>
 
-			<div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
-				{/* Editorial Label */}
-				<div
-					className={cn(
-						"mb-6 md:mb-10 opacity-0 transition-all duration-700 ease-out",
-						isIntersecting && "opacity-100",
-					)}
-				>
-					<span className="inline-block px-4 py-1.5 rounded-full border-2 border-multi-rosa bg-multi-rosa/5 text-multi-rosa font-poppins font-bold text-label tracking-[0.2em] uppercase shadow-sm">
-						Mentoria
-					</span>
-				</div>
+        <div className="brand-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen opacity-[0.02] mix-blend-overlay">
+          <Image
+            src="/rebranding/ÍCONE TRANSPARENTE.png"
+            alt=""
+            fill
+            className="object-cover scale-150 rotate-45"
+          />
+        </div>
 
-				<div className="flex flex-col lg:flex-row gap-12 lg:gap-0 items-stretch">
-					{/* Esquerda: Texto Editorial */}
-					<div
-						className={cn(
-							"w-full lg:w-[55%] flex flex-col justify-center lg:pr-16 xl:pr-24 opacity-0 translate-y-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
-							isIntersecting && "opacity-100 translate-y-0 delay-200",
-						)}
-					>
-						{/* Headline Dramática */}
-						<h2 className="font-display text-[clamp(32px,4.5vw,64px)] leading-[0.95] text-multi-roxo mb-5">
-							O que ninguém te conta{" "}
-							<span className="text-outline-yellow">antes do 1º cliente.</span>
-						</h2>
+        {/* Pássaros solicitados — Canto superior direito */}
+        <div className="brand-icon absolute top-[2%] right-[2%] w-48 md:w-72 opacity-20">
+          <Image
+            src="/assets/brasilidades/passaros_v2.png"
+            alt=""
+            width={350}
+            height={200}
+            className="w-full h-auto object-contain"
+          />
+        </div>
+      </div>
 
-						{/* Body — copy de conversão */}
-						<div className="space-y-3 text-[clamp(14px,1.5vw,18px)] leading-relaxed font-poppins text-multi-black/75">
-							<p>
-								Abrir uma agência é fácil. Fazer ela{" "}
-								<span className="relative inline-block font-semibold text-multi-roxo">
-									{/* Marker Amarelo */}
-									<span
-										className={cn(
-											"absolute inset-x-0 bottom-0 h-[40%] bg-multi-amarelo/30 -z-10 origin-left scale-x-0 transition-transform duration-800 ease-out",
-											isIntersecting && "scale-x-100 delay-700",
-										)}
-									/>
-									dar lucro de verdade
-								</span>{" "}
-								é outra história. Proposta comercial, precificação, posicionamento, time — tudo isso
-								precisa estar no lugar antes de escalar.
-							</p>
-							<p>
-								Na Mentoria de Escala, você monta a operação que sustenta o crescimento. Sem
-								achismo, com método validado por dezenas de agências e social medias.
-							</p>
-							<p className="text-multi-black/55 italic">
-								De social media solo a agência estruturada. Esse é o caminho.
-							</p>
-						</div>
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
+          {/* LADO ESQUERDO: TEXTO EDITORIAL */}
+          <div className="w-full lg:w-[45%] flex flex-col justify-center">
+            <div className="mb-6 editorial-content opacity-0">
+              <TextScramble
+                text="Descobrir"
+                className="font-poppins font-bold text-label tracking-[0.3em] uppercase text-multi-rosa border-b-2 border-multi-rosa/30 pb-1"
+              />
+            </div>
 
-						{/* CTA com radial fill (padrão Hero) */}
-						<div
-							className={cn(
-								"mt-6 md:mt-8 opacity-0 transition-all duration-800 ease-out",
-								isIntersecting && "opacity-100 delay-900",
-							)}
-						>
-							<a
-								href="#mentoria"
-								className="group relative inline-flex items-center justify-center gap-2 bg-multi-roxo text-white font-poppins font-bold text-sm md:text-base px-8 py-4 md:px-10 md:py-5 overflow-hidden rounded-sm"
-							>
-								<span className="relative z-10 transition-colors duration-300 group-hover:text-multi-roxo">
-									Quero escalar minha agência
-								</span>
-								<span className="relative z-10 transition-all duration-300 group-hover:text-multi-roxo group-hover:translate-x-1">
-									→
-								</span>
-								{/* Radial fill hover animation */}
-								<div className="absolute inset-0 bg-multi-amarelo rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
-							</a>
-						</div>
-					</div>
+            <h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.85] text-multi-roxo mb-6 editorial-content opacity-0">
+              Mentoria <br />
+              <span className="text-multi-rosa italic">Para Agências</span>
+            </h2>
 
-					{/* Direita: Instagram Stories Player */}
-					<div
-						className={cn(
-							"w-full lg:w-[45%] flex flex-col items-center opacity-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)]",
-							isIntersecting && "opacity-100 delay-300",
-						)}
-					>
-						{/* Stories Container — simula tela de celular */}
-						<div className="relative w-full max-w-[280px] md:max-w-[320px] aspect-9/16 rounded-3xl overflow-hidden shadow-2xl bg-multi-rosa">
-							{/* Imagens — transição fade */}
-							{STORIES.map((story, idx) => (
-								<div
-									key={story.src}
-									className={cn(
-										"absolute inset-0 transition-opacity duration-500 ease-out",
-										activeStory === idx ? "opacity-100 z-10" : "opacity-0 z-0",
-									)}
-								>
-									<Image
-										src={story.src}
-										alt={story.alt}
-										fill
-										className="object-contain"
-										sizes="380px"
-										priority={idx === 0}
-									/>
-								</div>
-							))}
+            {/* Barra de progresso visual (estilo padrão solicitado) */}
+            <div className="w-48 h-[2px] bg-multi-roxo/10 mb-8 relative overflow-hidden editorial-content opacity-0">
+              <div
+                className={cn(
+                  "absolute inset-y-0 left-0 w-1/2 bg-multi-roxo transition-transform duration-1000 origin-left scale-x-0",
+                  isIntersecting && "scale-x-100 delay-500",
+                )}
+              />
+            </div>
 
-							{/* Gradient top para contraste das barras */}
-							<div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-black/50 to-transparent pointer-events-none z-20" />
+            <p className="font-poppins text-lg md:text-xl text-multi-black/80 leading-relaxed mb-8 max-w-lg editorial-content opacity-0">
+              Feita para donos de agência e social medias que cansam de "vender
+              hora" e querem vender <strong>lucro e escala</strong>. Pare de
+              carregar o piano sozinho e aprenda a construir a operação que te
+              liberta do operacional.
+            </p>
 
-							{/* Barras de progresso (estilo Instagram) */}
-							<div className="absolute top-3 left-3 right-3 flex gap-1.5 z-30">
-								{STORIES.map((story, idx) => (
-									<div
-										key={story.src}
-										className="flex-1 h-[3px] rounded-full bg-white/30 overflow-hidden"
-									>
-										<div
-											className={cn(
-												"h-full bg-white rounded-full",
-												idx < activeStory && "w-full",
-												idx > activeStory && "w-0",
-												idx === activeStory && "animate-story-progress",
-											)}
-											style={
-												idx === activeStory && isIntersecting
-													? {
-															animation: `story-fill ${STORY_DURATION}ms linear forwards`,
-														}
-													: idx < activeStory
-														? { width: "100%" }
-														: { width: "0%" }
-											}
-										/>
-									</div>
-								))}
-							</div>
+            <div className="editorial-content opacity-0">
+              <Magnetic strength={0.3} radius={50}>
+                <a
+                  href="#contato"
+                  className="group relative inline-flex items-center justify-center gap-2 bg-multi-rosa text-white font-poppins font-bold text-base px-10 py-5 overflow-hidden rounded-full shadow-lg hover:shadow-multi-rosa/20 transition-all duration-300"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                    Começar agora
+                  </span>
+                  <span className="relative z-10 transition-all duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                  <div className="absolute inset-0 bg-multi-roxo transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                </a>
+              </Magnetic>
+            </div>
+          </div>
 
-							{/* Header do perfil */}
-							<div className="absolute top-8 left-3 right-3 flex items-center gap-2 z-30">
-								<div className="w-8 h-8 rounded-full bg-multi-amarelo flex items-center justify-center overflow-hidden">
-									<Image
-										src="/brand/logo-colorida.png"
-										alt="Multi BR"
-										width={24}
-										height={24}
-										className="w-5 h-5 object-contain"
-									/>
-								</div>
-								<span className="font-poppins font-semibold text-white text-xs">multi.br</span>
-								<span className="font-poppins text-white/60 text-xs">Agora</span>
-							</div>
+          {/* LADO DIREITO: GRID 2X2 COM LOGO CENTRAL */}
+          <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
+            <div
+              ref={gridRef}
+              className="relative grid grid-cols-2 gap-4 md:gap-6 w-full max-w-[550px] aspect-square"
+            >
+              <div className="grid-item relative rounded-tl-[40px] md:rounded-tl-[60px] rounded-bl-xl rounded-tr-xl overflow-hidden aspect-square">
+                <Image
+                  src="/assets/mentoria/mentoria-agencia-multi-br-00.jpg"
+                  alt="Mentoria 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+                />
+              </div>
 
-							{/* Gradient bottom */}
-							<div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/40 to-transparent pointer-events-none z-20" />
+              {/* ITEM 2 (Top Right) */}
+              <div className="grid-item relative rounded-tr-[40px] md:rounded-tr-[60px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square">
+                <Image
+                  src="/assets/mentoria/mentoria-agencia-multi-br-1.jpg"
+                  alt="Mentoria 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+                />
+              </div>
 
-							{/* Áreas de toque — esquerda volta, direita avança */}
-							<button
-								type="button"
-								onClick={goToPrev}
-								className="absolute left-0 top-0 w-1/3 h-full z-40 cursor-pointer"
-								aria-label="Story anterior"
-							/>
-							<button
-								type="button"
-								onClick={goToNext}
-								className="absolute right-0 top-0 w-2/3 h-full z-40 cursor-pointer"
-								aria-label="Próximo story"
-							/>
-						</div>
+              {/* ITEM 3 (Bottom Left) */}
+              <div className="grid-item relative rounded-bl-[40px] md:rounded-bl-[60px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square">
+                <Image
+                  src="/assets/mentoria/mentoria-agencia-multi-br-02.jpg"
+                  alt="Mentoria 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+                />
+              </div>
 
-						{/* Badge abaixo do stories */}
-						<div
-							className={cn(
-								"mt-6 text-center opacity-0 translate-y-4 transition-all duration-700 ease-out",
-								isIntersecting && "opacity-100 translate-y-0 delay-1000",
-							)}
-						>
-							<span className="inline-block bg-multi-amarelo text-multi-roxo font-poppins font-bold text-xs md:text-sm px-4 py-2 tracking-wider uppercase rounded-sm shadow-lg">
-								Para social medias e agências
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+              {/* ITEM 4 (Bottom Right) */}
+              <div className="grid-item relative rounded-br-[40px] md:rounded-br-[60px] rounded-tr-xl rounded-bl-xl overflow-hidden aspect-square">
+                <Image
+                  src="/assets/mentoria/mentoria-agencia-multi-br-03.jpg"
+                  alt="Mentoria 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+                />
+              </div>
+
+              {/* LOGO CENTRAL COM RECORTE */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div
+                  className={cn(
+                    "w-24 h-24 md:w-40 md:h-40 bg-multi-cream rounded-full flex items-center justify-center p-3 md:p-5 shadow-[0_0_50px_rgba(0,0,0,0.15)] border border-multi-roxo/5 transition-all duration-700 delay-1000 scale-0",
+                    isIntersecting && "scale-100",
+                  )}
+                >
+                  <Image
+                    src="/rebranding/LOGO TRANSPARENTE.png"
+                    alt="Logo Multi"
+                    width={140}
+                    height={140}
+                    className="w-[85%] h-auto object-contain animate-float-slow"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,94 +1,198 @@
+"use client";
+
+import { gsap, useGSAP } from "@/hooks/use-gsap";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+
+const POSTS = [
+  { id: 1, src: "/assets/feed/feed-multi.jpg", alt: "Case Multi 1" },
+  { id: 2, src: "/assets/feed/feed-multi-2.jpg", alt: "Case Multi 2" },
+  { id: 3, src: "/assets/feed/feed-multi-3.jpg", alt: "Case Multi 3" },
+  { id: 4, src: "/assets/feed/feed-multi-4.jpg", alt: "Case Multi 4" },
+  { id: 5, src: "/assets/feed/feed-multi-5.jpg", alt: "Case Multi 5" },
+  { id: 6, src: "/assets/feed/feed-multi-6.jpg", alt: "Case Multi 6" },
+  { id: 7, src: "/assets/feed/feed-multi-7.jpg", alt: "Case Multi 7" },
+  { id: 8, src: "/assets/feed/feed-multi-8.jpg", alt: "Case Multi 8" },
+  { id: 9, src: "/assets/feed/feed-multi-09.jpg", alt: "Case Multi 9" },
+  { id: 10, src: "/assets/feed/feed-multi-10.jpg", alt: "Case Multi 10" },
+  { id: 11, src: "/assets/feed/feed-multi-11.png", alt: "Case Multi 11" },
+  { id: 12, src: "/assets/feed/feed-multi-12.png", alt: "Case Multi 12" },
+];
 
 export function SomosDoRio({ className }: { className?: string }) {
-	return (
-		<section
-			className={cn(
-				"w-full bg-multi-roxo text-white py-16 md:py-24 overflow-hidden relative",
-				className,
-			)}
-		>
-			<div className="container mx-auto px-4 max-w-6xl relative z-10">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-					<div className="flex flex-col gap-6 md:gap-8">
-						<div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full w-fit border border-white/20 backdrop-blur-sm">
-							<span className="w-2.5 h-2.5 rounded-full bg-multi-amarelo pulse-amarelo" />
-							<span className="font-poppins font-medium text-xs md:text-sm tracking-wide text-white/90">
-								Direto do Rio de Janeiro
-							</span>
-						</div>
+  const sectionRef = useRef<HTMLElement>(null);
+  const marqueeRef1 = useRef<HTMLDivElement>(null);
+  const marqueeRef2 = useRef<HTMLDivElement>(null);
 
-						<h2 className="font-balgin text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-white">
-							Entendemos o{" "}
-							<span className="text-multi-amarelo block mt-1">ritmo do seu mercado.</span>
-						</h2>
+  useGSAP(
+    () => {
+      if (!marqueeRef1.current || !marqueeRef2.current) return;
 
-						<div className="space-y-4 text-base md:text-lg text-white/80 font-poppins font-light leading-relaxed max-w-lg">
-							<p>
-								Não basta estar na internet. É preciso entender como a sua cidade consome. Entender
-								o mercado carioca, seu ritmo e sua cultura é o que diferencia campanhas que
-								viralizam das que de fato viram faturamento.
-							</p>
-							<p className="font-medium text-white">
-								Somos uma agência parceira, feita no Rio para negócios que querem dominar a região.
-							</p>
-						</div>
+      // Vertical Marquee Animation — Column 1 (Up)
+      const col1 = marqueeRef1.current;
+      const col1Height = col1.scrollHeight / 2;
+      gsap.to(col1, {
+        y: -col1Height,
+        duration: 25,
+        ease: "none",
+        repeat: -1,
+      });
 
-						<div className="pt-2 md:pt-4">
-							<Link
-								href="/contato"
-								className="group inline-flex w-fit items-center justify-center gap-3 bg-multi-amarelo text-multi-roxo font-poppins font-bold px-6 py-4 md:px-8 md:py-4 border-2 border-multi-roxo rounded-sm hover:bg-white transition-colors duration-300 shadow-[4px_4px_0px_#FF8CBA] hover:shadow-[2px_2px_0px_#FF8CBA] hover:translate-x-[2px] hover:translate-y-[2px]"
-							>
-								Fale com nossos especialistas locais
-								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-							</Link>
-						</div>
-					</div>
+      // Vertical Marquee Animation — Column 2 (Down)
+      const col2 = marqueeRef2.current;
+      const col2Height = col2.scrollHeight / 2;
+      gsap.fromTo(
+        col2,
+        { y: -col2Height },
+        {
+          y: 0,
+          duration: 30,
+          ease: "none",
+          repeat: -1,
+        },
+      );
 
-					{/* Visual Element */}
-					<div className="relative h-[350px] md:h-[450px] lg:h-[550px] w-full rounded-2xl overflow-hidden border-4 border-multi-rosa shadow-2xl group isolate">
-						<div className="absolute inset-0 bg-multi-roxo/40 mix-blend-multiply z-10 group-hover:bg-transparent transition-colors duration-700" />
-						<div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-multi-roxo/90 via-multi-roxo/40 to-transparent z-10 pointer-events-none" />
+      // ScrollReveal for text content
+      gsap.from(".rio-content > *", {
+        opacity: 0,
+        x: -50,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
-						{/* Em vez de usar fill que pode quebrar a proporcao, usamos o svg do sol como fall-back + parallax de passaro */}
-						<div className="absolute inset-0 bg-multi-roxo flex items-center justify-center -z-10 group-hover:scale-105 transition-transform duration-1000">
-							<svg
-								viewBox="0 0 200 200"
-								fill="currentColor"
-								className="w-[150%] h-[150%] text-multi-amarelo opacity-10 animate-sol-spin"
-								role="img"
-								aria-label="Sol girando decorativo"
-							>
-								<title>Sol girando decorativo</title>
-								<circle cx="100" cy="100" r="40" />
-								{Array.from({ length: 18 }).map((_, i) => (
-									<path
-										// biome-ignore lint/suspicious/noArrayIndexKey: simple shape
-										key={`ray-${i}`}
-										d="M100 20L108 80L100 90L92 80L100 20Z"
-										transform={`rotate(${i * 20} 100 100)`}
-									/>
-								))}
-							</svg>
-						</div>
+  return (
+    <section
+      ref={sectionRef}
+      className={cn(
+        "w-full bg-multi-roxo text-white py-16 md:py-32 overflow-hidden relative isolate",
+        className,
+      )}
+    >
+      {/* Background Icon — Branding Refinement */}
+      <div className="absolute top-[-10%] left-[-10%] w-[120%] md:w-[70%] aspect-square opacity-10 pointer-events-none z-0">
+        <Image
+          src="/rebranding/ÍCONE BRANCO TRANSPARENTE.png"
+          alt=""
+          fill
+          className="object-contain -rotate-12 scale-150"
+          priority
+          sizes="(max-width: 768px) 100vw, 70vw"
+        />
+      </div>
 
-						<Image
-							src="/assets/brasilidades/rio.png"
-							alt="Paisagem Rio de Janeiro - Agência Multi"
-							fill
-							className="object-contain scale-125 translate-y-[10%] group-hover:scale-[1.35] group-hover:-translate-y-[5%] transition-all duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-2xl"
-							priority
-						/>
-					</div>
-				</div>
-			</div>
+      <div className="container mx-auto px-4 max-w-7xl relative z-10 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[600px]">
+          {/* LADO ESQUERDO: CONTEÚDO EDITORIAL */}
+          <div className="rio-content flex flex-col gap-6 md:gap-8 z-20">
+            <h2 className="font-display text-[clamp(42px,6vw,84px)] leading-[0.9] text-white">
+              Expertise <br />
+              <span className="text-white/40">Carioca em</span> <br />
+              Marketing
+            </h2>
 
-			{/* Decorative Elements */}
-			<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-multi-rosa/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none z-0" />
-			<div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-multi-amarelo/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none z-0" />
-		</section>
-	);
+            <div className="space-y-6 text-lg md:text-xl text-white/80 font-poppins font-light leading-relaxed max-w-lg">
+              <p>
+                Entendemos o{" "}
+                <strong>ritmo, a cultura e o comportamento de consumo</strong>{" "}
+                de quem vive e empreende no Rio. Unimos estratégia global com o
+                "borogodó" local para transformar marcas em referências.
+              </p>
+              <p className="text-multi-amarelo font-medium">
+                Sua agência parceira, direto da Cidade Maravilhosa para
+                impulsionar seus resultados.
+              </p>
+            </div>
+
+            <div className="pt-4">
+              <Link
+                href="/sobre"
+                className="group inline-flex items-center gap-4 bg-transparent text-white font-poppins font-bold text-lg hover:text-multi-amarelo transition-colors duration-300"
+              >
+                Conheça nossa história
+                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-multi-amarelo group-hover:bg-multi-amarelo group-hover:text-multi-roxo transition-all duration-300">
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* LADO DIREITO: MARQUEE VERTICAL DE POSTS */}
+          <div className="relative h-[500px] md:h-[700px] flex gap-4 md:gap-6 pointer-events-none">
+            {/* Gradientes de fade (top/bottom) */}
+            <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-multi-roxo to-transparent z-10" />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-multi-roxo to-transparent z-10" />
+
+            {/* Coluna 1 — Sobe */}
+            <div className="flex-1 overflow-hidden">
+              <div ref={marqueeRef1} className="flex flex-col gap-4 md:gap-6">
+                {[...POSTS, ...POSTS].map((post, i) => (
+                  <div
+                    key={`${post.id}-up-${i}`}
+                    className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                  >
+                    <Image
+                      src={post.src}
+                      alt={post.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 250px"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Coluna 2 — Desce */}
+            <div className="flex-1 overflow-hidden mt-12 md:mt-24">
+              <div ref={marqueeRef2} className="flex flex-col gap-4 md:gap-6">
+                {[...POSTS, ...POSTS].map((post, i) => (
+                  <div
+                    key={`${post.id}-down-${i}`}
+                    className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                  >
+                    <Image
+                      src={post.src}
+                      alt={post.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 250px"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Elemento Decorativo: Sol Carioca */}
+            <div className="absolute -right-20 md:-right-40 top-1/2 -translate-y-1/2 w-[400px] md:w-[600px] opacity-[0.03] z-0 pointer-events-none">
+              <svg
+                viewBox="0 0 200 200"
+                fill="currentColor"
+                className="w-full h-full text-multi-amarelo animate-sol-spin"
+              >
+                <circle cx="100" cy="100" r="40" />
+                {Array.from({ length: 18 }).map((_, i) => (
+                  <path
+                    key={i}
+                    d="M100 20L108 80L100 90L92 80L100 20Z"
+                    transform={`rotate(${i * 20} 100 100)`}
+                  />
+                ))}
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
