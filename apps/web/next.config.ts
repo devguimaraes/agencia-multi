@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
 	images: {
 		qualities: [75, 100],
 	},
+	async redirects() {
+		return [
+			{
+				source: "/servicos/social-media",
+				destination: "/servicos/gestao-de-redes-sociais",
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default nextConfig;

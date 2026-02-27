@@ -22,10 +22,41 @@ const POSTS = [
   { id: 12, src: "/assets/feed/feed-multi-12.png", alt: "Case Multi 12" },
 ];
 
-export function SomosDoRio({ className }: { className?: string }) {
+interface SomosDoRioProps {
+  className?: string;
+  variant?: "default" | "content-showcase";
+}
+
+export function SomosDoRio({ className, variant = "default" }: SomosDoRioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const marqueeRef1 = useRef<HTMLDivElement>(null);
   const marqueeRef2 = useRef<HTMLDivElement>(null);
+
+  const isContentShowcase = variant === "content-showcase";
+
+  const content = {
+    title: isContentShowcase ? (
+      <>
+        Criação de Conteúdo <br />
+        <span className="text-white/40">de Alto</span> <br />
+        Impacto
+      </>
+    ) : (
+      <>
+        Expertise <br />
+        <span className="text-white/40">Carioca em</span> <br />
+        Marketing
+      </>
+    ),
+    description1: isContentShowcase 
+      ? "Transformamos o feed da sua marca com posts estratégicos que geram desejo e autoridade instantânea. Cada imagem ao lado é um caso real de como unimos design premium e copy focada em conversão."
+      : "Entendemos o ritmo, a cultura e o comportamento de consumo de quem vive e empreende no Rio. Unimos estratégia global com o \"borogodó\" local para transformar marcas em referências.",
+    description2: isContentShowcase
+      ? "Sua vitrine digital sendo o maior diferencial competitivo do seu negócio."
+      : "Sua agência parceira, direto da Cidade Maravilhosa para impulsionar seus resultados.",
+    linkText: isContentShowcase ? "Conheça nosso portfólio" : "Conheça nossa história",
+    linkHref: isContentShowcase ? "/portfolio" : "/sobre",
+  };
 
   useGSAP(
     () => {
@@ -96,30 +127,24 @@ export function SomosDoRio({ className }: { className?: string }) {
           {/* LADO ESQUERDO: CONTEÚDO EDITORIAL */}
           <div className="rio-content flex flex-col gap-6 md:gap-8 z-20">
             <h2 className="font-display text-[clamp(42px,6vw,84px)] leading-[0.9] text-white">
-              Expertise <br />
-              <span className="text-white/40">Carioca em</span> <br />
-              Marketing
+              {content.title}
             </h2>
 
             <div className="space-y-6 text-lg md:text-xl text-white/80 font-poppins font-light leading-relaxed max-w-lg">
               <p>
-                Entendemos o{" "}
-                <strong>ritmo, a cultura e o comportamento de consumo</strong>{" "}
-                de quem vive e empreende no Rio. Unimos estratégia global com o
-                "borogodó" local para transformar marcas em referências.
+                {content.description1}
               </p>
               <p className="text-multi-amarelo font-medium">
-                Sua agência parceira, direto da Cidade Maravilhosa para
-                impulsionar seus resultados.
+                {content.description2}
               </p>
             </div>
 
             <div className="pt-4">
               <Link
-                href="/sobre"
+                href={content.linkHref}
                 className="group inline-flex items-center gap-4 bg-transparent text-white font-poppins font-bold text-lg hover:text-multi-amarelo transition-colors duration-300"
               >
-                Conheça nossa história
+                {content.linkText}
                 <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-multi-amarelo group-hover:bg-multi-amarelo group-hover:text-multi-roxo transition-all duration-300">
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>

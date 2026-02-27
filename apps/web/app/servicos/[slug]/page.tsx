@@ -1,5 +1,6 @@
 import { HeroPageBackground } from "@/components/layout/HeroPageBackground";
 import { FaqIntegrado } from "@/components/marketing/FaqIntegrado";
+import { SomosDoRio } from "@/components/marketing/SomosDoRio";
 import { RevealSection, StaggerContainer } from "@/components/ui/Reveal";
 import { SERVICES } from "@/data/services";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -132,44 +133,81 @@ export default async function ServicePage({
       </section>
 
       {/* --- 2. O PROBLEMA vs A SOLUÇÃO MULTI + ENTREGÁVEIS --- */}
-      <section className="py-24 md:py-32 bg-multi-cream relative overflow-hidden">
-        {/* Asset decorativo — Caju (canto inf. direito) */}
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] opacity-[0.10] pointer-events-none rotate-15 hidden md:block">
-          <Image
-            src="/assets/brasilidades/caju_v2.png"
-            alt=""
-            fill
-            className="object-contain"
-          />
+      <section className="min-h-screen flex items-center py-24 md:py-32 bg-multi-cream relative">
+        {/* Wrapper com overflow-hidden apenas para os elementos decorativos para não quebrar o sticky */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Asset decorativo — Caju (canto inf. direito) */}
+          <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] opacity-[0.10] rotate-15 hidden md:block">
+            <Image
+              src="/assets/brasilidades/caju_v2.png"
+              alt=""
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
-          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10 w-full">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 relative">
             {/* Coluna Esquerda: Contexto */}
-            <div className="lg:col-span-6 space-y-16">
+            <div className="lg:col-span-8 space-y-12">
               <StaggerContainer>
                 {/* Problema */}
                 <div className="relative">
                   <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-roxo/40 mb-4 block">
                     O Problema
                   </span>
-                  <h2 className="font-display text-3xl md:text-4xl text-multi-black leading-tight mb-4">
+                  <h2 className="font-display text-3xl md:text-4xl text-multi-black leading-tight mb-4 max-w-2xl">
                     {service.details.problem}
                   </h2>
                 </div>
 
-                {/* Solução */}
-                <div className="relative pl-6 md:pl-8 border-l-[3px] border-multi-rosa mt-12 bg-white/50 p-8 rounded-xl shadow-sm">
+                {/* Solução Full Width */}
+                <div className="relative pl-6 md:pl-8 border-l-[3px] border-multi-rosa bg-white/50 p-6 md:p-8 rounded-xl shadow-sm mt-12 mb-8">
                   <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-rosa/80 mb-4 block">
                     A Solução Multi
                   </span>
-                  <p className="font-poppins text-lg text-gray-700 leading-relaxed">
+                  <p className="font-poppins text-xl md:text-2xl text-gray-800 leading-relaxed font-semibold">
                     {service.details.solution}
                   </p>
                 </div>
 
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+                  {/* Bloco 1: Primeira Metade dos Parágrafos */}
+                  <div className="space-y-6">
+                    {service.details.content && service.details.content.length > 0 && (
+                      <>
+                        {service.details.content.slice(0, Math.ceil(service.details.content.length / 2)).map((paragraph, index) => (
+                          <p 
+                            key={`col1-${index}`} 
+                            className="font-poppins text-lg text-gray-700 leading-relaxed"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Bloco 2: Segunda Metade dos Parágrafos */}
+                  <div className="space-y-6">
+                    {service.details.content && service.details.content.length > 1 && (
+                      <>
+                        {service.details.content.slice(Math.ceil(service.details.content.length / 2)).map((paragraph, index) => (
+                          <p 
+                            key={`col2-${index}`} 
+                            className="font-poppins text-lg text-gray-700 leading-relaxed"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                </div>
+
                 {/* CTA */}
-                <div className="pt-12">
+                <div className="pt-8">
                   <a
                     href="/contato"
                     className="group relative inline-flex overflow-hidden bg-multi-roxo text-white font-poppins font-bold text-lg px-8 py-5 rounded-sm shadow-xl items-center justify-center transition-transform hover:-translate-y-1"
@@ -185,8 +223,8 @@ export default async function ServicePage({
             </div>
 
             {/* Coluna Direita: Box de Entregáveis */}
-            <div className="lg:col-span-6">
-              <RevealSection delay>
+            <div className="lg:col-span-4 flex items-center justify-center">
+              <RevealSection delay className="w-full">
                 <div className="bg-white rounded-2xl p-10 md:p-14 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-black/5 relative overflow-hidden">
                   {/* Decorator */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-multi-amarelo/10 rounded-bl-full -mr-20 -mt-20" />
@@ -214,10 +252,15 @@ export default async function ServicePage({
         </div>
       </section>
 
-      {/* --- 3. FAQ GLOBAL --- */}
+      {/* --- 3. SHOWCASE DE CONTEÚDO (Específico para Social Media) --- */}
+      {service.slug === "gestao-de-redes-sociais" && (
+        <SomosDoRio variant="content-showcase" />
+      )}
+
+      {/* --- 4. FAQ GLOBAL --- */}
       <FaqIntegrado />
 
-      {/* --- 4. CTA FINAL (Específico do Serviço) --- */}
+      {/* --- 5. CTA FINAL (Específico do Serviço) --- */}
       <section className="relative min-h-[50vh] flex items-center justify-center bg-multi-roxo text-white overflow-hidden py-24 md:py-32">
         <div className="grain" />
 

@@ -26,7 +26,7 @@ const SERVICES = [
     icon: PenTool,
   },
   {
-    title: "Gestão de Redes",
+    title: "Gestão de Redes Sociais",
     description: "Planejamento e estratégia 360° para seus perfis sociais.",
     icon: Share2,
   },
