@@ -348,7 +348,7 @@ export function HeroSection({ className }: { className?: string }) {
   const renderSplitHeadline = () => (
     <h1
       ref={headlineRef}
-      className="flex flex-col items-center justify-center gap-3 drop-shadow-md w-full"
+      className="flex flex-col items-center justify-center gap-1 md:gap-3 drop-shadow-md w-full"
       style={{ perspective: "600px" }}
     >
       <strong
@@ -388,7 +388,7 @@ export function HeroSection({ className }: { className?: string }) {
       {/* Texto de apoio */}
       <span
         ref={secondaryHeadlineRef}
-        className="font-poppins font-medium text-white/50 text-[clamp(10px,3vw,14px)] md:text-[clamp(10px,1.2vw,14px)] uppercase tracking-[0.15em] md:tracking-[0.2em] mt-3 px-4 md:px-0 max-w-[320px] md:max-w-none leading-relaxed"
+        className="font-poppins font-medium text-white/50 text-[clamp(10px,3vw,14px)] md:text-[clamp(10px,1.2vw,14px)] uppercase tracking-[0.15em] md:tracking-[0.2em] mt-1 md:mt-3 px-4 md:px-0 max-w-[320px] md:max-w-none leading-relaxed"
         style={{ opacity: 0 }}
       >
         Estratégia digital sem enrolação para multiplicar os resultados do seu
@@ -477,7 +477,7 @@ export function HeroSection({ className }: { className?: string }) {
           {/* Logo centralizada */}
           <div
             ref={logoRef}
-            className="mb-6 md:mb-8 will-change-transform"
+            className="mb-3 md:mb-8 will-change-transform"
             style={{ opacity: 0 }}
           >
             <Image
@@ -487,7 +487,7 @@ export function HeroSection({ className }: { className?: string }) {
               height={140}
               priority
               loading="eager"
-              className="w-full max-w-[240px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+              className="w-full max-w-[180px] md:max-w-[320px] lg:max-w-[420px] h-auto object-contain drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
               sizes="(max-width: 768px) 240px, (max-width: 1024px) 320px, 420px"
               style={{ height: "auto" }}
             />
@@ -499,7 +499,7 @@ export function HeroSection({ className }: { className?: string }) {
           {/* Subtítulo */}
           <div
             ref={subtitleRef}
-            className="mt-5 font-poppins font-light text-white/90 text-base md:text-xl max-w-2xl mx-auto drop-shadow-md"
+            className="mt-3 md:mt-5 font-poppins font-light text-white/90 text-sm md:text-xl max-w-2xl mx-auto drop-shadow-md hidden md:block"
             style={{ opacity: 0 }}
           >
             Sua marca assumindo o controle do mercado. Da atração visual até as
@@ -509,7 +509,7 @@ export function HeroSection({ className }: { className?: string }) {
           {/* CTAs */}
           <div
             ref={ctaRef}
-            className="mt-6 md:mt-14 flex flex-col sm:flex-row items-center gap-3 md:gap-6 pointer-events-auto"
+            className="mt-5 md:mt-14 flex flex-col sm:flex-row items-center gap-3 md:gap-6 pointer-events-auto"
           >
             {/* Primário Amarelo */}
             <Magnetic strength={0.3} radius={60}>
