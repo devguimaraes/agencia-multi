@@ -67,8 +67,8 @@ export default function SobrePage() {
                 </div>
 
                 <h2 className="font-display text-[clamp(48px,6vw,84px)] text-multi-black leading-[0.85] mb-12 tracking-tighter">
-                  Do <span className="text-multi-roxo italic">Bilhete</span> <br />
-                  à Inteligência Multi.
+                  Do <span className="text-multi-roxo italic">Bilhete</span>{" "}
+                  <br />à Inteligência Multi.
                 </h2>
               </RevealSection>
 
@@ -82,7 +82,12 @@ export default function SobrePage() {
                       Estúdio Bilhete: <br /> O Início no Rio
                     </h3>
                     <p className="font-poppins text-gray-600 leading-relaxed text-lg">
-                      A jornada da Multi BR iniciou no Cachambi, Zona Norte do Rio de Janeiro, originalmente sob o nome de Estúdio Bilhete. O propósito era claro: comunicar o que é autêntico através de produções em estúdio próprio e conteúdos diretos, dando voz a marcas que precisavam se destacar.
+                      A jornada da Multi BR iniciou no Cachambi, Zona Norte do
+                      Rio de Janeiro, originalmente sob o nome de Estúdio
+                      Bilhete. O propósito era claro: comunicar o que é
+                      autêntico através de produções em estúdio próprio e
+                      conteúdos diretos, dando voz a marcas que precisavam se
+                      destacar.
                     </p>
                   </div>
                 </RevealSection>
@@ -96,7 +101,12 @@ export default function SobrePage() {
                       Multi BR: <br /> Marketing e Publicidade
                     </h3>
                     <p className="font-poppins text-gray-600 leading-relaxed text-lg">
-                      A evolução de suporte tático para uma estrutura de inteligência de mercado consolidou a Multi BR como uma agência de marketing digital e publicidade focada em resultados. Unimos a essência criativa a uma arquitetura de dados robusta para transformar marcas em líderes de conversão.
+                      A evolução de suporte tático para uma estrutura de
+                      inteligência de mercado consolidou a Multi BR como uma
+                      agência de marketing digital e publicidade focada em
+                      resultados. Unimos a essência criativa a uma arquitetura
+                      de dados robusta para transformar marcas em líderes de
+                      conversão.
                     </p>
                   </div>
                 </RevealSection>
@@ -127,12 +137,17 @@ export default function SobrePage() {
 
                 <h2 className="font-display text-[clamp(56px,8vw,110px)] leading-[0.8] mb-12 tracking-tighter">
                   Estratégia <br />
-                  <span className="text-multi-amarelo italic font-light">Digital</span> <br />
+                  <span className="text-multi-amarelo italic font-light">
+                    Digital
+                  </span>{" "}
+                  <br />
                   <span className="text-white">Que Funciona.</span>
                 </h2>
 
                 <p className="font-poppins text-2xl md:text-3xl text-white/80 leading-[1.1] max-w-xl font-light italic border-l-4 border-multi-rosa pl-8">
-                  "Branding ✹ Conteúdo ✹ Tráfego. A Multi BR acredita que o mercado não perdoa a mediocridade visual nem a falta de dados."
+                  "Branding ✹ Conteúdo ✹ Tráfego. A Multi BR acredita que o
+                  mercado não perdoa a mediocridade visual nem a falta de
+                  dados."
                 </p>
               </RevealSection>
             </div>
@@ -190,7 +205,9 @@ export default function SobrePage() {
               O Que Nos Torna Únicos
             </h2>
             <p className="font-poppins text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Fórmulas prontas não fazem parte do nosso DNA. O foco da Multi BR é entregar o que funciona estrategicamente para o cenário brasileiro.
+              Fórmulas prontas não fazem parte do nosso DNA. O foco da Multi BR
+              é entregar o que funciona estrategicamente para o cenário
+              brasileiro.
             </p>
           </RevealSection>
 
@@ -241,6 +258,18 @@ export default function SobrePage() {
         <div className="grain" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-multi-rosa/10 rounded-full blur-[150px] pointer-events-none" />
 
+        {/* Asset Decorativo — Logomarca Branca */}
+        <div className="absolute top-1/2 -translate-y-1/2 -left-[20%] w-[80%] md:w-[55%] aspect-3/1 opacity-[0.06] pointer-events-none z-0">
+          <Image
+            src="/assets/brand/logomarca-branca.png"
+            alt=""
+            fill
+            className="object-contain -rotate-12"
+            aria-hidden="true"
+            sizes="(max-width: 768px) 80vw, 55vw"
+          />
+        </div>
+
         <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center">
           <RevealSection>
             <span className="font-poppins font-bold text-label tracking-[0.5em] uppercase text-multi-amarelo mb-12 block">
@@ -256,7 +285,9 @@ export default function SobrePage() {
               </span>
             </h2>
             <p className="font-poppins text-xl text-white/70 max-w-2xl mx-auto mb-16 leading-relaxed">
-              Diferente de agências tradicionais, a Multi BR atua como um parceiro estratégico. Para quem busca uma estrutura de publicidade real para escalar marcas, aqui é o lugar.
+              Diferente de agências tradicionais, a Multi BR atua como um
+              parceiro estratégico. Para quem busca uma estrutura de publicidade
+              real para escalar marcas, aqui é o lugar.
             </p>
           </RevealSection>
 
@@ -266,9 +297,7 @@ export default function SobrePage() {
                 href="/contato"
                 className="group relative overflow-hidden bg-multi-amarelo text-multi-roxo font-poppins font-bold text-lg px-12 py-7 rounded-lg shadow-[0_20px_40px_-10px_rgba(250,195,42,0.3)] flex items-center justify-center transition-all hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(250,195,42,0.4)]"
               >
-                <span className="relative z-10">
-                  Falar com a Multi agora
-                </span>
+                <span className="relative z-10">Falar com a Multi agora</span>
                 <div className="absolute inset-0 bg-white rounded-lg transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
               </a>
 

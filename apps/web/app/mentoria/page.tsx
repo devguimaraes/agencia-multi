@@ -244,6 +244,18 @@ export default function MentorshipPage() {
         {/* Circulo decorativo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-multi-rosa/20 rounded-full blur-[100px] pointer-events-none" />
 
+        {/* Asset Decorativo — Logomarca Branca */}
+        <div className="absolute top-1/2 -translate-y-1/2 -right-[20%] w-[80%] md:w-[55%] aspect-3/1 opacity-[0.06] pointer-events-none z-0">
+          <Image
+            src="/assets/brand/logomarca-branca.png"
+            alt=""
+            fill
+            className="object-contain rotate-12"
+            aria-hidden="true"
+            sizes="(max-width: 768px) 80vw, 55vw"
+          />
+        </div>
+
         <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center">
           <RevealSection>
             <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-amarelo mb-8 block">

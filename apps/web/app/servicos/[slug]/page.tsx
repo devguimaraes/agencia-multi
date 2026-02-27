@@ -278,6 +278,18 @@ export default async function ServicePage({
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-multi-rosa/20 rounded-full blur-[100px] pointer-events-none" />
 
+        {/* Asset Decorativo — Ícone Branco */}
+        <div className="absolute top-[-15%] -left-[15%] w-[90%] md:w-[60%] aspect-square opacity-[0.06] pointer-events-none z-0">
+          <Image
+            src="/assets/brand/icone-branco-transparente.png"
+            alt=""
+            fill
+            className="object-contain -rotate-12 scale-125"
+            aria-hidden="true"
+            sizes="(max-width: 768px) 90vw, 60vw"
+          />
+        </div>
+
         <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center max-w-4xl">
           <RevealSection>
             <h2 className="font-display text-[clamp(40px,6vw,80px)] text-white leading-[0.9] mb-8">
