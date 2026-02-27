@@ -391,7 +391,7 @@ export function HeroSection({ className }: { className?: string }) {
         className="font-poppins font-medium text-white/50 text-[clamp(10px,3vw,14px)] md:text-[clamp(10px,1.2vw,14px)] uppercase tracking-[0.15em] md:tracking-[0.2em] mt-3 px-4 md:px-0 max-w-[320px] md:max-w-none leading-relaxed"
         style={{ opacity: 0 }}
       >
-        Marketing digital sem enrolação para multiplicar os resultados do seu
+        Estratégia digital sem enrolação para multiplicar os resultados do seu
         negócio
       </span>
     </h1>

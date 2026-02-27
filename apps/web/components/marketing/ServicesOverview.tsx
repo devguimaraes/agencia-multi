@@ -17,32 +17,37 @@ const SERVICES = [
   {
     title: "Tráfego Pago",
     description:
-      "Anúncios otimizados em Google Ads e Meta Ads para máxima visibilidade.",
+      "Escala real com foco em ROI. Gestão cirúrgica de Google e Meta Ads.",
     icon: MousePointerClick,
   },
   {
     title: "Criação de Conteúdo",
-    description: "Mídias sociais e artigos que engajam e criam autoridade.",
+    description:
+      "Conteúdo intencional que gera autoridade e transforma seguidores em clientes.",
     icon: PenTool,
   },
   {
     title: "Gestão de Redes Sociais",
-    description: "Planejamento e estratégia 360° para seus perfis sociais.",
+    description:
+      "Posicionamento estratégico e constância para marcas que buscam liderança digital.",
     icon: Share2,
   },
   {
     title: "Design Gráfico",
-    description: "Peças publicitárias, portfólios e banners impactantes.",
+    description:
+      "Comunicação visual premium desenhada para elevar o valor da sua marca.",
     icon: Palette,
   },
   {
     title: "Criação de Sites",
-    description: "Destaque digital com sites performáticos e modernos.",
+    description:
+      "Plataformas de alta performance focadas em conversão e engenharia de vendas.",
     icon: MonitorSmartphone,
   },
   {
     title: "Identidade Visual",
-    description: "Da marca ao manual: um posicionamento inesquecível.",
+    description:
+      "Arquitetura de marca inesquecível para empresas que vieram para dominar.",
     icon: Eye,
   },
 ];

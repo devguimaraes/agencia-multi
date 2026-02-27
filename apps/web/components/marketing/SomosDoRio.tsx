@@ -27,7 +27,10 @@ interface SomosDoRioProps {
   variant?: "default" | "content-showcase";
 }
 
-export function SomosDoRio({ className, variant = "default" }: SomosDoRioProps) {
+export function SomosDoRio({
+  className,
+  variant = "default",
+}: SomosDoRioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const marqueeRef1 = useRef<HTMLDivElement>(null);
   const marqueeRef2 = useRef<HTMLDivElement>(null);
@@ -43,19 +46,21 @@ export function SomosDoRio({ className, variant = "default" }: SomosDoRioProps) 
       </>
     ) : (
       <>
-        Expertise <br />
-        <span className="text-white/40">Carioca em</span> <br />
-        Marketing
+        Agência de <br />
+        <span className="text-white/40">Marketing &</span> <br />
+        Publicidade
       </>
     ),
-    description1: isContentShowcase 
-      ? "Transformamos o feed da sua marca com posts estratégicos que geram desejo e autoridade instantânea. Cada imagem ao lado é um caso real de como unimos design premium e copy focada em conversão."
-      : "Entendemos o ritmo, a cultura e o comportamento de consumo de quem vive e empreende no Rio. Unimos estratégia global com o \"borogodó\" local para transformar marcas em referências.",
+    description1: isContentShowcase
+      ? "Transformamos feeds em máquinas de desejo. O foco é unir design de alto nível a roteiros estratégicos para que cada post se torne um ativo de autoridade e vendas da sua marca."
+      : "Elevamos o padrão da comunicação digital com estratégias de publicidade que unem inteligência de dados a uma estética premium. A expertise da Multi está em construir autoridade real e transformar o posicionamento de mercado das marcas.",
     description2: isContentShowcase
-      ? "Sua vitrine digital sendo o maior diferencial competitivo do seu negócio."
-      : "Sua agência parceira, direto da Cidade Maravilhosa para impulsionar seus resultados.",
-    linkText: isContentShowcase ? "Conheça nosso portfólio" : "Conheça nossa história",
-    linkHref: isContentShowcase ? "/portfolio" : "/sobre",
+      ? "Sua vitrine digital posicionada para atrair, conectar e converter."
+      : "Uma estrutura completa de marketing e publicidade para empresas que buscam escalar resultados e dominar o cenário digital brasileiro.",
+    linkText: isContentShowcase
+      ? "Conheça nosso portfólio"
+      : "Ver nossas soluções",
+    linkHref: isContentShowcase ? "/portfolio" : "/servicos",
   };
 
   useGSAP(
@@ -131,9 +136,7 @@ export function SomosDoRio({ className, variant = "default" }: SomosDoRioProps) 
             </h2>
 
             <div className="space-y-6 text-lg md:text-xl text-white/80 font-poppins font-light leading-relaxed max-w-lg">
-              <p>
-                {content.description1}
-              </p>
+              <p>{content.description1}</p>
               <p className="text-multi-amarelo font-medium">
                 {content.description2}
               </p>

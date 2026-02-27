@@ -13,9 +13,9 @@ export default async function Home() {
       <HeroSection />
       <TrustStrip />
       <ServicesOverview />
-      <MentorshipTeaser />
-      <PortfolioHighlights />
       <SomosDoRio />
+      <PortfolioHighlights />
+      <MentorshipTeaser />
       <GoogleReviewsSection />
       <FinalCTA />
     </>
