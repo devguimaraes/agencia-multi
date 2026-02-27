@@ -110,6 +110,10 @@ body {
 	color: transparent;
 	-webkit-text-stroke: 2px #fac32a;
 }
+.text-outline-white {
+	color: transparent;
+	-webkit-text-stroke: 2px #ffffff;
+}
 .text-multi-stroke {
 	/* Efeito multi-stroke descrito no briefing - dependendo do uso */
 	color: transparent;
