@@ -30,18 +30,7 @@ export const SERVICES: Service[] = [
 				"Análise de CPA (Custo por Aquisição)",
 				"Escala de resultados com dados precisos",
 			],
-			faq: [
-				{
-					question: "Quanto preciso investir?",
-					answer:
-						"O orçamento depende do volume de vendas que você quer atingir. Faremos um plano personalizado para que o investimento seja inteligente e retorne rápido.",
-				},
-				{
-					question: "Em quanto tempo vejo resultados?",
-					answer:
-						"Os primeiros clientes chegam logo nas primeiras semanas de otimização, ganhando mais consistência ao decorrer dos 3 primeiros meses.",
-				},
-			],
+			faq: [],
 		},
 	},
 	{
@@ -60,13 +49,7 @@ export const SERVICES: Service[] = [
 				"Copywriting orientado à conversão",
 				"Design focado na identidade da marca",
 			],
-			faq: [
-				{
-					question: "Vocês publicam os posts também?",
-					answer:
-						"No pacote completo, nós cuidamos de toda a gestão de publicação, para que você foque apenas em atender a demanda.",
-				},
-			],
+			faq: [],
 		},
 	},
 	{
