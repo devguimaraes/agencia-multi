@@ -4,7 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
-type NavLink = { readonly href: string; readonly label: string };
+type NavLink = { 
+	readonly href: string; 
+	readonly label: string;
+	readonly subLinks?: readonly { readonly href: string; readonly label: string }[];
+};
 
 interface MobileMenuProps {
 	id: string;
@@ -83,15 +87,30 @@ export function MobileMenu({ id, open, links, whatsappUrl, onNavigate }: MobileM
 					aria-label="Menu mobile"
 					className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 py-6"
 				>
-					{links.map(({ href, label }) => (
-						<Link
-							key={href}
-							href={href}
-							onClick={onNavigate}
-							className="rounded-lg px-4 py-3 font-medium text-base text-white/90 transition-colors hover:bg-white/10 hover:text-multi-amarelo"
-						>
-							{label}
-						</Link>
+					{links.map((link) => (
+						<div key={link.href} className="flex flex-col">
+							<Link
+								href={link.href}
+								onClick={onNavigate}
+								className="rounded-lg px-4 py-3 font-medium text-base text-white/90 transition-colors hover:bg-white/10 hover:text-multi-amarelo"
+							>
+								{link.label}
+							</Link>
+							{link.subLinks && link.subLinks.length > 0 && (
+								<div className="flex flex-col mt-1 ml-6 border-l-2 border-white/10 pl-4 space-y-2 mb-2">
+									{link.subLinks.map((sub) => (
+										<Link
+											key={sub.href}
+											href={sub.href}
+											onClick={onNavigate}
+											className="py-1 text-sm text-white/70 hover:text-white transition-colors"
+										>
+											{sub.label}
+										</Link>
+									))}
+								</div>
+							)}
+						</div>
 					))}
 				</nav>
 

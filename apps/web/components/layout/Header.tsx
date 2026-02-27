@@ -1,5 +1,6 @@
 "use client";
 
+import { SERVICES } from "@/data/services";
 import { gsap, useGSAP } from "@/hooks/use-gsap";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -9,12 +10,19 @@ import { MobileMenu } from "./MobileMenu";
 
 const NAV_LINKS = [
   { href: "/sobre", label: "Sobre" },
-  { href: "/servicos", label: "Serviços" },
+  {
+    href: "/servicos",
+    label: "Serviços",
+    subLinks: SERVICES.map((s) => ({
+      href: `/servicos/${s.slug}`,
+      label: s.title,
+    })),
+  },
   { href: "/mentoria", label: "Mentoria" },
   { href: "/portfolio", label: "Portfólio" },
   { href: "/blog", label: "Blog" },
   { href: "/contato", label: "Contato" },
-] as const;
+];
 
 const WHATSAPP_URL = "https://wa.me/5521969715247";
 
@@ -107,16 +115,40 @@ export function Header() {
             aria-label="Navegação principal"
             className="hidden lg:flex lg:items-center lg:gap-8"
           >
-            {NAV_LINKS.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="group relative font-poppins font-medium text-white/90 text-[15px] transition-colors duration-300 hover:text-white"
-              >
-                {label}
-                {/* Animating Underline (Awwwards Style) */}
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-multi-amarelo origin-left scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
-              </Link>
+            {NAV_LINKS.map((link) => (
+              <div key={link.href} className="group/nav relative py-4">
+                <Link
+                  href={link.href}
+                  className="group relative flex flex-col items-center font-poppins font-medium text-white/90 text-[15px] transition-colors duration-300 hover:text-white"
+                  aria-haspopup={link.subLinks ? "true" : undefined}
+                  aria-expanded={link.subLinks ? "false" : undefined}
+                >
+                  <span className="relative">
+                    {link.label}
+                    {/* Animating Underline (Awwwards Style) */}
+                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-multi-amarelo origin-left scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100" />
+                  </span>
+                  {link.subLinks && (
+                    <ChevronDownIcon className="absolute top-full left-1/2 -translate-x-1/2 transition-transform duration-300 group-hover/nav:-rotate-180" />
+                  )}
+                </Link>
+
+                {link.subLinks && (
+                  <div className="absolute left-0 top-full invisible opacity-0 translate-y-2 group-hover/nav:visible group-hover/nav:opacity-100 group-hover/nav:translate-y-0 w-56 pt-2 transition-all duration-300">
+                    <div className="bg-multi-roxo/95 border border-white/10 shadow-xl rounded-md overflow-hidden flex flex-col p-2 backdrop-blur-md">
+                      {link.subLinks.map((subLink) => (
+                        <Link
+                          key={subLink.href}
+                          href={subLink.href}
+                          className="px-4 py-2 text-sm text-white/80 hover:text-multi-amarelo hover:bg-white/5 rounded-sm transition-colors"
+                        >
+                          {subLink.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
@@ -203,6 +235,24 @@ function HamburgerIcon({ open }: { open: boolean }) {
           <line x1="3" y1="18" x2="21" y2="18" />
         </>
       )}
+    </svg>
+  );
+}
+
+function ChevronDownIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn("h-4 w-4", className)}
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }
