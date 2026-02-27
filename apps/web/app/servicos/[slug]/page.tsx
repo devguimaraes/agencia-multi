@@ -175,34 +175,45 @@ export default async function ServicePage({
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                   {/* Bloco 1: Primeira Metade dos Parágrafos */}
                   <div className="space-y-6">
-                    {service.details.content && service.details.content.length > 0 && (
-                      <>
-                        {service.details.content.slice(0, Math.ceil(service.details.content.length / 2)).map((paragraph, index) => (
-                          <p 
-                            key={`col1-${index}`} 
-                            className="font-poppins text-lg text-gray-700 leading-relaxed"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                      </>
-                    )}
+                    {service.details.content &&
+                      service.details.content.length > 0 && (
+                        <>
+                          {service.details.content
+                            .slice(
+                              0,
+                              Math.ceil(service.details.content.length / 2),
+                            )
+                            .map((paragraph, index) => (
+                              <p
+                                key={`col1-${index}`}
+                                className="font-poppins text-lg text-gray-700 leading-relaxed"
+                              >
+                                {paragraph}
+                              </p>
+                            ))}
+                        </>
+                      )}
                   </div>
 
                   {/* Bloco 2: Segunda Metade dos Parágrafos */}
                   <div className="space-y-6">
-                    {service.details.content && service.details.content.length > 1 && (
-                      <>
-                        {service.details.content.slice(Math.ceil(service.details.content.length / 2)).map((paragraph, index) => (
-                          <p 
-                            key={`col2-${index}`} 
-                            className="font-poppins text-lg text-gray-700 leading-relaxed"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                      </>
-                    )}
+                    {service.details.content &&
+                      service.details.content.length > 1 && (
+                        <>
+                          {service.details.content
+                            .slice(
+                              Math.ceil(service.details.content.length / 2),
+                            )
+                            .map((paragraph, index) => (
+                              <p
+                                key={`col2-${index}`}
+                                className="font-poppins text-lg text-gray-700 leading-relaxed"
+                              >
+                                {paragraph}
+                              </p>
+                            ))}
+                        </>
+                      )}
                   </div>
                 </div>
 
@@ -252,8 +263,9 @@ export default async function ServicePage({
         </div>
       </section>
 
-      {/* --- 3. SHOWCASE DE CONTEÚDO (Específico para Social Media) --- */}
-      {service.slug === "gestao-de-redes-sociais" && (
+      {/* --- 3. SHOWCASE DE CONTEÚDO --- */}
+      {(service.slug === "gestao-de-redes-sociais" ||
+        service.slug === "conteudo") && (
         <SomosDoRio variant="content-showcase" />
       )}
 
