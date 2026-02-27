@@ -101,8 +101,7 @@ export function Footer() {
               />
             </Link>
             <p className="max-w-xs text-white/50 text-[15px] font-poppins leading-relaxed">
-              Estratégia digital sem enrolação. Presença, escala e vendas para
-              quem quer resultado.
+              Agência de marketing digital no Rio de Janeiro. Estratégia digital sem enrolação: presença, escala e vendas para quem quer resultado.
             </p>
             {/* Redes sociais */}
             <div className="flex items-center gap-3 pt-2">
