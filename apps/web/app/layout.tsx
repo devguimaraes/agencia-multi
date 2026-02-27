@@ -82,9 +82,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="overflow-x-hidden">
+    <html lang="pt-BR" className="overflow-x-clip">
       <body
-        className={`${poppins.variable} antialiased min-h-screen overflow-x-hidden`}
+        className={`${poppins.variable} antialiased min-h-screen overflow-x-clip`}
       >
         {/* Skip to content — acessibilidade por teclado */}
         <a

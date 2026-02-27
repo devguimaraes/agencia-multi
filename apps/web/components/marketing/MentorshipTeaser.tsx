@@ -154,14 +154,16 @@ export function MentorshipTeaser({ className }: { className?: string }) {
           <div className="w-full lg:w-[45%] flex flex-col justify-center">
             <div className="mb-6 editorial-content opacity-0">
               <TextScramble
-                text="Descobrir"
+                text="Para Social Medias"
                 className="font-poppins font-bold text-label tracking-[0.3em] uppercase text-multi-rosa border-b-2 border-multi-rosa/30 pb-1"
               />
             </div>
 
             <h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.85] text-multi-roxo mb-6 editorial-content opacity-0">
-              Mentoria <br />
-              <span className="text-multi-rosa italic">Para Agências</span>
+              De Freelancer <br />
+              <span className="text-multi-rosa italic">
+                para Dono de Agência
+              </span>
             </h2>
 
             {/* Barra de progresso visual (estilo padrão solicitado) */}
@@ -175,20 +177,20 @@ export function MentorshipTeaser({ className }: { className?: string }) {
             </div>
 
             <p className="font-poppins text-lg md:text-xl text-multi-black/80 leading-relaxed mb-8 max-w-lg editorial-content opacity-0">
-              Feita para donos de agência e social medias que cansam de "vender
-              hora" e querem vender <strong>lucro e escala</strong>. Pare de
-              carregar o piano sozinho e aprenda a construir a operação que te
-              liberta do operacional.
+              Você entrega resultado para os clientes dos outros. Está na hora
+              de construir a sua estrutura — equipe, processo e recorrência. O{" "}
+              <strong>Método Multi</strong> transforma Social Medias
+              sobrecarregados em donos de agência.
             </p>
 
             <div className="editorial-content opacity-0">
               <Magnetic strength={0.3} radius={60}>
                 <a
-                  href="#contato"
+                  href="/mentoria"
                   className="group relative overflow-hidden bg-multi-rosa text-white font-poppins font-bold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-none shadow-xl flex items-center justify-center gap-2"
                 >
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                    Começar agora
+                    Conhecer a Mentoria
                   </span>
                   <span className="relative z-10 transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
                     ▶
