@@ -10,13 +10,19 @@ export function RevealSection({
 }: {
 	children: React.ReactNode;
 	className?: string;
-	delay?: boolean;
+	delay?: boolean | number;
 }) {
 	const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
 	return (
 		<div
 			ref={ref}
-			className={cn("reveal-up", isIntersecting && "is-visible", delay && "delay-200", className)}
+			className={cn(
+				"reveal-up",
+				isIntersecting && "is-visible",
+				delay === true && "delay-200",
+				className,
+			)}
+			style={typeof delay === "number" ? { transitionDelay: `${delay}s` } : undefined}
 		>
 			{children}
 		</div>

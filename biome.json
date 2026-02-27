@@ -42,11 +42,13 @@
 			},
 			"suspicious": {
 				"noConsoleLog": "warn",
-				"noExplicitAny": "error"
+				"noExplicitAny": "error",
+				"noArrayIndexKey": "warn"
 			},
 			"a11y": {
 				"recommended": true,
-				"useSemanticElements": "off"
+				"useSemanticElements": "off",
+				"noSvgWithoutTitle": "warn"
 			}
 		}
 	},

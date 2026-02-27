@@ -8,16 +8,16 @@ import { SomosDoRio } from "@/components/marketing/SomosDoRio";
 import { TrustStrip } from "@/components/marketing/TrustStrip";
 
 export default async function Home() {
-  return (
-    <>
-      <HeroSection />
-      <TrustStrip />
-      <ServicesOverview />
-      <SomosDoRio variant="content-showcase" />
-      <PortfolioHighlights />
-      <MentorshipTeaser />
-      <GoogleReviewsSection />
-      <FinalCTA />
-    </>
-  );
+	return (
+		<>
+			<HeroSection />
+			<TrustStrip />
+			<ServicesOverview />
+			<SomosDoRio variant="content-showcase" />
+			<PortfolioHighlights />
+			<MentorshipTeaser />
+			<GoogleReviewsSection />
+			<FinalCTA />
+		</>
+	);
 }

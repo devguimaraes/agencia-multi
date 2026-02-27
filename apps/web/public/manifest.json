@@ -1,21 +1,21 @@
 {
-  "name": "Agência Multi BR - Agência de Marketing Digital",
-  "short_name": "Agência Multi BR",
-  "description": "Marketing digital sem enrolação.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#5D018A",
-  "theme_color": "#5D018A",
-  "icons": [
-    {
-      "src": "/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "/brand/logo-colorida.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ]
+	"name": "Agência Multi BR - Agência de Marketing Digital",
+	"short_name": "Agência Multi BR",
+	"description": "Marketing digital sem enrolação.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#5D018A",
+	"theme_color": "#5D018A",
+	"icons": [
+		{
+			"src": "/favicon.ico",
+			"sizes": "64x64 32x32 24x24 16x16",
+			"type": "image/x-icon"
+		},
+		{
+			"src": "/brand/logo-colorida.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	]
 }

@@ -21,7 +21,8 @@ export const SERVICES: Service[] = [
 		icon: "🎯",
 		details: {
 			hero: "Escala real com inteligência de dados.",
-			problem: "Você sente que está apenas patrocinando as plataformas sem ver o retorno real no caixa?",
+			problem:
+				"Você sente que está apenas patrocinando as plataformas sem ver o retorno real no caixa?",
 			solution:
 				"Gerenciamos seu budget com foco total em faturamento. No Rio ou em todo o país, escalamos sua marca com previsibilidade e análise de dados.",
 			content: [
@@ -40,23 +41,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Por que contratar uma agência de tráfego pago no Rio de Janeiro?",
-					answer: "Contratar uma agência local como a Multi BR garante que sua estratégia considere as nuances do mercado carioca e brasileiro. Nossa inteligência de dados otimiza o investimento em Google e Meta Ads para atrair o público certo com o menor custo por aquisição (CPA).",
+					answer:
+						"Contratar uma agência local como a Multi BR garante que sua estratégia considere as nuances do mercado carioca e brasileiro. Nossa inteligência de dados otimiza o investimento em Google e Meta Ads para atrair o público certo com o menor custo por aquisição (CPA).",
 				},
 				{
 					question: "Qual o investimento ideal para anúncios online?",
-					answer: "O budget é definido com base nos seus objetivos de escala. A Multi BR trabalha com uma estrutura de publicidade que visa a máxima previsibilidade de lucro, garantindo que cada real investido impulsione o faturamento real do negócio.",
+					answer:
+						"O budget é definido com base nos seus objetivos de escala. A Multi BR trabalha com uma estrutura de publicidade que visa a máxima previsibilidade de lucro, garantindo que cada real investido impulsione o faturamento real do negócio.",
 				},
 				{
 					question: "Em quanto tempo vejo resultados com tráfego pago?",
-					answer: "Diferente do orgânico, o tráfego pago gera visibilidade imediata. No entanto, a fase de aprendizado e otimização de dados leva cerca de 30 a 60 dias para consolidar uma escala sustentável e ROI positivo.",
+					answer:
+						"Diferente do orgânico, o tráfego pago gera visibilidade imediata. No entanto, a fase de aprendizado e otimização de dados leva cerca de 30 a 60 dias para consolidar uma escala sustentável e ROI positivo.",
 				},
 				{
 					question: "Quais canais de anúncios são mais eficientes hoje?",
-					answer: "Depende do comportamento do seu cliente. Dominamos Meta Ads (Instagram/Facebook) para gerar desejo e Google Ads para capturar a intenção de busca imediata. Integramos esses canais para uma cobertura completa da jornada de compra.",
+					answer:
+						"Depende do comportamento do seu cliente. Dominamos Meta Ads (Instagram/Facebook) para gerar desejo e Google Ads para capturar a intenção de busca imediata. Integramos esses canais para uma cobertura completa da jornada de compra.",
 				},
 				{
 					question: "Como a Multi BR escala o ROI de marcas em crescimento?",
-					answer: "Através da análise constante de métricas de performance e testes de criativos. Não paramos na configuração inicial; otimizamos diariamente as campanhas para identificar padrões de sucesso e alocar o orçamento onde o retorno é maior.",
+					answer:
+						"Através da análise constante de métricas de performance e testes de criativos. Não paramos na configuração inicial; otimizamos diariamente as campanhas para identificar padrões de sucesso e alocar o orçamento onde o retorno é maior.",
 				},
 			],
 		},
@@ -87,23 +93,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Como o conteúdo estratégico ajuda na publicidade da minha marca?",
-					answer: "O conteúdo intencional é a base para qualquer estratégia de marketing digital. Ele educa o cliente, quebra objeções e constrói a autoridade necessária para que sua empresa se destaque da concorrência no cenário digital brasileiro.",
+					answer:
+						"O conteúdo intencional é a base para qualquer estratégia de marketing digital. Ele educa o cliente, quebra objeções e constrói a autoridade necessária para que sua empresa se destaque da concorrência no cenário digital brasileiro.",
 				},
 				{
 					question: "Vocês produzem conteúdo para nichos específicos?",
-					answer: "Sim, a Multi BR atende empresas que buscam um posicionamento premium. Adaptamos a linguagem e a estética para nichos de alto valor, unindo criatividade à inteligência de mercado para gerar desejo real pelo seu serviço.",
+					answer:
+						"Sim, a Multi BR atende empresas que buscam um posicionamento premium. Adaptamos a linguagem e a estética para nichos de alto valor, unindo criatividade à inteligência de mercado para gerar desejo real pelo seu serviço.",
 				},
 				{
 					question: "Qual a diferença entre posts comuns e conteúdo de alto impacto?",
-					answer: "Conteúdo de alto impacto utiliza design premium e roteiros de conversão. Não é sobre quantidade, mas sobre a qualidade estratégica de cada peça para transformar seguidores em clientes fiéis através de uma narrativa de marca sólida.",
+					answer:
+						"Conteúdo de alto impacto utiliza design premium e roteiros de conversão. Não é sobre quantidade, mas sobre a qualidade estratégica de cada peça para transformar seguidores em clientes fiéis através de uma narrativa de marca sólida.",
 				},
 				{
 					question: "Por que Reels e TikTok são fundamentais para autoridade hoje?",
-					answer: "Vídeos curtos possuem o maior alcance orgânico e capacidade de viralização. Roteiros bem estruturados nesses formatos permitem humanizar a marca e transmitir conhecimento rápido, estabelecendo liderança de mercado em poucos segundos.",
+					answer:
+						"Vídeos curtos possuem o maior alcance orgânico e capacidade de viralização. Roteiros bem estruturados nesses formatos permitem humanizar a marca e transmitir conhecimento rápido, estabelecendo liderança de mercado em poucos segundos.",
 				},
 				{
 					question: "O cliente precisa aparecer nos conteúdos produzidos?",
-					answer: "Não é obrigatório, mas rostos geram conexão. Desenvolvemos estratégias tanto com porta-vozes da empresa quanto produções focadas em produto ou locução profissional, sempre priorizando o que melhor comunica a autoridade da marca.",
+					answer:
+						"Não é obrigatório, mas rostos geram conexão. Desenvolvemos estratégias tanto com porta-vozes da empresa quanto produções focadas em produto ou locução profissional, sempre priorizando o que melhor comunica a autoridade da marca.",
 				},
 			],
 		},
@@ -115,7 +126,8 @@ export const SERVICES: Service[] = [
 		icon: "📱",
 		details: {
 			hero: "A vitrine que separa sua marca do amadorismo.",
-			problem: "Você perde clientes para a concorrência porque seu perfil digital não transmite o valor real do seu serviço?",
+			problem:
+				"Você perde clientes para a concorrência porque seu perfil digital não transmite o valor real do seu serviço?",
 			solution:
 				"Elevamos o nível do seu posicionamento digital. Cuidamos da marca de ponta a ponta, com constância e estratégia orientada a resultados.",
 			content: [
@@ -134,23 +146,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Por que investir na gestão profissional de redes sociais?",
-					answer: "Uma gestão profissional, como a oferecida pela Multi BR no Rio de Janeiro, garante constância e autoridade. É a diferença entre ter um perfil 'morto' e uma vitrine digital que atrai orçamentos e gera fechamentos reais de negócio.",
+					answer:
+						"Uma gestão profissional, como a oferecida pela Multi BR no Rio de Janeiro, garante constância e autoridade. É a diferença entre ter um perfil 'morto' e uma vitrine digital que atrai orçamentos e gera fechamentos reais de negócio.",
 				},
 				{
 					question: "Como é feita a estratégia de posicionamento digital?",
-					answer: "Analisamos seu mercado, público-alvo e diferenciais competitivos para criar uma linha de comunicação que valorize seu serviço. O objetivo é posicionar sua marca como líder do segmento, aumentando a percepção de valor.",
+					answer:
+						"Analisamos seu mercado, público-alvo e diferenciais competitivos para criar uma linha de comunicação que valorize seu serviço. O objetivo é posicionar sua marca como líder do segmento, aumentando a percepção de valor.",
 				},
 				{
 					question: "A Multi BR responde mensagens e comentários?",
-					answer: "Sim, nossa gestão inclui o monitoramento ativo para garantir que cada interação seja uma oportunidade de conversão, mantendo a marca humanizada e próxima do seu cliente ideal.",
+					answer:
+						"Sim, nossa gestão inclui o monitoramento ativo para garantir que cada interação seja uma oportunidade de conversão, mantendo a marca humanizada e próxima do seu cliente ideal.",
 				},
 				{
 					question: "Como mensurar o sucesso da presença digital?",
-					answer: "Focamos em KPIs de qualidade: crescimento de audiência qualificada, taxa de engajamento e, principalmente, o volume de leads e orçamentos gerados diretamente através dos canais sociais gerenciados.",
+					answer:
+						"Focamos em KPIs de qualidade: crescimento de audiência qualificada, taxa de engajamento e, principalmente, o volume de leads e orçamentos gerados diretamente através dos canais sociais gerenciados.",
 				},
 				{
 					question: "Qual a importância da constância no algoritmo de 2026?",
-					answer: "O algoritmo prioriza marcas que mantêm a audiência ativa. Nossa gestão assegura um fluxo contínuo de conteúdo relevante, garantindo que sua marca seja sempre priorizada no feed do seu potencial cliente.",
+					answer:
+						"O algoritmo prioriza marcas que mantêm a audiência ativa. Nossa gestão assegura um fluxo contínuo de conteúdo relevante, garantindo que sua marca seja sempre priorizada no feed do seu potencial cliente.",
 				},
 			],
 		},
@@ -158,7 +175,8 @@ export const SERVICES: Service[] = [
 	{
 		slug: "design",
 		title: "Design Gráfico",
-		description: "Um visual premium que transmite a confiança necessária para fechar bons negócios.",
+		description:
+			"Um visual premium que transmite a confiança necessária para fechar bons negócios.",
 		icon: "🎨",
 		details: {
 			hero: "O silêncio visual que transmite confiança absoluta.",
@@ -181,23 +199,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Como o design premium impacta a venda de serviços?",
-					answer: "O design é a primeira camada de confiança entre sua empresa e o cliente. Um visual premium eleva a percepção de autoridade, permitindo que você cobre o valor justo pelo seu serviço sem objeções de preço.",
+					answer:
+						"O design é a primeira camada de confiança entre sua empresa e o cliente. Um visual premium eleva a percepção de autoridade, permitindo que você cobre o valor justo pelo seu serviço sem objeções de preço.",
 				},
 				{
 					question: "Vocês criam materiais para apresentações comerciais?",
-					answer: "Sim, desenvolvemos apresentações institucionais e comerciais de alto impacto que ajudam a fechar negociações complexas, transmitindo profissionalismo e solidez em cada slide.",
+					answer:
+						"Sim, desenvolvemos apresentações institucionais e comerciais de alto impacto que ajudam a fechar negociações complexas, transmitindo profissionalismo e solidez em cada slide.",
 				},
 				{
 					question: "Qual o diferencial do design da Multi BR?",
-					answer: "Nossa agência de marketing e publicidade não entrega apenas 'beleza'. Criamos peças estratégicas fundamentadas em psicologia visual e arquitetura de marca para impulsionar a conversão do seu negócio.",
+					answer:
+						"Nossa agência de marketing e publicidade não entrega apenas 'beleza'. Criamos peças estratégicas fundamentadas em psicologia visual e arquitetura de marca para impulsionar a conversão do seu negócio.",
 				},
 				{
 					question: "O design gráfico ajuda a reduzir a objeção de preço?",
-					answer: "Sim. Quando a marca possui uma estética superior, o cliente percebe maior valor agregado. O design premium justifica o posicionamento de mercado e reduz a necessidade de descontos para fechar vendas.",
+					answer:
+						"Sim. Quando a marca possui uma estética superior, o cliente percebe maior valor agregado. O design premium justifica o posicionamento de mercado e reduz a necessidade de descontos para fechar vendas.",
 				},
 				{
 					question: "Quais os formatos entregues para campanhas publicitárias?",
-					answer: "Entregamos artes otimizadas para todos os formatos: Stories, Reels, Feed, banners para Google Display e materiais para YouTube, garantindo que a identidade visual seja preservada em todos os canais.",
+					answer:
+						"Entregamos artes otimizadas para todos os formatos: Stories, Reels, Feed, banners para Google Display e materiais para YouTube, garantindo que a identidade visual seja preservada em todos os canais.",
 				},
 			],
 		},
@@ -209,7 +232,8 @@ export const SERVICES: Service[] = [
 		icon: "💻",
 		details: {
 			hero: "Sua sede própria no ambiente digital.",
-			problem: "Seu faturamento depende apenas da sorte e do humor instável dos algoritmos das redes sociais?",
+			problem:
+				"Seu faturamento depende apenas da sorte e do humor instável dos algoritmos das redes sociais?",
 			solution:
 				"Construímos sites velozes e focados em conversão. Criamos um ecossistema digital que opera ininterruptamente para captar novos orçamentos.",
 			content: [
@@ -228,23 +252,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Por que minha empresa precisa de um site profissional?",
-					answer: "Um site é sua sede digital definitiva. Diferente das redes sociais, ele oferece controle total sobre a jornada do cliente, além de ser essencial para o SEO e descoberta através de buscas por IA e Google.",
+					answer:
+						"Um site é sua sede digital definitiva. Diferente das redes sociais, ele oferece controle total sobre a jornada do cliente, além de ser essencial para o SEO e descoberta através de buscas por IA e Google.",
 				},
 				{
 					question: "Os sites da Multi BR são otimizados para SEO e Mobile?",
-					answer: "Sim, todos os nossos projetos seguem o padrão mobile-first e são otimizados tecnicamente para que o Google e assistentes de IA encontrem sua empresa com facilidade, garantindo visibilidade orgânica.",
+					answer:
+						"Sim, todos os nossos projetos seguem o padrão mobile-first e são otimizados tecnicamente para que o Google e assistentes de IA encontrem sua empresa com facilidade, garantindo visibilidade orgânica.",
 				},
 				{
 					question: "O site carrega rápido no celular?",
-					answer: "Priorizamos a performance técnica. Utilizamos engenharia de ponta para que seu site tenha carregamento instantâneo, reduzindo a taxa de rejeição e aumentando drasticamente as chances de conversão em orçamentos.",
+					answer:
+						"Priorizamos a performance técnica. Utilizamos engenharia de ponta para que seu site tenha carregamento instantâneo, reduzindo a taxa de rejeição e aumentando drasticamente as chances de conversão em orçamentos.",
 				},
 				{
 					question: "Como é feita a integração com ferramentas de vendas?",
-					answer: "Conectamos seu site diretamente ao WhatsApp, CRM ou sistemas de e-mail marketing. O objetivo é que cada contato seja registrado e processado pelo seu time comercial sem perda de dados ou tempo.",
+					answer:
+						"Conectamos seu site diretamente ao WhatsApp, CRM ou sistemas de e-mail marketing. O objetivo é que cada contato seja registrado e processado pelo seu time comercial sem perda de dados ou tempo.",
 				},
 				{
 					question: "O site pertence à minha empresa após o desenvolvimento?",
-					answer: "Sim, a propriedade total do código e do domínio é do cliente. Oferecemos suporte técnico contínuo, mas garantimos autonomia total para que sua empresa tenha controle sobre seu principal ativo digital.",
+					answer:
+						"Sim, a propriedade total do código e do domínio é do cliente. Oferecemos suporte técnico contínuo, mas garantimos autonomia total para que sua empresa tenha controle sobre seu principal ativo digital.",
 				},
 			],
 		},
@@ -275,23 +304,28 @@ export const SERVICES: Service[] = [
 			faq: [
 				{
 					question: "Qual a importância de uma identidade visual estratégica?",
-					answer: "Uma identidade visual bem construída separa amadores de líderes. Ela garante que sua marca seja lembrada e respeitada, transmitindo os valores e a autoridade da sua empresa antes mesmo da primeira conversa.",
+					answer:
+						"Uma identidade visual bem construída separa amadores de líderes. Ela garante que sua marca seja lembrada e respeitada, transmitindo os valores e a autoridade da sua empresa antes mesmo da primeira conversa.",
 				},
 				{
 					question: "O que está incluso no projeto de branding da Multi BR?",
-					answer: "Entregamos um universo visual completo: logotipo, variações, manual de cores, tipografia e guia de aplicação. O objetivo é criar um lastro de confiança e autoridade em todos os pontos de contato da sua marca.",
+					answer:
+						"Entregamos um universo visual completo: logotipo, variações, manual de cores, tipografia e guia de aplicação. O objetivo é criar um lastro de confiança e autoridade em todos os pontos de contato da sua marca.",
 				},
 				{
 					question: "Quanto tempo leva para criar uma nova marca?",
-					answer: "Nosso processo de construção de marca leva em média 3 a 5 semanas. É uma imersão estratégica para garantir que o resultado final reflita a alma do seu negócio e esteja pronto para dominar o mercado brasileiro.",
+					answer:
+						"Nosso processo de construção de marca leva em média 3 a 5 semanas. É uma imersão estratégica para garantir que o resultado final reflita a alma do seu negócio e esteja pronto para dominar o mercado brasileiro.",
 				},
 				{
 					question: "Como o redesign de marca impacta marcas consolidadas?",
-					answer: "O redesign profissional renova a percepção de mercado, alinhando a empresa às expectativas atuais de consumo sem perder a sua história. É o caminho para aumentar o valor percebido e atrair clientes de maior ticket médio.",
+					answer:
+						"O redesign profissional renova a percepção de mercado, alinhando a empresa às expectativas atuais de consumo sem perder a sua história. É o caminho para aumentar o valor percebido e atrair clientes de maior ticket médio.",
 				},
 				{
 					question: "Posso usar a nova identidade em canais de publicidade impressa?",
-					answer: "Sim, entregamos arquivos de alta resolução e guias técnicos para aplicações em qualquer meio, seja digital ou impresso (papelaria, fachadas, uniformes), garantindo fidelidade visual em todos os suportes.",
+					answer:
+						"Sim, entregamos arquivos de alta resolução e guias técnicos para aplicações em qualquer meio, seja digital ou impresso (papelaria, fachadas, uniformes), garantindo fidelidade visual em todos os suportes.",
 				},
 			],
 		},

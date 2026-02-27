@@ -3,11 +3,8 @@
 import dynamic from "next/dynamic";
 
 const HeroBackground = dynamic(
-  () =>
-    import("@/components/three/HeroBackground").then(
-      (mod) => mod.HeroBackground,
-    ),
-  { ssr: false },
+	() => import("@/components/three/HeroBackground").then((mod) => mod.HeroBackground),
+	{ ssr: false },
 );
 
 /**
@@ -16,5 +13,5 @@ const HeroBackground = dynamic(
  * Requer que a seção pai tenha `position: relative` e `overflow-hidden`.
  */
 export function HeroPageBackground() {
-  return <HeroBackground />;
+	return <HeroBackground />;
 }

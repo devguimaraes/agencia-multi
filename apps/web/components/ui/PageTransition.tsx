@@ -24,11 +24,11 @@ export function PageTransition() {
 	// ═══════════════════════════════════════════
 	useEffect(() => {
 		const resetContent = () => {
-			gsap.set("#main-content", { 
+			gsap.set("#main-content", {
 				clearProps: "all",
 				opacity: 1,
 				scale: 1,
-				visibility: "visible"
+				visibility: "visible",
 			});
 		};
 
@@ -38,7 +38,7 @@ export function PageTransition() {
 
 		// Fallback de limpeza
 		const timer = setTimeout(resetContent, 1000);
-		
+
 		return () => clearTimeout(timer);
 	}, [pathname]);
 
@@ -52,7 +52,13 @@ export function PageTransition() {
 	// ═══════════════════════════════════════════
 	useGSAP(
 		() => {
-			if (!containerRef.current || !topPanelRef.current || !bottomPanelRef.current || !logoRef.current) return;
+			if (
+				!containerRef.current ||
+				!topPanelRef.current ||
+				!bottomPanelRef.current ||
+				!logoRef.current
+			)
+				return;
 
 			// Se for o carregamento inicial do site (F5), garante que está oculto e sai
 			if (isFirstMount.current) {

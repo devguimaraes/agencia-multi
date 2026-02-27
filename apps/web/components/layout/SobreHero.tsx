@@ -47,7 +47,8 @@ export function SobreHero() {
 
 					<RevealSection delay className="max-w-md pb-2">
 						<p className="font-poppins text-lg md:text-xl text-white/70 leading-relaxed border-l-2 border-multi-rosa/50 pl-6">
-							Estratégia digital direta e eficiente, com alma carioca e foco em resultados reais. Do bilhete escrito à mão à inteligência de mercado.
+							Estratégia digital direta e eficiente, com alma carioca e foco em resultados reais. Do
+							bilhete escrito à mão à inteligência de mercado.
 						</p>
 					</RevealSection>
 				</div>

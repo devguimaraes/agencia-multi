@@ -9,320 +9,303 @@ import Image from "next/image";
 import { useRef } from "react";
 
 export function MentorshipTeaser({ className }: { className?: string }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
-    threshold: 0.15,
-  });
+	const sectionRef = useRef<HTMLElement>(null);
+	const gridRef = useRef<HTMLDivElement>(null);
+	const { ref, isIntersecting } = useIntersectionObserver<HTMLElement>({
+		threshold: 0.15,
+	});
 
-  useGSAP(
-    () => {
-      if (!sectionRef.current || !gridRef.current) return;
+	useGSAP(
+		() => {
+			if (!sectionRef.current || !gridRef.current) return;
 
-      // Revela os itens do grid com efeito de escala
-      const gridItems = gridRef.current.querySelectorAll(".grid-item");
-      gsap.fromTo(
-        gridItems,
-        { scale: 0.8, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 80%",
-          },
-        },
-      );
+			// Revela os itens do grid com efeito de escala
+			const gridItems = gridRef.current.querySelectorAll(".grid-item");
+			gsap.fromTo(
+				gridItems,
+				{ scale: 0.8, opacity: 0 },
+				{
+					scale: 1,
+					opacity: 1,
+					duration: 1,
+					stagger: 0.15,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: gridRef.current,
+						start: "top 80%",
+					},
+				},
+			);
 
-      // Parallax sutil no background (ícones flutuantes)
-      const icons = sectionRef.current.querySelectorAll(".brand-icon");
-      icons.forEach((icon, i) => {
-        gsap.to(icon, {
-          y: i % 2 === 0 ? -40 : 40,
-          rotation: i % 2 === 0 ? 15 : -15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
+			// Parallax sutil no background (ícones flutuantes)
+			const icons = sectionRef.current.querySelectorAll(".brand-icon");
+			icons.forEach((icon, i) => {
+				gsap.to(icon, {
+					y: i % 2 === 0 ? -40 : 40,
+					rotation: i % 2 === 0 ? 15 : -15,
+					ease: "none",
+					scrollTrigger: {
+						trigger: sectionRef.current,
+						start: "top bottom",
+						end: "bottom top",
+						scrub: true,
+					},
+				});
+			});
 
-      // Revela o conteúdo editorial (texto) com staggered reveal
-      const contentItems =
-        sectionRef.current.querySelectorAll(".editorial-content");
-      gsap.fromTo(
-        contentItems,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-        },
-      );
+			// Revela o conteúdo editorial (texto) com staggered reveal
+			const contentItems = sectionRef.current.querySelectorAll(".editorial-content");
+			gsap.fromTo(
+				contentItems,
+				{ y: 40, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 1.2,
+					stagger: 0.15,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: sectionRef.current,
+						start: "top 75%",
+					},
+				},
+			);
 
-      // Efeito Parallax Hover no Grid inteiro
-      const handleMouseMove = (e: MouseEvent) => {
-        if (!gridRef.current) return;
-        const rect = gridRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+			// Efeito Parallax Hover no Grid inteiro
+			const handleMouseMove = (e: MouseEvent) => {
+				if (!gridRef.current) return;
+				const rect = gridRef.current.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
-        const rotateY = ((x - centerX) / centerX) * 10;
+				const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
+				const rotateY = ((x - centerX) / centerX) * 10;
 
-        gsap.to(gridRef.current, {
-          rotateX,
-          rotateY,
-          transformPerspective: 1000,
-          ease: "power2.out",
-          duration: 0.5,
-        });
-      };
+				gsap.to(gridRef.current, {
+					rotateX,
+					rotateY,
+					transformPerspective: 1000,
+					ease: "power2.out",
+					duration: 0.5,
+				});
+			};
 
-      const handleMouseLeave = () => {
-        if (!gridRef.current) return;
-        gsap.to(gridRef.current, {
-          rotateX: 0,
-          rotateY: 0,
-          ease: "power2.out",
-          duration: 1,
-        });
-      };
+			const handleMouseLeave = () => {
+				if (!gridRef.current) return;
+				gsap.to(gridRef.current, {
+					rotateX: 0,
+					rotateY: 0,
+					ease: "power2.out",
+					duration: 1,
+				});
+			};
 
-      const gridEl = gridRef.current;
-      gridEl?.addEventListener("mousemove", handleMouseMove);
-      gridEl?.addEventListener("mouseleave", handleMouseLeave);
+			const gridEl = gridRef.current;
+			gridEl?.addEventListener("mousemove", handleMouseMove);
+			gridEl?.addEventListener("mouseleave", handleMouseLeave);
 
-      return () => {
-        gridEl?.removeEventListener("mousemove", handleMouseMove);
-        gridEl?.removeEventListener("mouseleave", handleMouseLeave);
-      };
-    },
-    { scope: sectionRef },
-  );
+			return () => {
+				gridEl?.removeEventListener("mousemove", handleMouseMove);
+				gridEl?.removeEventListener("mouseleave", handleMouseLeave);
+			};
+		},
+		{ scope: sectionRef },
+	);
 
-  return (
-    <section
-      ref={(node) => {
-        if (node) {
-          sectionRef.current = node;
-          (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-        }
-      }}
-      className={cn(
-        "relative min-h-dvh flex items-center py-20 md:py-32 bg-[#FDFCFB] text-multi-black overflow-hidden isolate border-t border-multi-roxo/10",
-        className,
-      )}
-    >
-      <div className="grain light opacity-50 z-0" />
-      {/* BACKGROUND BRANDING ASSETS — Reforço da marca */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="brand-icon absolute top-[2%] left-[2%] w-48 md:w-64 opacity-10 grayscale brightness-0">
-          <Image
-            src="/rebranding/LOGO BRANCA TRANSPARENTE.png"
-            alt=""
-            width={300}
-            height={300}
-          />
-        </div>
-        <div className="brand-icon absolute bottom-[10%] right-[2%] w-56 md:w-80 opacity-10 grayscale brightness-0 rotate-12">
-          <Image
-            src="/rebranding/ÍCONE BRANCO TRANSPARENTE.png"
-            alt=""
-            width={400}
-            height={400}
-          />
-        </div>
+	return (
+		<section
+			ref={(node) => {
+				if (node) {
+					sectionRef.current = node;
+					(ref as React.MutableRefObject<HTMLElement | null>).current = node;
+				}
+			}}
+			className={cn(
+				"relative min-h-dvh flex items-center py-20 md:py-32 bg-[#FDFCFB] text-multi-black overflow-hidden isolate border-t border-multi-roxo/10",
+				className,
+			)}
+		>
+			<div className="grain light opacity-50 z-0" />
+			{/* BACKGROUND BRANDING ASSETS — Reforço da marca */}
+			<div className="absolute inset-0 pointer-events-none z-0">
+				<div className="brand-icon absolute top-[2%] left-[2%] w-48 md:w-64 opacity-10 grayscale brightness-0">
+					<Image src="/rebranding/LOGO BRANCA TRANSPARENTE.png" alt="" width={300} height={300} />
+				</div>
+				<div className="brand-icon absolute bottom-[10%] right-[2%] w-56 md:w-80 opacity-10 grayscale brightness-0 rotate-12">
+					<Image src="/rebranding/ÍCONE BRANCO TRANSPARENTE.png" alt="" width={400} height={400} />
+				</div>
 
-        {/* Assets de Brasilidades solicitados — Posicionamento refinado nas pontas */}
-        <div className="brand-icon absolute bottom-[12%] left-[2%] w-48 md:w-72 opacity-20 -rotate-12">
-          <Image
-            src="/assets/brasilidades/flor_hibisco_v5.png"
-            alt=""
-            width={350}
-            height={350}
-            className="w-full h-auto object-contain"
-          />
-        </div>
-        <div className="brand-icon absolute bottom-[2%] md:bottom-[5%] left-[5%] md:left-[15%] w-40 md:w-72 opacity-20 rotate-12">
-          <Image
-            src="/assets/brasilidades/hero_mesacadeiras.png"
-            alt=""
-            width={350}
-            height={350}
-            className="w-full h-auto object-contain"
-          />
-        </div>
+				{/* Assets de Brasilidades solicitados — Posicionamento refinado nas pontas */}
+				<div className="brand-icon absolute bottom-[12%] left-[2%] w-48 md:w-72 opacity-20 -rotate-12">
+					<Image
+						src="/assets/brasilidades/flor_hibisco_v5.png"
+						alt=""
+						width={350}
+						height={350}
+						className="w-full h-auto object-contain"
+					/>
+				</div>
+				<div className="brand-icon absolute bottom-[2%] md:bottom-[5%] left-[5%] md:left-[15%] w-40 md:w-72 opacity-20 rotate-12">
+					<Image
+						src="/assets/brasilidades/hero_mesacadeiras.png"
+						alt=""
+						width={350}
+						height={350}
+						className="w-full h-auto object-contain"
+					/>
+				</div>
 
-        <div className="brand-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen opacity-[0.02] mix-blend-overlay">
-          <Image
-            src="/rebranding/ÍCONE TRANSPARENTE.png"
-            alt=""
-            fill
-            className="object-cover scale-150 rotate-45"
-          />
-        </div>
+				<div className="brand-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen opacity-[0.02] mix-blend-overlay">
+					<Image
+						src="/rebranding/ÍCONE TRANSPARENTE.png"
+						alt=""
+						fill
+						className="object-cover scale-150 rotate-45"
+					/>
+				</div>
 
-        {/* Pássaros solicitados — Canto superior direito */}
-        <div className="brand-icon absolute top-[2%] right-[2%] w-48 md:w-72 opacity-20">
-          <Image
-            src="/assets/brasilidades/passaros_v2.png"
-            alt=""
-            width={350}
-            height={200}
-            className="w-full h-auto object-contain"
-          />
-        </div>
-      </div>
+				{/* Pássaros solicitados — Canto superior direito */}
+				<div className="brand-icon absolute top-[2%] right-[2%] w-48 md:w-72 opacity-20">
+					<Image
+						src="/assets/brasilidades/passaros_v2.png"
+						alt=""
+						width={350}
+						height={200}
+						className="w-full h-auto object-contain"
+					/>
+				</div>
+			</div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
-          {/* LADO ESQUERDO: TEXTO EDITORIAL */}
-          <div className="w-full lg:w-[45%] flex flex-col justify-center">
-            <div className="mb-6 editorial-content opacity-0">
-              <TextScramble
-                text="Para Social Medias"
-                className="inline-block font-poppins font-bold text-xs md:text-sm tracking-[0.3em] uppercase text-multi-rosa border border-multi-rosa/20 rounded-full px-4 py-2 bg-multi-rosa/5"
-              />
-            </div>
+			<div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
+				<div className="flex flex-col lg:flex-row gap-16 lg:items-center">
+					{/* LADO ESQUERDO: TEXTO EDITORIAL */}
+					<div className="w-full lg:w-[45%] flex flex-col justify-center">
+						<div className="mb-6 editorial-content opacity-0">
+							<TextScramble
+								text="Para Social Medias"
+								className="inline-block font-poppins font-bold text-xs md:text-sm tracking-[0.3em] uppercase text-multi-rosa border border-multi-rosa/20 rounded-full px-4 py-2 bg-multi-rosa/5"
+							/>
+						</div>
 
-            <h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.9] text-multi-roxo mb-8 editorial-content opacity-0 tracking-tight">
-              De Freelancer <br />
-              <span className="text-multi-rosa italic font-light">
-                para Dono de Agência
-              </span>
-            </h2>
+						<h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.9] text-multi-roxo mb-8 editorial-content opacity-0 tracking-tight">
+							De Freelancer <br />
+							<span className="text-multi-rosa italic font-light">para Dono de Agência</span>
+						</h2>
 
-            {/* Barra de progresso visual (estilo padrão solicitado) */}
-            <div className="w-full max-w-[200px] h-[1px] bg-multi-roxo/10 mb-8 relative overflow-hidden editorial-content opacity-0">
-              <div
-                className={cn(
-                  "absolute inset-y-0 left-0 w-[40px] bg-linear-to-r from-transparent via-multi-rosa to-transparent transition-all duration-[2s] ease-in-out -translate-x-[40px]",
-                  isIntersecting && "translate-x-[200px] delay-500",
-                )}
-              />
-            </div>
+						{/* Barra de progresso visual (estilo padrão solicitado) */}
+						<div className="w-full max-w-[200px] h-[1px] bg-multi-roxo/10 mb-8 relative overflow-hidden editorial-content opacity-0">
+							<div
+								className={cn(
+									"absolute inset-y-0 left-0 w-[40px] bg-linear-to-r from-transparent via-multi-rosa to-transparent transition-all duration-[2s] ease-in-out -translate-x-[40px]",
+									isIntersecting && "translate-x-[200px] delay-500",
+								)}
+							/>
+						</div>
 
-            <p className="font-poppins text-lg md:text-xl text-multi-black/70 leading-relaxed mb-10 max-w-lg editorial-content opacity-0">
-              Você entrega resultado para os clientes dos outros. Está na hora
-              de construir a sua estrutura — equipe, processos escaláveis e
-              recorrência. O{" "}
-              <strong className="text-multi-roxo font-semibold">
-                Método Multi
-              </strong>{" "}
-              transforma profissionais sobrecarregados em donos de um negócio
-              sólido.
-            </p>
+						<p className="font-poppins text-lg md:text-xl text-multi-black/70 leading-relaxed mb-10 max-w-lg editorial-content opacity-0">
+							Você entrega resultado para os clientes dos outros. Está na hora de construir a sua
+							estrutura — equipe, processos escaláveis e recorrência. O{" "}
+							<strong className="text-multi-roxo font-semibold">Método Multi</strong> transforma
+							profissionais sobrecarregados em donos de um negócio sólido.
+						</p>
 
-            <div className="editorial-content opacity-0">
-              <Magnetic strength={0.3} radius={60}>
-                <a
-                  href="/mentoria"
-                  className="group relative overflow-hidden bg-multi-rosa text-white font-poppins font-bold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-none shadow-xl flex items-center justify-center gap-2"
-                >
-                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                    Conhecer a Mentoria
-                  </span>
-                  <span className="relative z-10 transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
-                    ▶
-                  </span>
-                  <div className="absolute inset-0 bg-multi-roxo rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
-                </a>
-              </Magnetic>
-            </div>
-          </div>
+						<div className="editorial-content opacity-0">
+							<Magnetic strength={0.3} radius={60}>
+								<a
+									href="/mentoria"
+									className="group relative overflow-hidden bg-multi-rosa text-white font-poppins font-bold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-none shadow-xl flex items-center justify-center gap-2"
+								>
+									<span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+										Conhecer a Mentoria
+									</span>
+									<span className="relative z-10 transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
+										▶
+									</span>
+									<div className="absolute inset-0 bg-multi-roxo rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
+								</a>
+							</Magnetic>
+						</div>
+					</div>
 
-          {/* LADO DIREITO: GRID 2X2 COM LOGO CENTRAL */}
-          <div className="w-full lg:w-[55%] flex justify-center lg:justify-end perspective-1000">
-            <div
-              ref={gridRef}
-              className="relative grid grid-cols-2 gap-4 md:gap-6 w-full max-w-[550px] aspect-square transform-style-3d"
-            >
-              <div className="grid-item relative rounded-tl-[40px] md:rounded-tl-[80px] rounded-bl-xl rounded-tr-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
-                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-                <Image
-                  src="/assets/mentoria/mentoria-agencia-multi-br-00.jpg"
-                  alt="Mentoria 1"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
-                />
-              </div>
+					{/* LADO DIREITO: GRID 2X2 COM LOGO CENTRAL */}
+					<div className="w-full lg:w-[55%] flex justify-center lg:justify-end perspective-1000">
+						<div
+							ref={gridRef}
+							className="relative grid grid-cols-2 gap-4 md:gap-6 w-full max-w-[550px] aspect-square transform-style-3d"
+						>
+							<div className="grid-item relative rounded-tl-[40px] md:rounded-tl-[80px] rounded-bl-xl rounded-tr-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
+								<div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+								<Image
+									src="/assets/mentoria/mentoria-agencia-multi-br-00.jpg"
+									alt="Mentoria 1"
+									fill
+									className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+								/>
+							</div>
 
-              {/* ITEM 2 (Top Right) */}
-              <div className="grid-item relative rounded-tr-[40px] md:rounded-tr-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group mt-4 md:mt-8">
-                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-                <Image
-                  src="/assets/mentoria/mentoria-agencia-multi-br-1.jpg"
-                  alt="Mentoria 2"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
-                />
-              </div>
+							{/* ITEM 2 (Top Right) */}
+							<div className="grid-item relative rounded-tr-[40px] md:rounded-tr-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group mt-4 md:mt-8">
+								<div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+								<Image
+									src="/assets/mentoria/mentoria-agencia-multi-br-1.jpg"
+									alt="Mentoria 2"
+									fill
+									className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+								/>
+							</div>
 
-              {/* ITEM 3 (Bottom Left) */}
-              <div className="grid-item relative rounded-bl-[40px] md:rounded-bl-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group -mt-4 md:-mt-8">
-                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-                <Image
-                  src="/assets/mentoria/mentoria-agencia-multi-br-02.jpg"
-                  alt="Mentoria 3"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
-                />
-              </div>
+							{/* ITEM 3 (Bottom Left) */}
+							<div className="grid-item relative rounded-bl-[40px] md:rounded-bl-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group -mt-4 md:-mt-8">
+								<div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+								<Image
+									src="/assets/mentoria/mentoria-agencia-multi-br-02.jpg"
+									alt="Mentoria 3"
+									fill
+									className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+								/>
+							</div>
 
-              {/* ITEM 4 (Bottom Right) */}
-              <div className="grid-item relative rounded-br-[40px] md:rounded-br-[80px] rounded-tr-xl rounded-bl-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
-                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-                <Image
-                  src="/assets/mentoria/mentoria-agencia-multi-br-03.jpg"
-                  alt="Mentoria 4"
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
-                />
-              </div>
+							{/* ITEM 4 (Bottom Right) */}
+							<div className="grid-item relative rounded-br-[40px] md:rounded-br-[80px] rounded-tr-xl rounded-bl-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
+								<div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+								<Image
+									src="/assets/mentoria/mentoria-agencia-multi-br-03.jpg"
+									alt="Mentoria 4"
+									fill
+									className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
+								/>
+							</div>
 
-              {/* LOGO CENTRAL COM RECORTE GLASSMORPHISM */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-                {/* Aura brilhante */}
-                <div className="absolute inset-0 bg-multi-amarelo/20 mix-blend-multiply blur-2xl rounded-full scale-150 animate-pulse-slow" />
+							{/* LOGO CENTRAL COM RECORTE GLASSMORPHISM */}
+							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+								{/* Aura brilhante */}
+								<div className="absolute inset-0 bg-multi-amarelo/20 mix-blend-multiply blur-2xl rounded-full scale-150 animate-pulse-slow" />
 
-                <div
-                  className={cn(
-                    "relative w-24 h-24 md:w-40 md:h-40 bg-white/40 backdrop-blur-xl rounded-full flex items-center justify-center p-3 md:p-5 shadow-[0_0_50px_rgba(0,0,0,0.1),inset_0_2px_10px_rgba(255,255,255,0.5)] border border-white/60 transition-all duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] delay-700 scale-0 origin-center rotate-[-90deg]",
-                    isIntersecting && "scale-100 rotate-0",
-                  )}
-                >
-                  <Image
-                    src="/rebranding/LOGO MONOCROMÁTICA TRANSPARENTE.png"
-                    alt="Logo Multi"
-                    width={140}
-                    height={140}
-                    className="w-[85%] h-auto object-contain drop-shadow-md opacity-90"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+								<div
+									className={cn(
+										"relative w-24 h-24 md:w-40 md:h-40 bg-white/40 backdrop-blur-xl rounded-full flex items-center justify-center p-3 md:p-5 shadow-[0_0_50px_rgba(0,0,0,0.1),inset_0_2px_10px_rgba(255,255,255,0.5)] border border-white/60 transition-all duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] delay-700 scale-0 origin-center rotate-[-90deg]",
+										isIntersecting && "scale-100 rotate-0",
+									)}
+								>
+									<Image
+										src="/rebranding/LOGO MONOCROMÁTICA TRANSPARENTE.png"
+										alt="Logo Multi"
+										width={140}
+										height={140}
+										className="w-[85%] h-auto object-contain drop-shadow-md opacity-90"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 }

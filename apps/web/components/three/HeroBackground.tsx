@@ -97,42 +97,42 @@ const fragmentShader = /* glsl */ `
 `;
 
 function GradientPlane() {
-  const meshRef = useRef<THREE.Mesh>(null);
+	const meshRef = useRef<THREE.Mesh>(null);
 
-  const uniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uResolution: {
-        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-      },
-      uColorA: { value: new THREE.Color("#5D018A") }, // Roxo Multi (Base)
-      uColorB: { value: new THREE.Color("#014FCD") }, // Azul Multi (Flow)
-      uColorC: { value: new THREE.Color("#E60057") }, // Rosa Multi (Accent)
-      uColorD: { value: new THREE.Color("#FAC32A") }, // Amarelo Multi (Highlight)
-    }),
-    [],
-  );
+	const uniforms = useMemo(
+		() => ({
+			uTime: { value: 0 },
+			uResolution: {
+				value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+			},
+			uColorA: { value: new THREE.Color("#5D018A") }, // Roxo Multi (Base)
+			uColorB: { value: new THREE.Color("#014FCD") }, // Azul Multi (Flow)
+			uColorC: { value: new THREE.Color("#E60057") }, // Rosa Multi (Accent)
+			uColorD: { value: new THREE.Color("#FAC32A") }, // Amarelo Multi (Highlight)
+		}),
+		[],
+	);
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      const material = meshRef.current.material as THREE.ShaderMaterial;
-      // state.clock already exists in R3F, using it directly avoids deprecation warnings of manual THREE.Clock
-      material.uniforms.uTime.value = state.clock.elapsedTime;
-    }
-  });
+	useFrame((state) => {
+		if (meshRef.current) {
+			const material = meshRef.current.material as THREE.ShaderMaterial;
+			// state.clock already exists in R3F, using it directly avoids deprecation warnings of manual THREE.Clock
+			material.uniforms.uTime.value = state.clock.elapsedTime;
+		}
+	});
 
-  return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[2, 2]} />
-      <shaderMaterial
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={uniforms}
-        depthWrite={false}
-        depthTest={false}
-      />
-    </mesh>
-  );
+	return (
+		<mesh ref={meshRef}>
+			<planeGeometry args={[2, 2]} />
+			<shaderMaterial
+				vertexShader={vertexShader}
+				fragmentShader={fragmentShader}
+				uniforms={uniforms}
+				depthWrite={false}
+				depthTest={false}
+			/>
+		</mesh>
+	);
 }
 
 /**
@@ -140,25 +140,21 @@ function GradientPlane() {
  * Carregado via dynamic import para não impactar o bundle principal.
  */
 export function HeroBackground() {
-  return (
-    <div
-      className="absolute inset-0 z-0"
-      aria-hidden="true"
-      style={{ opacity: 0.85 }}
-    >
-      <Canvas
-        gl={{
-          antialias: false,
-          alpha: false,
-          powerPreference: "low-power",
-          failIfMajorPerformanceCaveat: true,
-        }}
-        camera={{ position: [0, 0, 1] }}
-        dpr={[1, 1.5]}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <GradientPlane />
-      </Canvas>
-    </div>
-  );
+	return (
+		<div className="absolute inset-0 z-0" aria-hidden="true" style={{ opacity: 0.85 }}>
+			<Canvas
+				gl={{
+					antialias: false,
+					alpha: false,
+					powerPreference: "low-power",
+					failIfMajorPerformanceCaveat: true,
+				}}
+				camera={{ position: [0, 0, 1] }}
+				dpr={[1, 1.5]}
+				style={{ width: "100%", height: "100%" }}
+			>
+				<GradientPlane />
+			</Canvas>
+		</div>
+	);
 }

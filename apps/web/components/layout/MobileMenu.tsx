@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
-type NavLink = { 
-	readonly href: string; 
+type NavLink = {
+	readonly href: string;
 	readonly label: string;
 	readonly subLinks?: readonly { readonly href: string; readonly label: string }[];
 };
