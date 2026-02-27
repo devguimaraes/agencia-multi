@@ -13,7 +13,7 @@ export default async function Home() {
       <HeroSection />
       <TrustStrip />
       <ServicesOverview />
-      <SomosDoRio />
+      <SomosDoRio variant="content-showcase" />
       <PortfolioHighlights />
       <MentorshipTeaser />
       <GoogleReviewsSection />
