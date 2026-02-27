@@ -182,18 +182,18 @@ export function MentorshipTeaser({ className }: { className?: string }) {
             </p>
 
             <div className="editorial-content opacity-0">
-              <Magnetic strength={0.3} radius={50}>
+              <Magnetic strength={0.3} radius={60}>
                 <a
                   href="#contato"
-                  className="group relative inline-flex items-center justify-center gap-2 bg-multi-rosa text-white font-poppins font-bold text-base px-10 py-5 overflow-hidden rounded-full shadow-lg hover:shadow-multi-rosa/20 transition-all duration-300"
+                  className="group relative overflow-hidden bg-multi-rosa text-white font-poppins font-bold text-sm md:text-lg px-8 py-4 md:px-10 md:py-5 rounded-sm border-none shadow-xl flex items-center justify-center gap-2"
                 >
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                     Começar agora
                   </span>
-                  <span className="relative z-10 transition-all duration-300 group-hover:translate-x-1">
-                    →
+                  <span className="relative z-10 transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
+                    ▶
                   </span>
-                  <div className="absolute inset-0 bg-multi-roxo transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                  <div className="absolute inset-0 bg-multi-roxo rounded-full transform scale-0 origin-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.5]" />
                 </a>
               </Magnetic>
             </div>
