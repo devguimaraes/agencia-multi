@@ -31,7 +31,14 @@ const FAQ_ITEMS = [
 	},
 ];
 
-export function FaqIntegrado({ className }: { className?: string }) {
+interface FaqIntegradoProps {
+	className?: string;
+	items?: { question: string; answer: string }[];
+}
+
+export function FaqIntegrado({ className, items }: FaqIntegradoProps) {
+	const displayItems = items && items.length > 0 ? items : FAQ_ITEMS;
+
 	return (
 		<section className={cn("w-full py-16 md:py-24 bg-gray-50", className)}>
 			<div className="container px-4 mx-auto max-w-4xl">
@@ -47,7 +54,7 @@ export function FaqIntegrado({ className }: { className?: string }) {
 
 				<div className="bg-white rounded-xl md:rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10 mb-12">
 					<Accordion type="single" collapsible className="w-full">
-						{FAQ_ITEMS.map((item, index) => (
+						{displayItems.map((item, index) => (
 							<AccordionItem key={`faq-${index.toString()}`} value={`item-${index.toString()}`}>
 								<AccordionTrigger className="text-base md:text-lg font-bold py-5 hover:text-multi-rosa data-[state=open]:text-multi-roxo">
 									{item.question}

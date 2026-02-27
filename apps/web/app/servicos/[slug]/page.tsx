@@ -269,8 +269,8 @@ export default async function ServicePage({
         <SomosDoRio variant="content-showcase" />
       )}
 
-      {/* --- 4. FAQ GLOBAL --- */}
-      <FaqIntegrado />
+      {/* --- 4. FAQ ESPECÍFICO DO SERVIÇO --- */}
+      <FaqIntegrado items={service.details.faq} />
 
       {/* --- 5. CTA FINAL (Específico do Serviço) --- */}
       <section className="relative min-h-[50vh] flex items-center justify-center bg-multi-roxo text-white overflow-hidden py-24 md:py-32">
