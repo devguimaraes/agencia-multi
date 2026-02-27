@@ -58,12 +58,12 @@ export function MentorshipTeaser({ className }: { className?: string }) {
         sectionRef.current.querySelectorAll(".editorial-content");
       gsap.fromTo(
         contentItems,
-        { y: 30, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.1,
+          duration: 1.2,
+          stagger: 0.15,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -71,6 +71,46 @@ export function MentorshipTeaser({ className }: { className?: string }) {
           },
         },
       );
+
+      // Efeito Parallax Hover no Grid inteiro
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!gridRef.current) return;
+        const rect = gridRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
+        const rotateY = ((x - centerX) / centerX) * 10;
+
+        gsap.to(gridRef.current, {
+          rotateX,
+          rotateY,
+          transformPerspective: 1000,
+          ease: "power2.out",
+          duration: 0.5,
+        });
+      };
+
+      const handleMouseLeave = () => {
+        if (!gridRef.current) return;
+        gsap.to(gridRef.current, {
+          rotateX: 0,
+          rotateY: 0,
+          ease: "power2.out",
+          duration: 1,
+        });
+      };
+
+      const gridEl = gridRef.current;
+      gridEl?.addEventListener("mousemove", handleMouseMove);
+      gridEl?.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        gridEl?.removeEventListener("mousemove", handleMouseMove);
+        gridEl?.removeEventListener("mouseleave", handleMouseLeave);
+      };
     },
     { scope: sectionRef },
   );
@@ -84,10 +124,11 @@ export function MentorshipTeaser({ className }: { className?: string }) {
         }
       }}
       className={cn(
-        "relative min-h-dvh flex items-center py-20 md:py-32 bg-multi-cream text-multi-black overflow-hidden isolate border-t border-multi-roxo/10",
+        "relative min-h-dvh flex items-center py-20 md:py-32 bg-[#FDFCFB] text-multi-black overflow-hidden isolate border-t border-multi-roxo/10",
         className,
       )}
     >
+      <div className="grain light opacity-50 z-0" />
       {/* BACKGROUND BRANDING ASSETS — Reforço da marca */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="brand-icon absolute top-[2%] left-[2%] w-48 md:w-64 opacity-10 grayscale brightness-0">
@@ -155,32 +196,36 @@ export function MentorshipTeaser({ className }: { className?: string }) {
             <div className="mb-6 editorial-content opacity-0">
               <TextScramble
                 text="Para Social Medias"
-                className="font-poppins font-bold text-label tracking-[0.3em] uppercase text-multi-rosa border-b-2 border-multi-rosa/30 pb-1"
+                className="inline-block font-poppins font-bold text-xs md:text-sm tracking-[0.3em] uppercase text-multi-rosa border border-multi-rosa/20 rounded-full px-4 py-2 bg-multi-rosa/5"
               />
             </div>
 
-            <h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.85] text-multi-roxo mb-6 editorial-content opacity-0">
+            <h2 className="font-display text-[clamp(42px,5.5vw,72px)] leading-[0.9] text-multi-roxo mb-8 editorial-content opacity-0 tracking-tight">
               De Freelancer <br />
-              <span className="text-multi-rosa italic">
+              <span className="text-multi-rosa italic font-light">
                 para Dono de Agência
               </span>
             </h2>
 
             {/* Barra de progresso visual (estilo padrão solicitado) */}
-            <div className="w-48 h-[2px] bg-multi-roxo/10 mb-8 relative overflow-hidden editorial-content opacity-0">
+            <div className="w-full max-w-[200px] h-[1px] bg-multi-roxo/10 mb-8 relative overflow-hidden editorial-content opacity-0">
               <div
                 className={cn(
-                  "absolute inset-y-0 left-0 w-1/2 bg-multi-roxo transition-transform duration-1000 origin-left scale-x-0",
-                  isIntersecting && "scale-x-100 delay-500",
+                  "absolute inset-y-0 left-0 w-[40px] bg-linear-to-r from-transparent via-multi-rosa to-transparent transition-all duration-[2s] ease-in-out -translate-x-[40px]",
+                  isIntersecting && "translate-x-[200px] delay-500",
                 )}
               />
             </div>
 
-            <p className="font-poppins text-lg md:text-xl text-multi-black/80 leading-relaxed mb-8 max-w-lg editorial-content opacity-0">
+            <p className="font-poppins text-lg md:text-xl text-multi-black/70 leading-relaxed mb-10 max-w-lg editorial-content opacity-0">
               Você entrega resultado para os clientes dos outros. Está na hora
-              de construir a sua estrutura — equipe, processo e recorrência. O{" "}
-              <strong>Método Multi</strong> transforma Social Medias
-              sobrecarregados em donos de agência.
+              de construir a sua estrutura — equipe, processos escaláveis e
+              recorrência. O{" "}
+              <strong className="text-multi-roxo font-semibold">
+                Método Multi
+              </strong>{" "}
+              transforma profissionais sobrecarregados em donos de um negócio
+              sólido.
             </p>
 
             <div className="editorial-content opacity-0">
@@ -202,68 +247,75 @@ export function MentorshipTeaser({ className }: { className?: string }) {
           </div>
 
           {/* LADO DIREITO: GRID 2X2 COM LOGO CENTRAL */}
-          <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
+          <div className="w-full lg:w-[55%] flex justify-center lg:justify-end perspective-1000">
             <div
               ref={gridRef}
-              className="relative grid grid-cols-2 gap-4 md:gap-6 w-full max-w-[550px] aspect-square"
+              className="relative grid grid-cols-2 gap-4 md:gap-6 w-full max-w-[550px] aspect-square transform-style-3d"
             >
-              <div className="grid-item relative rounded-tl-[40px] md:rounded-tl-[60px] rounded-bl-xl rounded-tr-xl overflow-hidden aspect-square">
+              <div className="grid-item relative rounded-tl-[40px] md:rounded-tl-[80px] rounded-bl-xl rounded-tr-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
+                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src="/assets/mentoria/mentoria-agencia-multi-br-00.jpg"
                   alt="Mentoria 1"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
                 />
               </div>
 
               {/* ITEM 2 (Top Right) */}
-              <div className="grid-item relative rounded-tr-[40px] md:rounded-tr-[60px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square">
+              <div className="grid-item relative rounded-tr-[40px] md:rounded-tr-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group mt-4 md:mt-8">
+                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src="/assets/mentoria/mentoria-agencia-multi-br-1.jpg"
                   alt="Mentoria 2"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
                 />
               </div>
 
               {/* ITEM 3 (Bottom Left) */}
-              <div className="grid-item relative rounded-bl-[40px] md:rounded-bl-[60px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square">
+              <div className="grid-item relative rounded-bl-[40px] md:rounded-bl-[80px] rounded-tl-xl rounded-br-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group -mt-4 md:-mt-8">
+                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src="/assets/mentoria/mentoria-agencia-multi-br-02.jpg"
                   alt="Mentoria 3"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
                 />
               </div>
 
               {/* ITEM 4 (Bottom Right) */}
-              <div className="grid-item relative rounded-br-[40px] md:rounded-br-[60px] rounded-tr-xl rounded-bl-xl overflow-hidden aspect-square">
+              <div className="grid-item relative rounded-br-[40px] md:rounded-br-[80px] rounded-tr-xl rounded-bl-xl overflow-hidden aspect-square shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-white/40 group">
+                <div className="absolute inset-0 bg-multi-roxo/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src="/assets/mentoria/mentoria-agencia-multi-br-03.jpg"
                   alt="Mentoria 4"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 300px"
                 />
               </div>
 
-              {/* LOGO CENTRAL COM RECORTE */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+              {/* LOGO CENTRAL COM RECORTE GLASSMORPHISM */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                {/* Aura brilhante */}
+                <div className="absolute inset-0 bg-multi-amarelo/20 mix-blend-multiply blur-2xl rounded-full scale-150 animate-pulse-slow" />
+
                 <div
                   className={cn(
-                    "w-24 h-24 md:w-40 md:h-40 bg-multi-cream rounded-full flex items-center justify-center p-3 md:p-5 shadow-[0_0_50px_rgba(0,0,0,0.15)] border border-multi-roxo/5 transition-all duration-700 delay-1000 scale-0",
-                    isIntersecting && "scale-100",
+                    "relative w-24 h-24 md:w-40 md:h-40 bg-white/40 backdrop-blur-xl rounded-full flex items-center justify-center p-3 md:p-5 shadow-[0_0_50px_rgba(0,0,0,0.1),inset_0_2px_10px_rgba(255,255,255,0.5)] border border-white/60 transition-all duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] delay-700 scale-0 origin-center rotate-[-90deg]",
+                    isIntersecting && "scale-100 rotate-0",
                   )}
                 >
                   <Image
-                    src="/rebranding/LOGO TRANSPARENTE.png"
+                    src="/rebranding/LOGO MONOCROMÁTICA TRANSPARENTE.png"
                     alt="Logo Multi"
                     width={140}
                     height={140}
-                    className="w-[85%] h-auto object-contain animate-float-slow"
+                    className="w-[85%] h-auto object-contain drop-shadow-md opacity-90"
                   />
                 </div>
               </div>

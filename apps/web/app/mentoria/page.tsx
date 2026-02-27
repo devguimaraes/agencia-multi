@@ -1,5 +1,12 @@
 import { RevealSection, StaggerContainer } from "@/components/ui/Reveal";
-import { CheckCircle2, Target, TrendingUp, Users } from "lucide-react";
+import {
+  CheckCircle2,
+  LineChart,
+  Target,
+  TrendingUp,
+  Users,
+  Wallet,
+} from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -76,37 +83,43 @@ export default function MentorshipPage() {
         </div>
       </section>
 
-      {/* --- 2. DORES (LISTA EDITORIAL) --- */}
-      <section className="py-24 md:py-32 bg-multi-cream text-multi-black relative border-b border-black/5">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+      {/* --- 2. DORES (LISTA EDITORIAL DARK OBERVABLE) --- */}
+      <section className="py-24 md:py-32 bg-multi-black text-white relative border-b border-white/5 overflow-hidden">
+        {/* Glow de fundo */}
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-multi-roxo/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
             {/* Coluna Esquerda: Contexto */}
             <div className="lg:col-span-5 relative">
               <div className="sticky top-32">
                 <RevealSection>
-                  <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-roxo/40 mb-4 block">
+                  <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-white/30 mb-6 block">
                     Esse é você hoje?
                   </span>
-                  <h2 className="font-display text-[clamp(42px,3.5vw,52px)] text-multi-roxo leading-[0.95] mb-6">
+                  <h2 className="font-display text-[clamp(42px,4vw,64px)] text-white leading-[0.95] mb-8">
                     Você faz tudo.
                     <br className="md:hidden" />
                     <br className="hidden md:block" /> E ainda assim
                     <br className="hidden md:block" />{" "}
                     <span className="text-multi-rosa">falta dinheiro?</span>
                   </h2>
-                  <p className="font-poppins text-lg text-gray-600">
+                  <p className="font-poppins text-xl text-white/60 leading-relaxed border-l-2 border-multi-rosa/50 pl-6">
                     Social Media que faz tudo sozinho não tem agência — tem um
                     emprego disfarçado. O problema não é dedicação. É que você
                     nunca aprendeu a montar{" "}
-                    <strong>uma estrutura que trabalhe por você</strong>.
+                    <strong className="text-multi-amarelo font-medium">
+                      uma estrutura que trabalhe por você
+                    </strong>
+                    .
                   </p>
                 </RevealSection>
               </div>
             </div>
 
-            {/* Coluna Direita: Lista Interativa */}
+            {/* Coluna Direita: Lista Interativa Editorial */}
             <div className="lg:col-span-7">
-              <StaggerContainer className="flex flex-col border-t border-black/10">
+              <StaggerContainer className="flex flex-col border-t border-white/10 mt-10 lg:mt-0">
                 {[
                   {
                     title:
@@ -119,24 +132,31 @@ export default function MentorshipPage() {
                     desc: "Sem case documentado, posicionamento claro e processo comercial, qualquer preço parece alto. Você concorre com freelancer, não com agência.",
                   },
                   {
-                    title:
-                      "Você ganha mais, gasta mais energia — o lucro não muda",
+                    title: "Você ganha mais, gasta energia — o lucro não muda",
                     desc: "Cada cliente novo é mais trabalho para o mesmo modelo quebrado. Sem processo, escalar só aumenta o caos — não o faturamento líquido.",
                   },
                 ].map((item, idx) => (
                   <div
                     key={item.title}
-                    className="group relative flex flex-col py-8 md:py-10 border-b border-black/10 hover:bg-multi-roxo/5 transition-colors duration-300 px-4 md:px-8"
+                    className="group relative flex flex-col py-10 md:py-12 border-b border-white/10 hover:bg-multi-roxo/10 transition-colors duration-400 ease-out px-4 md:px-8"
                   >
-                    <div className="flex items-start gap-4 md:gap-6 mb-4">
-                      <span className="font-poppins font-bold text-xl text-multi-rosa/50 group-hover:text-multi-rosa transition-colors">
-                        {(idx + 1).toString().padStart(2, "0")}
-                      </span>
-                      <h3 className="font-display text-2xl md:text-3xl text-multi-black group-hover:text-multi-roxo transition-colors m-0">
+                    <div className="flex items-start gap-4 md:gap-8 mb-6">
+                      <div className="flex items-center gap-3 pt-1">
+                        {/* Indicador Hover (Seta Invisível) */}
+                        <span className="text-multi-amarelo text-xl font-bold opacity-0 -translate-x-4 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 hidden sm:block">
+                          →
+                        </span>
+                        <span className="font-poppins font-light text-xl text-white/30 tracking-[0.2em] shrink-0 group-hover:text-multi-amarelo/50 transition-colors">
+                          {(idx + 1).toString().padStart(2, "0")} —
+                        </span>
+                      </div>
+
+                      <h3 className="font-display text-2xl md:text-[32px] md:leading-[1.1] text-white group-hover:text-multi-amarelo transition-colors duration-400 m-0 w-full group-hover:translate-x-1">
                         {item.title}
                       </h3>
                     </div>
-                    <p className="font-poppins text-gray-600 max-w-lg ml-8 md:ml-12">
+
+                    <p className="font-poppins text-lg text-white/50 max-w-lg ml-0 sm:ml-12 md:ml-[100px] leading-relaxed group-hover:text-white/80 transition-colors duration-400">
                       {item.desc}
                     </p>
                   </div>
@@ -147,20 +167,20 @@ export default function MentorshipPage() {
         </div>
       </section>
 
-      {/* --- 3. METODOLOGIA (GRID COM ICONS) --- */}
-      <section className="py-24 md:py-32 bg-white relative">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+      {/* --- 3. METODOLOGIA (GRID COM 6 PILARES) --- */}
+      <section className="py-24 md:py-32 bg-multi-cream/30 relative">
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <RevealSection className="text-center mb-16 md:mb-24">
             <span className="font-poppins font-bold text-label tracking-[0.4em] uppercase text-multi-roxo/40 mb-4 block">
               O Método Multi
             </span>
             <h2 className="font-display text-[clamp(40px,5vw,64px)] text-multi-roxo leading-none relative inline-block">
-              4 Pilares Para Sair do Freelancer
+              6 Pilares Para Sair do Freelancer
               <div className="absolute -bottom-2 left-0 h-[2px] bg-multi-amarelo w-[80%]" />
             </h2>
           </RevealSection>
 
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
             {[
               {
                 icon: Target,
@@ -175,28 +195,40 @@ export default function MentorshipPage() {
               {
                 icon: CheckCircle2,
                 title: "Operação Sem Você no Centro",
-                text: "Briefings, aprovações e relatórios no piloto automático. Como documentar seu processo para que outra pessoa execute — e você supervisione.",
+                text: "Briefings, aprovações e relatórios no piloto automático. Como documentar processo para que outra pessoa execute e você supervisione.",
               },
               {
                 icon: Users,
                 title: "Primeiro Colaborador",
                 text: "Quando e quem contratar primeiro, como precificar o serviço absorvendo o custo e como delegar sem perder a qualidade entregue.",
               },
+              {
+                icon: LineChart,
+                title: "Escala e Precificação",
+                text: "Como reestruturar seus pacotes, aumentar o ticket cobrado e parar de vender horas, conectando preço ao valor percebido e resultado entregue.",
+              },
+              {
+                icon: Wallet,
+                title: "Gestão Financeira da Agência",
+                text: "A separação definitiva entre PF e PJ. Como provisionar caixa, calcular margem de contribuição e finalmente ver lucro no final do mês.",
+              },
             ].map((mod) => (
               <div
                 key={mod.title}
-                className="group bg-multi-cream p-10 rounded-lg hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden"
+                className="group bg-multi-cream rounded-[2.5rem] p-10 hover:-translate-y-2 transition-all duration-700 hover:shadow-[0_20px_40px_-15px_rgba(93,1,138,0.12)] relative overflow-hidden flex flex-col items-start"
               >
-                {/* Decorator background */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-multi-amarelo/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-150" />
+                {/* Blobs de fundo no hover */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-multi-roxo/5 rounded-bl-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-[1.5]" />
 
-                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 relative z-10 text-multi-roxo group-hover:text-multi-rosa transition-colors">
-                  <mod.icon className="w-6 h-6" />
+                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 relative z-10 text-multi-roxo shadow-sm group-hover:text-multi-rosa transition-colors duration-500">
+                  <mod.icon className="w-8 h-8" />
                 </div>
-                <h3 className="font-display text-2xl text-multi-roxo mb-3 relative z-10">
+
+                <h3 className="font-display text-2xl text-multi-black mb-4 relative z-10 group-hover:text-multi-roxo transition-colors duration-500">
                   {mod.title}
                 </h3>
-                <p className="font-poppins text-gray-600 relative z-10 leading-relaxed">
+
+                <p className="font-poppins text-gray-600 leading-relaxed relative z-10">
                   {mod.text}
                 </p>
               </div>
